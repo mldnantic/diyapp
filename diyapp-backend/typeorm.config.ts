@@ -1,3 +1,4 @@
+import { User } from "src/users/models/user.entity";
 import { DataSourceOptions } from "typeorm";
 
 export const typeOrmConfig: DataSourceOptions = {
@@ -7,6 +8,6 @@ export const typeOrmConfig: DataSourceOptions = {
   username: "postgres",
   password: "mysecretpassword",
   database: "postgres",
-  entities: [],
+  entities: [User],
   synchronize: true,
 };
