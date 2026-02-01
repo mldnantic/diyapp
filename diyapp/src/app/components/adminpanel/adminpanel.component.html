@@ -1,0 +1,67 @@
+<h1 class="title">Admin panel</h1>
+<div>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab label="Category options">
+            <mat-card appearance="outlined" class="margine">
+                <div class="opcija">
+                    <mat-form-field class="margine">
+                        <mat-label>Category name</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <button matButton="filled" class="margine">Add category</button>
+                    <button matButton="filled" class="margine">Delete category</button>
+                </div>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Item options">
+            <mat-card appearance="outlined" class="margine">
+                <div class="opcija">
+                    <mat-form-field class="margine">
+                        <mat-label>Category</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field class="margine">
+                        <mat-label>Name</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field class="margine">
+                        <mat-label>Price</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <button matButton="filled" class="margine">Add item</button>
+                    <button matButton="filled" class="margine">Delete item</button>
+                </div>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Item compatibility rules">
+            <mat-card appearance="outlined" class="margine">
+                <div class="opcija">
+                    <mat-form-field class="margine">
+                        <mat-label>Category 1</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field class="margine">
+                        <mat-label>Prop 1</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field class="margine">
+                        <mat-label>RelOp</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field class="margine">
+                        <mat-label>Category 2</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-form-field class="margine">
+                        <mat-label>Prop 2</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <button matButton="filled" class="margine">Add rule</button>
+                </div>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<div class="app-root">
+    <router-outlet />
+</div>
