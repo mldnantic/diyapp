@@ -11,22 +11,10 @@ import { Observable, of } from 'rxjs';
 import { Category } from '../../models/category';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { loadCategories } from '../../store/category/category.action';
+import { addCategory, loadCategories } from '../../store/category/category.action';
 import { selectCategoryList } from '../../store/category/category.selector';
 import { AsyncPipe } from '@angular/common';
 import { CategoriesService } from '../../services/categories.service';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Wood' },
-  { position: 2, name: 'Tools' },
-  { position: 3, name: 'Metal' },
-  { position: 4, name: 'Decoration' }
-];
 
 @Component({
   selector: 'app-adminpanel.component',
@@ -36,8 +24,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrl: './adminpanel.component.scss',
 })
 export class AdminPanelComponent implements OnInit {
+
   displayedColumns: string[] = ['position', 'name'];
-  dataSource = ELEMENT_DATA;
+
+  name: string = '';
 
   categories$: Observable<Category[]> = of([]);
   constructor(private store: Store<AppState>) { }
@@ -47,6 +37,11 @@ export class AdminPanelComponent implements OnInit {
     this.store.dispatch(loadCategories());
     this.categories$ = this.store.select(selectCategoryList);
 
+  }
+
+  addCategory(): void {
+    this.store.dispatch(addCategory({ categoryName: this.name }));
+    this.categories$ = this.store.select(selectCategoryList);
   }
 
 }

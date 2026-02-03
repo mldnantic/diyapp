@@ -9,7 +9,7 @@ export const loadCategoriesSuccess = createAction(
     props<{ categories: Category[]}>()
 );
 
-// export const selectCategory = createAction(
-//     'Select Category',
-//     props<{categoryId: number}>()
-// );
+export const addCategory = createAction(
+    'Add Category',
+    props<{categoryName: string}>()
+);

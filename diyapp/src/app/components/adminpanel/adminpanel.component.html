@@ -6,9 +6,9 @@
                 <div class="opcija">
                     <mat-form-field class="margine">
                         <mat-label>Category name</mat-label>
-                        <input matInput>
+                        <input matInput [(ngModel)]="name">
                     </mat-form-field>
-                    <button matButton="filled" class="margine">Add category</button>
+                    <button matButton="filled" class="margine" (click)="addCategory()">Add category</button>
                     <button matButton="filled" class="margine">Delete category</button>
                 </div>
             </mat-card>

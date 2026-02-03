@@ -16,12 +16,6 @@ export const initialState: CategoriesState = adapter.getInitialState({
 
 export const categoriesReducer = createReducer(
     initialState,
-    // on(Actions.selectCategory, (state, {categoryId}) => {
-    //     return{
-    //         ...state,
-    //         selectedCategory: categoryId
-    //     }
-    // }),
     on(Actions.loadCategoriesSuccess, (state, {categories})=> 
         adapter.setAll(categories, state)
     ),
