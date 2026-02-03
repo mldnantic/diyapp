@@ -19,4 +19,7 @@ export const categoriesReducer = createReducer(
     on(Actions.loadCategoriesSuccess, (state, {categories})=> 
         adapter.setAll(categories, state)
     ),
+    on(Actions.addCategorySuccess, (state, {category})=>
+        adapter.addOne(category, state)
+    ),
 )

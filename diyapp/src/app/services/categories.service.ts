@@ -15,8 +15,8 @@ export class CategoriesService {
     return this.httpClient.get<Category[]>(environment.APIURL + "/categories");
   }
 
-  addCategory(categoryName: string): Observable<Category[]> {
-    return this.httpClient.post<Category[]>(environment.APIURL + "/categories", { name: categoryName });
+  addCategory(categoryName: string): Observable<Category> {
+    return this.httpClient.post<Category>(environment.APIURL + "/categories", { name: categoryName });
   }
 
 }

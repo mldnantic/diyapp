@@ -6,10 +6,15 @@ export const loadCategories = createAction('Load Categories');
 
 export const loadCategoriesSuccess = createAction(
     'Load Categories Success',
-    props<{ categories: Category[]}>()
+    props<{ categories: Category[] }>()
 );
 
 export const addCategory = createAction(
     'Add Category',
-    props<{categoryName: string}>()
+    props<{ categoryName: string }>()
+);
+
+export const addCategorySuccess = createAction(
+    'Add Category Success',
+    props<{ category: Category }>()
 );

@@ -16,13 +16,11 @@ export class CategoriesService {
         return this.categoryRepo.find();
     }
 
-    async create(dto: CategoryDto): Promise<Category[]> {
+    async create(dto: CategoryDto): Promise<Category> {
         const category = this.categoryRepo.create({
             name: dto.name
         });
-        await this.categoryRepo.save(category);
-        
-        return this.categoryRepo.find();
+        return await this.categoryRepo.save(category);
     }
 
     async delete(id: number): Promise<void> {
