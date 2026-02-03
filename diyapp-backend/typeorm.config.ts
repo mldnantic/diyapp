@@ -1,3 +1,5 @@
+import { Category } from "src/categories/models/category.entity";
+import { Item } from "src/items/models/item.entity";
 import { User } from "src/users/models/user.entity";
 import { DataSourceOptions } from "typeorm";
 
@@ -8,6 +10,6 @@ export const typeOrmConfig: DataSourceOptions = {
   username: "postgres",
   password: "mysecretpassword",
   database: "postgres",
-  entities: [User],
+  entities: [User, Category, Item],
   synchronize: true,
 };
