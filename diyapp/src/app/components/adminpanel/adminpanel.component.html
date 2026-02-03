@@ -13,11 +13,13 @@
                 </div>
             </mat-card>
             <mat-card appearance="outlined" class="margine">
-                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                @if(categories$ | async; as cats)
+                {
+                <table mat-table [dataSource]="categories$" class="mat-elevation-z8">
 
                     <ng-container matColumnDef="position">
-                        <th mat-header-cell *matHeaderCellDef> No. </th>
-                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="name">
@@ -28,6 +30,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+                }
             </mat-card>
         </mat-tab>
         <mat-tab label="Item options">
