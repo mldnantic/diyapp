@@ -15,10 +15,11 @@ import { addCategory, loadCategories } from '../../store/category/category.actio
 import { selectCategoryList } from '../../store/category/category.selector';
 import { AsyncPipe } from '@angular/common';
 import { CategoriesService } from '../../services/categories.service';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-adminpanel.component',
-  imports: [AsyncPipe, MatButtonModule, MatTabsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, FormsModule, MatTableModule],
+  imports: [AsyncPipe, MatButtonModule, MatTabsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, FormsModule, MatTableModule, MatSelectModule],
   providers: [CategoriesService, Store],
   templateUrl: './adminpanel.component.html',
   styleUrl: './adminpanel.component.scss',

@@ -36,10 +36,17 @@
         <mat-tab label="Item options">
             <mat-card appearance="outlined" class="margine">
                 <div class="opcija">
+                    @if(categories$ | async; as cats)
+                    {
                     <mat-form-field class="margine">
                         <mat-label>Category</mat-label>
-                        <input matInput>
+                        <mat-select>
+                            @for (cat of cats; track cat.id) {
+                            <mat-option value="cat.id">{{cat.name}}</mat-option>
+                            }
+                        </mat-select>
                     </mat-form-field>
+                    }
                     <mat-form-field class="margine">
                         <mat-label>Name</mat-label>
                         <input matInput>
