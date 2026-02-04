@@ -5,13 +5,11 @@ import * as Actions from "./category.action";
 
 
 export interface CategoriesState extends EntityState<Category> {
-    selectedCategories: number[];
 }
 
 const adapter = createEntityAdapter<Category>();
 
 export const initialState: CategoriesState = adapter.getInitialState({
-    selectedCategories: [],
 });
 
 export const categoriesReducer = createReducer(

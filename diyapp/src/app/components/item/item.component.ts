@@ -9,6 +9,6 @@ import { Item } from '../../models/item';
 })
 export class ItemComponent {
 
-  @Input() item: Item | null = null;
+  @Input() item!: Item ;
 
 }

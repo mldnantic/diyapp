@@ -3,8 +3,8 @@ import { AppState } from "../../app.state";
 import { Item } from "../../models/item";
 
 export const selectItemsFeature = createSelector(
-    (state: AppState) => state.categories,
-    (categories) => categories
+    (state: AppState) => state.items,
+    (items) => items
 );
 
 export const selectedItemIds = createSelector(

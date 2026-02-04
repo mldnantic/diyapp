@@ -4,13 +4,11 @@ import { createReducer, on } from "@ngrx/store";
 import * as Actions from "./item.action";
 
 export interface ItemsState extends EntityState<Item> {
-    selectedItems: number[];
 }
 
 const adapter = createEntityAdapter<Item>();
 
 export const initialState: ItemsState = adapter.getInitialState({
-    selectedItems: [],
 });
 
 export const itemsReducer = createReducer(

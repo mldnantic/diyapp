@@ -14,7 +14,6 @@ import { AppState } from '../../app.state';
 import { addCategory, loadCategories } from '../../store/category/category.action';
 import { selectCategoryList } from '../../store/category/category.selector';
 import { AsyncPipe } from '@angular/common';
-import { CategoriesService } from '../../services/categories.service';
 import { MatSelectModule } from '@angular/material/select';
 import { Item } from '../../models/item';
 import { addItem, loadItems } from '../../store/item/item.action';
@@ -39,7 +38,7 @@ import { ItemComponent } from '../item/item.component';
     MatSelectModule,
     MatGridListModule
   ],
-  providers: [CategoriesService, Store],
+  providers: [Store],
   templateUrl: './adminpanel.component.html',
   styleUrl: './adminpanel.component.scss',
 })
