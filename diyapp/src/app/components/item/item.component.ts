@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Item } from '../../models/item';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'item',
-  imports: [],
+  imports: [MatCardModule, MatButtonModule],
   templateUrl: './item.component.html',
   styleUrl: './item.component.scss',
 })

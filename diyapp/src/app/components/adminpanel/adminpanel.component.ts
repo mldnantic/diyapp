@@ -44,7 +44,7 @@ import { ItemComponent } from '../item/item.component';
 })
 export class AdminPanelComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name'];
+  displayedColumns: string[] = ['name', 'delete'];
 
   name: string = '';
 
@@ -73,6 +73,8 @@ export class AdminPanelComponent implements OnInit {
   }
 
   addCategory(): void {
+    if(this.name == '')
+      return;
     this.store.dispatch(addCategory({ categoryName: this.name }));
     this.categories$ = this.store.select(selectCategoryList);
   }
