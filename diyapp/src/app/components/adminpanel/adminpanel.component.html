@@ -40,22 +40,22 @@
                     {
                     <mat-form-field class="margine">
                         <mat-label>Category</mat-label>
-                        <mat-select>
+                        <mat-select (selectionChange)="onSelectionChange($event)">
                             @for (cat of cats; track cat.id) {
-                            <mat-option value="cat.id">{{cat.name}}</mat-option>
+                            <mat-option [value]="cat.id">{{cat.name}}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
                     }
                     <mat-form-field class="margine">
                         <mat-label>Name</mat-label>
-                        <input matInput>
+                        <input matInput [(ngModel)]="itemName">
                     </mat-form-field>
                     <mat-form-field class="margine">
                         <mat-label>Price</mat-label>
-                        <input matInput>
+                        <input matInput [(ngModel)]="itemPrice">
                     </mat-form-field>
-                    <button matButton="filled" class="margine">Add item</button>
+                    <button matButton="filled" class="margine" (click)="addItem()">Add item</button>
                     <button matButton="filled" class="margine">Delete item</button>
                 </div>
             </mat-card>

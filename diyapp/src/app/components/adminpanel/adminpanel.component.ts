@@ -15,7 +15,10 @@ import { addCategory, loadCategories } from '../../store/category/category.actio
 import { selectCategoryList } from '../../store/category/category.selector';
 import { AsyncPipe } from '@angular/common';
 import { CategoriesService } from '../../services/categories.service';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { Item } from '../../models/item';
+import { addItem } from '../../store/item/item.action';
+import { selectItemList } from '../../store/item/item.selector';
 
 @Component({
   selector: 'app-adminpanel.component',
@@ -30,7 +33,13 @@ export class AdminPanelComponent implements OnInit {
 
   name: string = '';
 
+  categoryId: number = 0;
+  itemName: string = '';
+  itemPrice: number = 0;
+
   categories$: Observable<Category[]> = of([]);
+  items$: Observable<Item[]> = of([]);
+
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
@@ -45,4 +54,17 @@ export class AdminPanelComponent implements OnInit {
     this.categories$ = this.store.select(selectCategoryList);
   }
 
+  onSelectionChange(event: any) {
+    this.categoryId = event.value;
+    console.log(this.categoryId);
+  }
+
+  addItem(): void {
+    this.store.dispatch(addItem({
+      name: this.itemName,
+      price: this.itemPrice,
+      categoryId: this.categoryId
+    }));
+    this.items$ = this.store.select(selectItemList);
+  }
 }

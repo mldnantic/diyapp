@@ -8,6 +8,7 @@ import { metaReducers, reducers } from './app.state';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { CategoriesEffects } from './store/category/category.effect';
+import { ItemsEffects } from './store/item/item.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(reducers, { metaReducers }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects(CategoriesEffects),
+    provideEffects(CategoriesEffects, ItemsEffects),
   ]
 };
