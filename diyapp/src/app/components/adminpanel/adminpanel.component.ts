@@ -20,6 +20,8 @@ import { addItem, loadItems } from '../../store/item/item.action';
 import { selectItemList } from '../../store/item/item.selector';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ItemComponent } from '../item/item.component';
+import {MatListModule} from '@angular/material/list';
+
 
 @Component({
   selector: 'adminpanel',
@@ -36,7 +38,8 @@ import { ItemComponent } from '../item/item.component';
     FormsModule,
     MatTableModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule
   ],
   providers: [Store],
   templateUrl: './adminpanel.component.html',

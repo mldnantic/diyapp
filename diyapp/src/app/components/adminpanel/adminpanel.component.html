@@ -69,18 +69,37 @@
                     <button matButton="filled" class="margine">Delete item</button>
                 </div>
             </mat-card>
-            <div class="skrol">
-                <mat-grid-list cols="4">
-                    @for(i of data.items; track i.id)
-                    {
-                    <mat-grid-tile>
-                        <mat-card appearance="outlined" class="maxWidthHeight">
-                            <item [item]=i></item>
+            <mat-grid-list cols="5" rowHeight="1:1">
+                <mat-grid-tile colspan="1">
+                    <div>
+                        <mat-card appearance="outlined">
+                            <mat-selection-list>
+                                <mat-form-field>
+                                    <mat-label>Search by name</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                                @for (c of data.categories; track c.id) {
+                                <mat-list-option>{{c.name}}</mat-list-option>
+                                }
+                            </mat-selection-list>
                         </mat-card>
-                    </mat-grid-tile>
-                    }
-                </mat-grid-list>
-            </div>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="4" class="skrol">
+                    <div class="maxWidthHeight">
+                        <mat-grid-list cols="4">
+                            @for(i of data.items; track i.id)
+                            {
+                            <mat-grid-tile>
+                                <mat-card appearance="outlined" class="maxWidthHeight">
+                                    <item [item]=i></item>
+                                </mat-card>
+                            </mat-grid-tile>
+                            }
+                        </mat-grid-list>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
         </mat-tab>
         <mat-tab label="Item compatibility rules">
             <mat-card appearance="outlined" class="margine">
