@@ -12,19 +12,19 @@ export class CategoriesService {
         private categoryRepo: Repository<Category>,
     ) { }
 
-    async get(): Promise<Category[]> {
-        return this.categoryRepo.find();
+    async get() {
+        return await this.categoryRepo.find();
     }
 
-    async create(dto: CategoryDto): Promise<Category> {
+    async create(dto: CategoryDto) {
         const category = this.categoryRepo.create({
             name: dto.name
         });
         return await this.categoryRepo.save(category);
     }
 
-    async delete(id: number): Promise<void> {
-        await this.categoryRepo.delete(id);
+    async delete(id: number) {
+        return await this.categoryRepo.delete(id);
     }
 
 }

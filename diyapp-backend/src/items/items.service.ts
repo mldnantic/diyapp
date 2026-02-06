@@ -13,22 +13,22 @@ export class ItemsService {
         @InjectRepository(Category) private categoryRepository: Repository<Category>
     ) { }
 
-    public getAll() {
-        return this.itemsRepository.find();
+    public async getAll() {
+        return await this.itemsRepository.find();
     }
 
-    public getById(id: number) {
-        return this.itemsRepository.findOneBy({ id });
+    public async getById(id: number) {
+        return await this.itemsRepository.findOneBy({ id });
     }
 
-    public async create(partDto: ItemDto) {
-        const category = await this.categoryRepository.findOneBy({ id: partDto.categoryId });
+    public async create(itemDto: ItemDto) {
+        const category = await this.categoryRepository.findOneBy({ id: itemDto.categoryId });
         if (!category) {
             throw new Error('Category doesnt exist!');
         }
         const part = this.itemsRepository.create({
-            name: partDto.name,
-            price: partDto.price,
+            name: itemDto.name,
+            price: itemDto.price,
             category
         });
         return await this.itemsRepository.save(part);
