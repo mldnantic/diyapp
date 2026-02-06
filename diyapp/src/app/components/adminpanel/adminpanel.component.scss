@@ -24,7 +24,6 @@
     height: 100%;
     display: flex;
     flex-flow:column wrap;
-    flex:2.5 0;
     justify-content: flex-start;
     align-self: flex-start;
     padding: 5px;
@@ -34,4 +33,10 @@
 
 .skrol{
   overflow-y: scroll;
+}
+
+.rowCards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

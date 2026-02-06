@@ -6,3 +6,9 @@
     justify-content: space-evenly;
     height: 100%;
 }
+
+.rowButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
