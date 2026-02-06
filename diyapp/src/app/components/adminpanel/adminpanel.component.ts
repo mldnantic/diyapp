@@ -21,6 +21,8 @@ import { selectItemList } from '../../store/item/item.selector';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ItemComponent } from '../item/item.component';
 import {MatListModule} from '@angular/material/list';
+import { Property } from '../../models/property';
+import { PropertiesService } from '../../services/properties.service';
 
 
 @Component({
@@ -56,10 +58,11 @@ export class AdminPanelComponent implements OnInit {
   itemPrice: number = 0;
 
   categories$: Observable<Category[]> = of([]);
+  properties$: Observable<Property[]> = of([]);
   items$: Observable<Item[]> = of([]);
   combined$: Observable<{ categories: Category[]; items: Item[]; }> = of();
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private propService: PropertiesService) { }
 
   ngOnInit(): void {
     this.store.dispatch(loadCategories());
@@ -84,7 +87,7 @@ export class AdminPanelComponent implements OnInit {
 
   onSelectionChange(event: any) {
     this.categoryId = event.value;
-    console.log(this.categoryId);
+    this.properties$ = this.propService.getProperties(this.categoryId);
   }
 
   addItem(): void {

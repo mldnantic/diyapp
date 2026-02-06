@@ -46,11 +46,15 @@
                                     }
                                 </mat-select>
                             </mat-form-field>
-                            <button matButton="filled" class="margine">Edit category properties</button>
                         </div>
                     </mat-card>
+                    @if(properties$ | async; as properties)
+                    {
+                    @if(properties.length > 0)
+                    {
+
                     <mat-card appearance="outlined" class="margine">
-                        <table mat-table [dataSource]="data.categories" class="mat-elevation-z8">
+                        <table mat-table [dataSource]="properties" class="mat-elevation-z8">
 
                             <ng-container matColumnDef="name">
                                 <th mat-header-cell *matHeaderCellDef> Category properties </th>
@@ -70,6 +74,11 @@
                         </table>
                         <button matButton="filled" class="maxWidthHeight">Add property</button>
                     </mat-card>
+                    }
+                    @else {
+                        <h1 class="title">Select a category</h1>
+                    }
+                    }
                 </div>
             </div>
         </mat-tab>
