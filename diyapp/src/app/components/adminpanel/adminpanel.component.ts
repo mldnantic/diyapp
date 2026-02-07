@@ -24,7 +24,8 @@ import { MatListModule } from '@angular/material/list';
 import { Property } from '../../models/property';
 import { PropertiesService } from '../../services/properties.service';
 import { MatDialog } from '@angular/material/dialog';
-import { RenameCategoryDialog } from './dialogs/renamecategory/renamecategorydialog.component';
+import { RenameDialogComponent } from '../renamedialog/renamedialog.component';
+import { DeleteDialogComponent } from '../deletedialog/deletedialog.component';
 
 @Component({
   selector: 'adminpanel',
@@ -51,9 +52,9 @@ import { RenameCategoryDialog } from './dialogs/renamecategory/renamecategorydia
 export class AdminPanelComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'delete'];
+  readonly dialog = inject(MatDialog);
 
   name: string = '';
-  readonly dialog = inject(MatDialog);
 
   categoryId: number = 0;
   itemName: string = '';
@@ -92,11 +93,26 @@ export class AdminPanelComponent implements OnInit {
     this.properties$ = this.propService.getProperties(this.categoryId);
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(RenameCategoryDialog, {
+  openDialog(dialogType: string, data: any): void {
+    let component: any;
+
+    switch (dialogType) {
+      case 'rename':
+        component = RenameDialogComponent;
+        break;
+      case 'delete':
+        component = DeleteDialogComponent;
+        break;
+      default:
+        console.error("Unknown dialog type!");
+        return;
+    }
+
+    this.dialog.open(component, {
       width: '250px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+      data
     });
   }
 
