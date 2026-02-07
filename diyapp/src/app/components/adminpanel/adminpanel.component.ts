@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,12 +18,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { Item } from '../../models/item';
 import { addItem, loadItems } from '../../store/item/item.action';
 import { selectItemList } from '../../store/item/item.selector';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ItemComponent } from '../item/item.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { Property } from '../../models/property';
 import { PropertiesService } from '../../services/properties.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { RenameCategoryDialog } from './dialogs/renamecategory/renamecategorydialog.component';
 
 @Component({
   selector: 'adminpanel',
@@ -52,6 +53,7 @@ export class AdminPanelComponent implements OnInit {
   displayedColumns: string[] = ['name', 'delete'];
 
   name: string = '';
+  readonly dialog = inject(MatDialog);
 
   categoryId: number = 0;
   itemName: string = '';
@@ -74,12 +76,12 @@ export class AdminPanelComponent implements OnInit {
       this.categories$,
       this.items$
     ]).pipe(
-      map(([categories, items]) => ({categories, items}))
+      map(([categories, items]) => ({ categories, items }))
     )
   }
 
   addCategory(): void {
-    if(this.name == '')
+    if (this.name == '')
       return;
     this.store.dispatch(addCategory({ categoryName: this.name }));
     this.categories$ = this.store.select(selectCategoryList);
@@ -88,6 +90,14 @@ export class AdminPanelComponent implements OnInit {
   onSelectionChange(event: any) {
     this.categoryId = event.value;
     this.properties$ = this.propService.getProperties(this.categoryId);
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(RenameCategoryDialog, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
   addItem(): void {
