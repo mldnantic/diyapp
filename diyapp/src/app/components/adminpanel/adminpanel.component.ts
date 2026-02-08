@@ -55,6 +55,7 @@ export class AdminPanelComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   name: string = '';
+  propertyName: string = '';
 
   categoryId: number = 0;
   itemName: string = '';
@@ -93,7 +94,7 @@ export class AdminPanelComponent implements OnInit {
     this.properties$ = this.propService.getProperties(this.categoryId);
   }
 
-  openDialog(dialogType: string, data: any): void {
+  openDialog(dialogType: string, data: DialogData): void {
     let component: any;
 
     switch (dialogType) {
@@ -124,4 +125,10 @@ export class AdminPanelComponent implements OnInit {
     }));
     this.items$ = this.store.select(selectItemList);
   }
+}
+
+export interface DialogData {
+  entity: string;
+  name: string;
+  id: number;
 }
