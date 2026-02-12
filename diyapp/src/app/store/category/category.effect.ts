@@ -17,7 +17,7 @@ export class CategoriesEffects {
         this.action$.pipe(
             ofType(loadCategories),
             mergeMap(() =>
-                this.categoriesService.getAll().pipe(
+                this.categoriesService.getCategories().pipe(
                     map((categories) => loadCategoriesSuccess({ categories })),
                     catchError(() => of({ type: 'load error' }))
                 )

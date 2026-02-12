@@ -17,7 +17,7 @@ export class ItemsEffects {
         this.action$.pipe(
             ofType(loadItems),
             mergeMap(() =>
-                this.itemsService.getAll().pipe(
+                this.itemsService.getItems().pipe(
                     map((items) => loadItemsSuccess({ items })),
                     catchError(() => of({ type: 'load error' }))
                 )
