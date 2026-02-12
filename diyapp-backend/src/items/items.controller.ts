@@ -7,31 +7,28 @@ export class ItemsController {
 
     constructor(private itemsService: ItemsService) { }
 
-    @Post()
-    public addItem(@Body() dto: ItemDto) {
-        return this.itemsService.create(dto);
-    }
-
     @Get()
     public getItems() {
         return this.itemsService.getAll();
     }
 
-    @Put(":id")
-    public async updateItem(
-        @Param("id", ParseIntPipe) id: number,
-        @Body() dto: ItemDto
-    ) {
-        return this.itemsService.update(id, dto);
-    }
-
-    @Get(":id")
-    public getItem(@Param("id", ParseIntPipe) id: number) {
+    @Get(':id')
+    public getItem(@Param('id', ParseIntPipe) id: number) {
         return this.itemsService.getById(id);
     }
 
-    @Delete(":id")
-    public deleteItem(@Param("id", ParseIntPipe) id: number) {
+    @Post()
+    public addItem(@Body() dto: ItemDto) {
+        return this.itemsService.create(dto);
+    }
+
+    @Delete(':id')
+    public deleteItem(@Param('id', ParseIntPipe) id: number) {
         return this.itemsService.delete(id);
+    }
+
+    @Put(':id')
+    public async updateItem(@Param('id', ParseIntPipe) id: number, @Body() dto: ItemDto) {
+        return this.itemsService.update(id, dto);
     }
 }

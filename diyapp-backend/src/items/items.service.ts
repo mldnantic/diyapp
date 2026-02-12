@@ -22,9 +22,11 @@ export class ItemsService {
     }
 
     public async create(itemDto: ItemDto) {
-        const category = await this.categoryRepository.findOneBy({ id: itemDto.categoryId });
+        const category = await this.categoryRepository.findOneBy({
+            id: itemDto.categoryId
+        });
         if (!category) {
-            throw new Error('Category doesnt exist!');
+            throw new Error('Item doesnt exist!');
         }
         const part = this.itemsRepository.create({
             name: itemDto.name,

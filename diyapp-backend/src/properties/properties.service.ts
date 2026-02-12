@@ -13,15 +13,16 @@ export class PropertiesService {
         @InjectRepository(Category) private categoryRepo: Repository<Category>
     ) { }
 
-    async get(id: number)
-    {
+    async get(id: number) {
         return await this.propertyRepo.find({
-            where: {category: {id: id}}
+            where: { category: { id: id } }
         });
     }
 
     async create(propertyDto: PropertyDto) {
-        const category = await this.categoryRepo.findOneBy({ id: propertyDto.categoryId });
+        const category = await this.categoryRepo.findOneBy({
+            id: propertyDto.categoryId
+        });
         if (!category) {
             throw new Error('Category doesnt exist!');
         }
@@ -35,4 +36,9 @@ export class PropertiesService {
     async delete(id: number) {
         return await this.propertyRepo.delete(id);
     }
+
+    async update(id: number, dto: PropertyDto) {
+        return await this.propertyRepo.update(id, dto);
+    }
+
 }

@@ -7,12 +7,9 @@ import { CategoryDto } from './models/category.dto';
 @Injectable()
 export class CategoriesService {
 
-    constructor(
-        @InjectRepository(Category)
-        private categoryRepo: Repository<Category>,
-    ) { }
+    constructor(@InjectRepository(Category) private categoryRepo: Repository<Category>) { }
 
-    async get() {
+    async getAll() {
         return await this.categoryRepo.find();
     }
 
@@ -22,9 +19,13 @@ export class CategoriesService {
         });
         return await this.categoryRepo.save(category);
     }
-
+    
     async delete(id: number) {
         return await this.categoryRepo.delete(id);
+    }
+    
+    async update(id: number, dto: CategoryDto) {
+        return await this.categoryRepo.update(id, dto);
     }
 
 }
