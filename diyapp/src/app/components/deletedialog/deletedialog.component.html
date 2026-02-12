@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Delete {{data.name}}?</h1>
 <div mat-dialog-content>
-  <h3>Are you sure you want to delete this {{data.entity}}? This action is irreversible!</h3>
+  <h3 class="margine">Are you sure you want to delete this {{data.entity}}? This action is irreversible!</h3>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close="false">Cancel</button>
-  <button mat-button mat-dialog-close="true">Delete</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true">Delete</button>
 </div>

@@ -109,11 +109,23 @@ export class AdminPanelComponent implements OnInit {
         return;
     }
 
-    this.dialog.open(component, {
+    const dialog = this.dialog.open(component, {
       width: '250px',
       enterAnimationDuration: '0ms',
       exitAnimationDuration: '0ms',
       data
+    });
+
+    dialog.afterClosed().subscribe(result=>{
+      if(dialogType=='rename' && result)
+      {
+        console.log(result);
+      }
+      
+      if(dialogType=='delete' && result === true)
+      {
+        console.log(data.id);
+      }
     });
   }
 
