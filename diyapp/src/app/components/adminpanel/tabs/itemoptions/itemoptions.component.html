@@ -1,0 +1,52 @@
+<mat-card appearance="outlined" class="margine">
+    <div class="opcija">
+        <mat-form-field class="margine">
+            <mat-label>Category</mat-label>
+            <mat-select (selectionChange)="onSelectionChange($event)">
+                @for (c of categories; track c.id) {
+                <mat-option [value]="c.id">{{c.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="margine">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="itemName">
+        </mat-form-field>
+        <mat-form-field class="margine">
+            <mat-label>Price</mat-label>
+            <input matInput [(ngModel)]="itemPrice">
+        </mat-form-field>
+        <button matButton="filled" class="margine" (click)="addItem()">Add item</button>
+    </div>
+</mat-card>
+<mat-grid-list cols="5" rowHeight="1:1.33">
+    <mat-grid-tile colspan="1">
+        <div>
+            <mat-card appearance="outlined">
+                <mat-selection-list>
+                    <mat-form-field>
+                        <mat-label>Search by name</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    @for (c of categories; track c.id) {
+                    <mat-list-option>{{c.name}}</mat-list-option>
+                    }
+                </mat-selection-list>
+            </mat-card>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" class="skrol">
+        <div class="maxWidthHeight">
+            <mat-grid-list cols="4" rowHeight="1.33:1">
+                @for(i of items; track i.id)
+                {
+                <mat-grid-tile>
+                    <mat-card appearance="outlined" class="margine">
+                        <item [item]=i></item>
+                    </mat-card>
+                </mat-grid-tile>
+                }
+            </mat-grid-list>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

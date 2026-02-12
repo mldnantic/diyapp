@@ -26,12 +26,13 @@ import { PropertiesService } from '../../services/properties.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from '../renamedialog/renamedialog.component';
 import { DeleteDialogComponent } from '../deletedialog/deletedialog.component';
+import { CategoryOptionsComponent } from "./tabs/categoryoptions/categoryoptions.component";
+import { ItemOptionsComponent } from './tabs/itemoptions/itemoptions.component';
 
 @Component({
   selector: 'adminpanel',
   imports: [
     AsyncPipe,
-    ItemComponent,
     MatButtonModule,
     MatTabsModule,
     MatButtonModule,
@@ -43,19 +44,15 @@ import { DeleteDialogComponent } from '../deletedialog/deletedialog.component';
     MatTableModule,
     MatSelectModule,
     MatGridListModule,
-    MatListModule
-  ],
+    MatListModule,
+    CategoryOptionsComponent,
+    ItemOptionsComponent
+],
   providers: [Store],
   templateUrl: './adminpanel.component.html',
   styleUrl: './adminpanel.component.scss',
 })
 export class AdminPanelComponent implements OnInit {
-
-  displayedColumns: string[] = ['name', 'delete'];
-  readonly dialog = inject(MatDialog);
-
-  name: string = '';
-  propertyName: string = '';
 
   categoryId: number = 0;
   itemName: string = '';
@@ -82,61 +79,11 @@ export class AdminPanelComponent implements OnInit {
     )
   }
 
-  addCategory(): void {
-    if (this.name == '')
-      return;
-    this.store.dispatch(addCategory({ categoryName: this.name }));
-    this.categories$ = this.store.select(selectCategoryList);
-  }
-
   onSelectionChange(event: any) {
     this.categoryId = event.value;
     this.properties$ = this.propService.getProperties(this.categoryId);
   }
 
-  openDialog(dialogType: string, data: DialogData): void {
-    let component: any;
-
-    switch (dialogType) {
-      case 'rename':
-        component = RenameDialogComponent;
-        break;
-      case 'delete':
-        component = DeleteDialogComponent;
-        break;
-      default:
-        console.error("Unknown dialog type!");
-        return;
-    }
-
-    const dialog = this.dialog.open(component, {
-      width: '250px',
-      enterAnimationDuration: '0ms',
-      exitAnimationDuration: '0ms',
-      data
-    });
-
-    dialog.afterClosed().subscribe(result=>{
-      if(dialogType=='rename' && result)
-      {
-        console.log(result);
-      }
-      
-      if(dialogType=='delete' && result === true)
-      {
-        console.log(data.id);
-      }
-    });
-  }
-
-  addItem(): void {
-    this.store.dispatch(addItem({
-      name: this.itemName,
-      price: this.itemPrice,
-      categoryId: this.categoryId
-    }));
-    this.items$ = this.store.select(selectItemList);
-  }
 }
 
 export interface DialogData {

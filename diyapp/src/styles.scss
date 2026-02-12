@@ -45,3 +45,14 @@ body {
 .margine{
   margin: 20px;
 }
+
+.rowCards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title{
+    font-size: 300%;
+    text-align: center;
+}
