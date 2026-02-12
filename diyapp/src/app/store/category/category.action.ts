@@ -18,3 +18,13 @@ export const addCategorySuccess = createAction(
     'Add Category Success',
     props<{ category: Category }>()
 );
+
+export const deleteCategory = createAction(
+    'Delete Category',
+    props<{ categoryId: number }>()
+);
+
+export const deleteCategorySuccess = createAction(
+    'Delete Category Success',
+    props<{ categoryId: number }>()
+);

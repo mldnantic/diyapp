@@ -20,4 +20,7 @@ export const categoriesReducer = createReducer(
     on(Actions.addCategorySuccess, (state, {category})=>
         adapter.addOne(category, state)
     ),
+    on(Actions.deleteCategorySuccess, (state, {categoryId})=>
+        adapter.removeOne(categoryId, state)
+    )
 )
