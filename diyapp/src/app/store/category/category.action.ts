@@ -28,3 +28,19 @@ export const deleteCategorySuccess = createAction(
     'Delete Category Success',
     props<{ categoryId: number }>()
 );
+
+export const updateCategory = createAction(
+    'Update Category',
+    props<{
+        categoryId: number,
+        categoryName: string
+    }>()
+);
+
+export const updateCategorySuccess = createAction(
+    'Update Category Success',
+    props<{
+        categoryId: number,
+        categoryName: string
+    }>()
+);

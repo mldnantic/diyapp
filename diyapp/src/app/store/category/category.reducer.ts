@@ -22,5 +22,11 @@ export const categoriesReducer = createReducer(
     ),
     on(Actions.deleteCategorySuccess, (state, {categoryId})=>
         adapter.removeOne(categoryId, state)
-    )
+    ),
+    on(Actions.updateCategorySuccess, (state, {categoryId, categoryName})=>
+        adapter.updateOne({
+            id: categoryId,
+            changes: { name: categoryName}
+        }, state)
+    ),
 )

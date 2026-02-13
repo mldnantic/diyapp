@@ -14,7 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
 import { PropertiesService } from '../../../../services/properties.service';
-import { addCategory, deleteCategory } from '../../../../store/category/category.action';
+import { addCategory, deleteCategory, updateCategory } from '../../../../store/category/category.action';
 import { Observable, of } from 'rxjs';
 import { Category } from '../../../../models/category';
 import { Property } from '../../../../models/property';
@@ -94,11 +94,15 @@ export class CategoryOptionsComponent {
 
     dialog.afterClosed().subscribe(result => {
       if (dialogType == 'rename' && result) {
-        console.log(result);
+        if (data.entity == 'category') {
+          this.store.dispatch(updateCategory({ categoryId: data.id, categoryName: data.name }));
+        }
       }
 
       if (dialogType == 'delete' && result === true) {
-        this.store.dispatch(deleteCategory({categoryId: data.id}));
+        if (data.entity == 'category') {
+          this.store.dispatch(deleteCategory({ categoryId: data.id }));
+        }
       }
     });
   }
