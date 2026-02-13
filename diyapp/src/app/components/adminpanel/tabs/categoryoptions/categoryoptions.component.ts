@@ -22,6 +22,8 @@ import { DialogData } from '../../adminpanel.component';
 import { RenameDialogComponent } from '../../../renamedialog/renamedialog.component';
 import { DeleteDialogComponent } from '../../../deletedialog/deletedialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { addProperty, deleteProperty, loadProperties, updateProperty } from '../../../../store/property/property.action';
+import { selectPropertyList } from '../../../../store/property/property.selector';
 
 @Component({
   selector: 'categoryoptions',
@@ -57,7 +59,7 @@ export class CategoryOptionsComponent {
   @Input() categories: Category[] = [];
   properties$: Observable<Property[]> = of([]);
 
-  constructor(private store: Store<AppState>, private propService: PropertiesService) { }
+  constructor(private store: Store<AppState>) { }
 
   addCategory(): void {
     if (this.name == '')
@@ -68,12 +70,14 @@ export class CategoryOptionsComponent {
   addProperty(): void {
     if(this.propertyName == '')
       return;
-    
+    this.store.dispatch(addProperty({categoryId: this.categoryId, propertyName: this.propertyName}));
+    this.properties$ = this.store.select(selectPropertyList);
   }
 
   onSelectionChange(event: any) {
     this.categoryId = event.value;
-    this.properties$ = this.propService.getProperties(this.categoryId);
+    this.store.dispatch(loadProperties({categoryId: this.categoryId}));
+    this.properties$ = this.store.select(selectPropertyList);
   }
 
   openDialog(dialogType: string, data: DialogData): void {
@@ -103,11 +107,17 @@ export class CategoryOptionsComponent {
         if (data.entity == 'category') {
           this.store.dispatch(updateCategory({ categoryId: data.id, categoryName: result }));
         }
+        if(data.entity == 'property') {
+          this.store.dispatch(updateProperty({ propertyId: data.id, propertyName: result}));
+        }
       }
 
       if (dialogType == 'delete' && result === true) {
         if (data.entity == 'category') {
           this.store.dispatch(deleteCategory({ categoryId: data.id }));
+        }
+        if(data.entity == 'property') {
+          this.store.dispatch(deleteProperty({ propertyId: data.id}));
         }
       }
     });

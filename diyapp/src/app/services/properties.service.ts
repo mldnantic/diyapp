@@ -22,4 +22,11 @@ export class PropertiesService {
     });
   }
 
+  deleteProperty(propertyId: number): Observable<void> {
+    return this.httpClient.delete<void>(environment.APIURL + "/properties/" + propertyId);
+  }
+
+  updateProperty(propertyId: number, propertyName: string): Observable<void> {
+    return this.httpClient.put<void>(environment.APIURL + "/properties/" + propertyId, { name: propertyName });
+  }
 }

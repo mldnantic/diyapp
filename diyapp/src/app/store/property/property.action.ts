@@ -1,16 +1,22 @@
 import { createAction, props } from "@ngrx/store";
 import { Property } from "../../models/property";
 
-export const loadProperties = createAction('Load Properties');
+export const loadProperties = createAction(
+    'Load Properties',
+    props<{ categoryId: number }>()
+);
 
 export const loadPropertiesSuccess = createAction(
     'Load Properties Success',
-    props<{properties: Property[]}>()
+    props<{ properties: Property[] }>()
 );
 
 export const addProperty = createAction(
     'Add Property',
-    props<{ propertyName: string }>()
+    props<{
+        categoryId: number, 
+        propertyName: string
+    }>()
 );
 
 export const addPropertySuccess = createAction(

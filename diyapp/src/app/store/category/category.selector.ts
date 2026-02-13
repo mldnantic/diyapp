@@ -2,7 +2,6 @@ import { createSelector } from "@ngrx/store";
 import { AppState } from "../../app.state";
 import { Category } from "../../models/category";
 
-
 export const selectCategoriesFeature = createSelector(
     (state: AppState) => state.categories,
     (categories) => categories

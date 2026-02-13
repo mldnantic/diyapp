@@ -26,5 +26,4 @@ export class CategoriesService {
   updateCategory(categoryId: number, categoryName: string): Observable<void> {
     return this.httpClient.put<void>(environment.APIURL + "/categories/" + categoryId, {name: categoryName});
   }
-
 }
