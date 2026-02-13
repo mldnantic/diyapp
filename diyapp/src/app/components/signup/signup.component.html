@@ -1,0 +1,24 @@
+<div>
+<mat-card appearance="outlined">
+  <mat-card-header>
+  <h1>Sign up/Log in</h1>
+  </mat-card-header>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput [(ngModel)]="password" [type]="hide() ? 'password' : 'text'" />
+    <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
+      <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <button matButton="filled" (click)="login()">Log in</button>
+  <button matButton="filled" (click)="register()">Sign up</button>
+</mat-card>
+</div>

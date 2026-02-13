@@ -64,14 +64,18 @@ export class CategoryOptionsComponent {
   addCategory(): void {
     if (this.name == '')
       return;
+    
     this.store.dispatch(addCategory({ categoryName: this.name }));
   }
 
   addProperty(): void {
     if(this.propertyName == '')
       return;
+
     this.store.dispatch(addProperty({categoryId: this.categoryId, propertyName: this.propertyName}));
     this.properties$ = this.store.select(selectPropertyList);
+
+    this.propertyName = '';
   }
 
   onSelectionChange(event: any) {

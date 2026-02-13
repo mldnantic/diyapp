@@ -1,0 +1,13 @@
+div{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+h1{
+    align-self: center;
+}
+
+mat-form-field, button{
+    margin:10px;
+}
