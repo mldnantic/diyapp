@@ -23,13 +23,13 @@
     <mat-grid-tile colspan="1">
         <div>
             <mat-card appearance="outlined">
-                <mat-selection-list>
+                <mat-selection-list #categorySelectionList (selectionChange)="onFilterSelection(categorySelectionList)">
                     <mat-form-field>
                         <mat-label>Search by name</mat-label>
                         <input matInput>
                     </mat-form-field>
                     @for (c of categories; track c.id) {
-                    <mat-list-option>{{c.name}}</mat-list-option>
+                    <mat-list-option [value]="c.id">{{c.name}}</mat-list-option>
                     }
                 </mat-selection-list>
             </mat-card>

@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { Category } from '../../../../models/category';
 import { Item } from '../../../../models/item';
 import { Observable, of } from 'rxjs';
@@ -48,21 +48,29 @@ export class ItemOptionsComponent {
 
   @Input() categories: Category[] = [];
   @Input() items: Item[] = [];
-  properties$: Observable<Property[]> = of([]);
 
-  constructor(private store: Store<AppState>, private propService: PropertiesService) { }
+  constructor(private store: Store<AppState>) { }
 
   onSelectionChange(event: any) {
     this.categoryId = event.value;
-    this.properties$ = this.propService.getProperties(this.categoryId);
+  }
+
+  onFilterSelection(list: MatSelectionList) {
+    const selectedValues = list.selectedOptions.selected.map(o => o.value);
+    console.log(selectedValues);
   }
 
   addItem(): void {
+    if (this.categoryId == 0 || this.itemName == '' || this.itemPrice == 0) {
+      return;
+    }
     this.store.dispatch(addItem({
       name: this.itemName,
       price: this.itemPrice,
       categoryId: this.categoryId
     }));
+    this.itemName = '';
+    this.itemPrice = 0;
   }
 
 }

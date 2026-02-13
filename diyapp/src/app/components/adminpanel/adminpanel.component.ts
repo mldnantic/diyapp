@@ -54,16 +54,11 @@ import { ItemOptionsComponent } from './tabs/itemoptions/itemoptions.component';
 })
 export class AdminPanelComponent implements OnInit {
 
-  categoryId: number = 0;
-  itemName: string = '';
-  itemPrice: number = 0;
-
   categories$: Observable<Category[]> = of([]);
-  properties$: Observable<Property[]> = of([]);
   items$: Observable<Item[]> = of([]);
   combined$: Observable<{ categories: Category[]; items: Item[]; }> = of();
 
-  constructor(private store: Store<AppState>, private propService: PropertiesService) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.store.dispatch(loadCategories());
@@ -78,12 +73,6 @@ export class AdminPanelComponent implements OnInit {
       map(([categories, items]) => ({ categories, items }))
     )
   }
-
-  onSelectionChange(event: any) {
-    this.categoryId = event.value;
-    this.properties$ = this.propService.getProperties(this.categoryId);
-  }
-
 }
 
 export interface DialogData {
