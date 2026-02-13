@@ -49,7 +49,7 @@
         </mat-card>
         @if(properties$ | async; as properties)
         {
-        @if(properties.length > 0)
+        @if(categoryId > 0)
         {
 
         <mat-card appearance="outlined" class="margine">
@@ -78,7 +78,7 @@
                     <mat-label>Property name</mat-label>
                     <input matInput [(ngModel)]="propertyName">
                 </mat-form-field>
-                <button matButton="filled" class="margine">Add property</button>
+                <button matButton="filled" class="margine" (click)="addProperty()">Add property</button>
             </div>
         </mat-card>
         }

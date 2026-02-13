@@ -1,4 +1,4 @@
 export interface Property{
     id: number;
-    name: number;
+    name: string;
 }

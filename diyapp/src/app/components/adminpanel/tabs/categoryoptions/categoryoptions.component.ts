@@ -65,6 +65,12 @@ export class CategoryOptionsComponent {
     this.store.dispatch(addCategory({ categoryName: this.name }));
   }
 
+  addProperty(): void {
+    if(this.propertyName == '')
+      return;
+    
+  }
+
   onSelectionChange(event: any) {
     this.categoryId = event.value;
     this.properties$ = this.propService.getProperties(this.categoryId);
@@ -95,7 +101,7 @@ export class CategoryOptionsComponent {
     dialog.afterClosed().subscribe(result => {
       if (dialogType == 'rename' && result) {
         if (data.entity == 'category') {
-          this.store.dispatch(updateCategory({ categoryId: data.id, categoryName: data.name }));
+          this.store.dispatch(updateCategory({ categoryId: data.id, categoryName: result }));
         }
       }
 
