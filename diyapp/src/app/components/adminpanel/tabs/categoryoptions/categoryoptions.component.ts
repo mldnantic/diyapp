@@ -66,6 +66,7 @@ export class CategoryOptionsComponent {
       return;
     
     this.store.dispatch(addCategory({ categoryName: this.name }));
+    this.name = '';
   }
 
   addProperty(): void {
