@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './moderatorpanel.component.html',
   styleUrl: './moderatorpanel.component.scss',
 })
-export class ModeratorpanelComponent {
+export class ModeratorPanelComponent {
 
 }

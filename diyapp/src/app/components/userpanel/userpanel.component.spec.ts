@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModeratorPanelComponent } from './moderatorpanel.component';
+import { UserPanelComponent } from './userpanel.component';
 
-describe('ModeratorpanelComponent', () => {
-  let component: ModeratorPanelComponent;
-  let fixture: ComponentFixture<ModeratorPanelComponent>;
+describe('UserpanelComponent', () => {
+  let component: UserPanelComponent;
+  let fixture: ComponentFixture<UserPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModeratorPanelComponent]
+      imports: [UserPanelComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ModeratorPanelComponent);
+    fixture = TestBed.createComponent(UserPanelComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
