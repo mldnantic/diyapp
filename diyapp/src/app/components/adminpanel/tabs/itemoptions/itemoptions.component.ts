@@ -18,7 +18,7 @@ import { Property } from '../../../../models/property';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
 import { PropertiesService } from '../../../../services/properties.service';
-import { addItem } from '../../../../store/item/item.action';
+import { addItem, loadItemsFromCategories } from '../../../../store/item/item.action';
 
 @Component({
   selector: 'itemoptions',
@@ -51,13 +51,13 @@ export class ItemOptionsComponent {
 
   constructor(private store: Store<AppState>) { }
 
-  onSelectionChange(event: any) {
+  onSelectionChange(event: any): void {
     this.categoryId = event.value;
   }
 
-  onFilterSelection(list: MatSelectionList) {
+  onFilterSelection(list: MatSelectionList): void {
     const selectedValues = list.selectedOptions.selected.map(o => o.value);
-    console.log(selectedValues);
+    this.store.dispatch(loadItemsFromCategories({ categoryIds: selectedValues }));
   }
 
   addItem(): void {

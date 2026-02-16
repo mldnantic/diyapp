@@ -13,7 +13,7 @@ export const initialState: ItemsState = adapter.getInitialState({
 
 export const itemsReducer = createReducer(
     initialState,
-    on(Actions.loadItemsSuccess, (state, {items})=> 
+    on(Actions.loadItemsFromCategoriesSuccess, (state, {items})=> 
         adapter.setAll(items, state)
     ),
     on(Actions.addItemSuccess, (state, {item})=>

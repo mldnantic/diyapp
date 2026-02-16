@@ -16,7 +16,7 @@ import { selectCategoryList } from '../../store/category/category.selector';
 import { AsyncPipe } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { Item } from '../../models/item';
-import { addItem, loadItems } from '../../store/item/item.action';
+import { addItem, loadItemsFromCategories } from '../../store/item/item.action';
 import { selectItemList } from '../../store/item/item.selector';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ItemComponent } from '../item/item.component';
@@ -63,7 +63,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadCategories());
     this.categories$ = this.store.select(selectCategoryList);
-    this.store.dispatch(loadItems());
+    this.store.dispatch(loadItemsFromCategories());
     this.items$ = this.store.select(selectItemList);
 
     this.combined$ = combineLatest([

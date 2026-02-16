@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Item } from './models/item.entity';
 import { Category } from 'src/categories/models/category.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { ItemDto } from './models/item.dto';
 
 @Injectable()
@@ -13,8 +13,13 @@ export class ItemsService {
         @InjectRepository(Category) private categoryRepository: Repository<Category>
     ) { }
 
-    public async getAll() {
-        return await this.itemsRepository.find();
+    public async getFromCategories(categoryIds: string) {
+        const catIds = categoryIds.split(',').map(Number);
+        return await this.itemsRepository
+            .createQueryBuilder('item')
+            .leftJoinAndSelect('item.category', 'category')
+            .where('category.id IN (:...catIds)', { catIds })
+            .getMany();
     }
 
     public async getById(id: number) {

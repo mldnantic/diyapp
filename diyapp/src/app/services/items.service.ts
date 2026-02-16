@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item';
 import { environment } from '../../environments/environment';
@@ -11,8 +11,9 @@ export class ItemsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getItems() {
-    return this.httpClient.get<Item[]>(environment.APIURL + "/items");
+  getItemsFromCategories(categoryIds: number[]) {
+    const params = new HttpParams().set('categoryIds', categoryIds.join(","));
+    return this.httpClient.get<Item[]>(environment.APIURL + "/items", { params });
   }
 
   addItem(itemName: string, itemPrice: number, categoryId: number): Observable<Item> {

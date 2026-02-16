@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { ItemDto } from './models/item.dto';
 
@@ -8,8 +8,8 @@ export class ItemsController {
     constructor(private itemsService: ItemsService) { }
 
     @Get()
-    public getItems() {
-        return this.itemsService.getAll();
+    public getItemsFromCategories(@Query('categoryIds') categoryIds: string) {
+        return this.itemsService.getFromCategories(categoryIds);
     }
 
     @Get(':id')

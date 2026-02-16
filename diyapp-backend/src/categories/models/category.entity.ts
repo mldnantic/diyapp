@@ -13,6 +13,6 @@ export class Category {
     @OneToMany(() => Property, (property) => property.category)
     properties: Property[];
 
-    @OneToMany(() => Item, (part) => part.category)
-    parts: Item[];
+    @OneToMany(() => Item, (item) => item.category)
+    items: Item[];
 }
