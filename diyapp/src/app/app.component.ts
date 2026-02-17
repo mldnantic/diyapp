@@ -12,6 +12,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class App {
   protected readonly title = signal('diyapp');
 
-  links = ['adminpanel', 'moderatorpanel', 'profile'];
+  links = ['adminpanel', 'moderatorpanel', 'signup'];
   role: string = 'admin';
 }
