@@ -1,1 +1,36 @@
-<p>homepage.component works!</p>
+@if(combined$ | async; as data)
+{
+<mat-grid-list cols="5" rowHeight="1:1">
+    <mat-grid-tile colspan="1">
+        <div>
+            <mat-card appearance="outlined">
+                <mat-selection-list #categorySelectionList (selectionChange)="onFilterSelection(categorySelectionList)">
+                    <mat-form-field>
+                        <mat-label>Search by name</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    @for (c of data.categories; track c.id) {
+                    <mat-list-option [value]="c.id">{{c.name}}</mat-list-option>
+                    }
+                </mat-selection-list>
+                <button matButton="filled" (click)="onApplyFilter()">Apply filter</button>
+            </mat-card>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" class="skrol">
+        <div class="maxWidthHeight">
+            <mat-grid-list cols="4" rowHeight="2:1">
+                @for(i of data.items; track i.id)
+                {
+                <mat-grid-tile>
+                    <mat-card appearance="outlined" class="margine">
+                        <h1>{{i.name}}</h1>
+                        <button matButton="filled">View item</button>
+                    </mat-card>
+                </mat-grid-tile>
+                }
+            </mat-grid-list>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
+}
