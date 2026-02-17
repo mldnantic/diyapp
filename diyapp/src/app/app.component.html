@@ -1,5 +1,17 @@
 <div class="logo">
-    <h1>DIYapp</h1>
+    <h1 routerLink="/">DIYapp</h1>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel" animationDuration="0ms">
+        @if(role == 'admin')
+        {
+            <a mat-tab-link routerLink="{{links[0]}}"> Admin panel </a>
+        }
+        @if(role == 'moderator')
+        {
+            <a mat-tab-link routerLink="{{links[1]}}"> Moderator panel </a>
+        }
+        <a mat-tab-link routerLink="{{links[2]}}"> Profile </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 </div>
 <div class="app-root">
     <router-outlet />

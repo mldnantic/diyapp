@@ -3,7 +3,7 @@
 <mat-grid-list cols="5" rowHeight="1:1">
     <mat-grid-tile colspan="1">
         <div>
-            <mat-card appearance="outlined">
+            <mat-card appearance="outlined" class="list">
                 <mat-selection-list #categorySelectionList (selectionChange)="onFilterSelection(categorySelectionList)">
                     <mat-form-field>
                         <mat-label>Search by name</mat-label>
@@ -24,7 +24,7 @@
                 {
                 <mat-grid-tile>
                     <mat-card appearance="outlined" class="margine">
-                        <h1>{{i.name}}</h1>
+                        <h2>{{i.name}}</h2>
                         <button matButton="filled">View item</button>
                     </mat-card>
                 </mat-grid-tile>

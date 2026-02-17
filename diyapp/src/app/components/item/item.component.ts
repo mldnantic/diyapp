@@ -11,6 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ItemComponent {
 
-  @Input() item!: Item ;
+  @Input() item!: Item;
 
 }
