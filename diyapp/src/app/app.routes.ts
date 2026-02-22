@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './components/notfound/notfound.component';
 import { SignUpComponent } from './components/signup/signup.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -15,17 +16,20 @@ export const routes: Routes = [
     {
         path: 'profile',
         loadComponent: () =>
-            import('./components/userpanel/userpanel.component').then((c) => c.UserPanelComponent)
+            import('./components/userpanel/userpanel.component').then((c) => c.UserPanelComponent),
+        canActivate: [AuthGuard]
     },
     {
         path: 'moderatorpanel',
         loadComponent: () =>
-            import('./components/moderatorpanel/moderatorpanel.component').then((c) => c.ModeratorPanelComponent)
+            import('./components/moderatorpanel/moderatorpanel.component').then((c) => c.ModeratorPanelComponent),
+        canActivate: [AuthGuard]
     },
     {
         path: 'adminpanel',
         loadComponent: () =>
-            import('./components/adminpanel/adminpanel.component').then((c) => c.AdminPanelComponent)
+            import('./components/adminpanel/adminpanel.component').then((c) => c.AdminPanelComponent),
+        canActivate: [AuthGuard]
     },
     {
         path: '**',

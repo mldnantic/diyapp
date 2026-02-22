@@ -6,37 +6,50 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup.component',
-  imports: [ 
+  imports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatCardModule,
-    FormsModule,
-    RouterLink
+    FormsModule
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignUpComponent {
-  
+
   email: string = '';
   username: string = '';
   password: string = '';
 
   hide = signal(true);
-  
+
+  constructor(private authService: AuthService) { }
+
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
-  
+
   register() {
   }
 
   login() {
+
+    this.authService.login({ username: this.username, password: this.password }).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('jwt', res.access_token);
+        console.log(res.access_token);
+      },
+      error: (err) => {
+        console.error('LOGIN FAILED', err);
+      }
+    });
+
   }
 }
