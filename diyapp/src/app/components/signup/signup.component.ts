@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class SignUpComponent {
 
   hide = signal(true);
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -45,11 +45,16 @@ export class SignUpComponent {
       next: (res: any) => {
         localStorage.setItem('jwt', res.access_token);
         console.log(res.access_token);
+        this.router.navigate(['profile']);
       },
       error: (err) => {
         console.error('LOGIN FAILED', err);
       }
     });
 
+  }
+
+  logout() {
+    localStorage.removeItem('jwt');
   }
 }
