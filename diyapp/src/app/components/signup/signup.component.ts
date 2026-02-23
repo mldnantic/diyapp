@@ -40,7 +40,8 @@ export class SignUpComponent {
   }
 
   login() {
-
+    if(this.username == '' || this.password == '')
+      return;
     this.authService.login({ username: this.username, password: this.password }).subscribe({
       next: (res: any) => {
         localStorage.setItem('jwt', res.access_token);
@@ -54,7 +55,5 @@ export class SignUpComponent {
 
   }
 
-  logout() {
-    localStorage.removeItem('jwt');
-  }
+
 }
