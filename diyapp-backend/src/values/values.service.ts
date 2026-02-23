@@ -45,8 +45,6 @@ export class ValuesService {
     }
 
     async updateValue(id: number, valueDto: ValueDto) {
-        const value = await this.getValueById(id);
-
         const { item, property } = await this.findItemAndProperty(valueDto.itemId, valueDto.propertyId);
         this.ensureSameCategory(item, property);
 

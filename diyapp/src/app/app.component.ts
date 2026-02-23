@@ -13,5 +13,4 @@ export class App {
   protected readonly title = signal('diyapp');
 
   links = ['adminpanel', 'moderatorpanel', 'profile', 'signup'];
-  role: string = 'admin';
 }

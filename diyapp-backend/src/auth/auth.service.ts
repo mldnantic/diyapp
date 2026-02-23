@@ -4,9 +4,12 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/models/user.entity';
 import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
+import { jwtConstants } from './constants';
 
 @Injectable()
 export class AuthService {
+
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService
@@ -21,11 +24,20 @@ export class AuthService {
     return null;
   }
 
-    async login(user: User) {
+  async login(user: User) {
     const payload = { username: user.username, sub: user.id, email: user.email, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),
     };
   }
-  
+
+  async validateToken(token: string) {
+    try {
+      const decoded = jwt.verify(token, jwtConstants.secret);
+      return decoded;
+    }
+    catch (error) {
+      return null;
+    }
+  }
 }
