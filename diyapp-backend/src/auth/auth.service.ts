@@ -33,8 +33,9 @@ export class AuthService {
 
   async validateToken(token: string) {
     try {
-      const decoded = jwt.verify(token, jwtConstants.secret);
-      return decoded;
+      const decoded: any = jwt.verify(token, jwtConstants.secret);
+      const { sub, iat, exp, ...payload} = decoded;
+      return payload;
     }
     catch (error) {
       return null;

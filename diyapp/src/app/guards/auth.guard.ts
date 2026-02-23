@@ -11,6 +11,17 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
 
+    this.authService.validateToken().subscribe(response => {
+      if(response.valid) {
+        console.log('Token is valid', response.payload);
+        return true;
+      }
+      else {
+        console.log('Token expired');
+        return false;
+      }
+    })
+
     if (!this.authService.validateToken()) {
       this.router.navigate(['signup']);
       return false;

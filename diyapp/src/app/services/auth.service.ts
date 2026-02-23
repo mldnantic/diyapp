@@ -17,11 +17,9 @@ export class AuthService {
     return localStorage.getItem('jwt');
   }
 
-  validateToken(): boolean {
+  validateToken() {
     const token = this.getToken();
-    if(!token)
-      return false;
-    return true;
+    return this.httpClient.post<{valid: boolean, payload?: any}>(environment.APIURL + "/auth/validate", { token });
   }
 
 }
