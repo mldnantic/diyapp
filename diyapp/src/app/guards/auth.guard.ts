@@ -9,24 +9,22 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  canActivate(): boolean {
-
+  canActivate() {
+    let valid = false;
+    
     this.authService.validateToken().subscribe(response => {
       if(response.valid) {
         console.log('Token is valid', response.payload);
-        return true;
+        valid = true;
       }
       else {
         console.log('Token expired');
-        return false;
+        this.router.navigate(['signup']);
+        valid = false;
       }
-    })
+    });
 
-    if (!this.authService.validateToken()) {
-      this.router.navigate(['signup']);
-      return false;
-    }
+    return valid;
 
-    return true;
   }
 }
