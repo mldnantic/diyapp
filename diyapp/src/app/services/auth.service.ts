@@ -13,8 +13,15 @@ export class AuthService {
     return this.httpClient.post(environment.APIURL + "/auth/login", credentials);
   }
 
-  getToken(): string | null {
+  private getToken(): string | null {
     return localStorage.getItem('jwt');
   }
-  
+
+  validateToken(): boolean {
+    const token = this.getToken();
+    if(!token)
+      return false;
+    return true;
+  }
+
 }

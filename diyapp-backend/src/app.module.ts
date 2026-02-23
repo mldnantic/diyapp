@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ItemsModule } from './items/items.module';
 import { CategoriesModule } from './categories/categories.module';
 import { PropertiesModule } from './properties/properties.module';
+import { ValuesModule } from './values/values.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PropertiesModule } from './properties/properties.module';
     AuthModule,
     CategoriesModule,
     PropertiesModule,
+    ValuesModule,
     ItemsModule,
   ],
   controllers: [AppController],
