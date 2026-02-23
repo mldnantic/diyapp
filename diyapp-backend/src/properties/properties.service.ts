@@ -13,13 +13,13 @@ export class PropertiesService {
         @InjectRepository(Category) private categoryRepo: Repository<Category>
     ) { }
 
-    async get(id: number) {
+    async getCategoryProperties(id: number) {
         return await this.propertyRepo.find({
             where: { category: { id: id } }
         });
     }
 
-    async create(propertyDto: PropertyDto) {
+    async addProperty(propertyDto: PropertyDto) {
         const category = await this.categoryRepo.findOneBy({
             id: propertyDto.categoryId
         });
@@ -33,11 +33,11 @@ export class PropertiesService {
         return await this.propertyRepo.save(property);
     }
 
-    async delete(id: number) {
+    async deleteProperty(id: number) {
         return await this.propertyRepo.delete(id);
     }
 
-    async update(id: number, dto: PropertyDto) {
+    async updateProperty(id: number, dto: PropertyDto) {
         return await this.propertyRepo.update(id, dto);
     }
 

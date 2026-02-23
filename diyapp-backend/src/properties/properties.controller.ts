@@ -8,23 +8,23 @@ export class PropertiesController {
     constructor(private readonly propertyService: PropertiesService) { }
 
     @Get(':categoryId')
-    async get(@Param('categoryId', ParseIntPipe) id: number) {
-        return this.propertyService.get(id);
+    async getCategoryProperties(@Param('categoryId', ParseIntPipe) id: number) {
+        return this.propertyService.getCategoryProperties(id);
     }
 
     @Post()
-    async create(@Body() dto: PropertyDto) {
-        return this.propertyService.create(dto);
+    async addProperty(@Body() dto: PropertyDto) {
+        return this.propertyService.addProperty(dto);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: number) {
-        return this.propertyService.delete(id);
+    async deleteProperty(@Param('id') id: number) {
+        return this.propertyService.deleteProperty(id);
     }
     
     @Put(':id')
-    async update(@Param('id', ParseIntPipe) id: number, @Body() dto: PropertyDto) {
-        return this.propertyService.update(id, dto);
+    async updateProperty(@Param('id', ParseIntPipe) id: number, @Body() dto: PropertyDto) {
+        return this.propertyService.updateProperty(id, dto);
     }
 
 }
