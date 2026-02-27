@@ -17,19 +17,22 @@ export const routes: Routes = [
         path: 'profile',
         loadComponent: () =>
             import('./components/userpanel/userpanel.component').then((c) => c.UserPanelComponent),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ['user', 'moderator', 'admin'] }
     },
     {
         path: 'moderatorpanel',
         loadComponent: () =>
             import('./components/moderatorpanel/moderatorpanel.component').then((c) => c.ModeratorPanelComponent),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ['moderator', 'admin'] }
     },
     {
         path: 'adminpanel',
         loadComponent: () =>
             import('./components/adminpanel/adminpanel.component').then((c) => c.AdminPanelComponent),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] }
     },
     {
         path: '**',
