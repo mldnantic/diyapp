@@ -1,6 +1,6 @@
 @if(combined$ | async; as data) {
-<h1 class="title">Admin panel</h1>
-<div>
+<div class="adminpanel">
+    <h1 class="title">Admin panel</h1>
     <mat-tab-group animationDuration="0ms">
         <mat-tab label="Category options">
             <categoryoptions [categories]="data.categories"></categoryoptions>

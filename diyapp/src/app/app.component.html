@@ -1,13 +1,15 @@
-<div class="logo">
-    <h1 routerLink="/">DIYapp</h1>
-    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-        <a mat-tab-link [disabled]="true"></a>
-        <a mat-tab-link routerLink="{{links[0]}}">Admin panel</a>
-        <a mat-tab-link routerLink="{{links[1]}}">Moderator panel</a>
-        <a mat-tab-link routerLink="{{links[2]}}"> Profile </a>
-    </nav>
-    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-</div>
-<div class="app-root">
-    <router-outlet />
+<div class="app-container">
+    <div class="header">
+        <h1 routerLink="/">DIYapp</h1>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+            <a mat-tab-link [disabled]="true"></a>
+            <a mat-tab-link routerLink="{{links[0]}}">Admin panel</a>
+            <a mat-tab-link routerLink="{{links[1]}}">Moderator panel</a>
+            <a mat-tab-link routerLink="{{links[2]}}"> Profile </a>
+        </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+    </div>
+    <div class="app-body">
+        <router-outlet />
+    </div>
 </div>
