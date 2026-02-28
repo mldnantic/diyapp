@@ -14,8 +14,9 @@ export const loadValuesSuccess = createAction(
 export const addValue = createAction(
     'Add Value',
     props<{
+        value: string,
         itemId: number,
-        propertyId: string
+        propertyId: number
     }>()
 );
 

@@ -11,6 +11,7 @@ import { CategoriesEffects } from './store/category/category.effect';
 import { ItemsEffects } from './store/item/item.effect';
 import { PropertiesEffects } from './store/property/property.effect';
 import { loggingInterceptor } from '../interceptors/jwtinterceptor';
+import { ValuesEffects } from './store/value/value.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([loggingInterceptor])),
     provideStore(reducers, { metaReducers }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects(CategoriesEffects, PropertiesEffects, ItemsEffects),
+    provideEffects(CategoriesEffects, PropertiesEffects, ItemsEffects, ValuesEffects),
   ]
 };
