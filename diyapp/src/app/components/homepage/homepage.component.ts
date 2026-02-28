@@ -69,7 +69,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.updateAppBodyHeight();
+    setTimeout(()=>this.updateAppBodyHeight());
   }
 
   @HostListener('window:resize')
