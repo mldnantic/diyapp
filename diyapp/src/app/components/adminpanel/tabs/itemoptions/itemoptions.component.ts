@@ -13,11 +13,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
 import { Category } from '../../../../models/category';
 import { Item } from '../../../../models/item';
-import { Observable, of } from 'rxjs';
-import { Property } from '../../../../models/property';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
-import { PropertiesService } from '../../../../services/properties.service';
 import { addItem, loadItemsFromCategories } from '../../../../store/item/item.action';
 
 @Component({

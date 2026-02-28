@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,17 +37,20 @@ import { loadItemsFromCategories } from '../../store/item/item.action';
     MatSelectModule,
     MatGridListModule,
     MatListModule
-],
+  ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, AfterViewInit {
 
   categories$: Observable<Category[]> = of([]);
   items$: Observable<Item[]> = of([]);
   combined$: Observable<{ categories: Category[]; items: Item[]; }> = of();
 
   selectedValues: number[] = [];
+
+  appBodyHeight = '500px';
+  rowHeight = '200px';
 
   constructor(private store: Store<AppState>) { }
 
@@ -63,6 +66,23 @@ export class HomePageComponent implements OnInit {
     ]).pipe(
       map(([categories, items]) => ({ categories, items }))
     )
+  }
+
+  ngAfterViewInit(): void {
+    this.updateAppBodyHeight();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateAppBodyHeight();
+  }
+
+  private updateAppBodyHeight(): void {
+    const appbody = document.querySelector('.app-body') as HTMLElement;
+    if (appbody) {
+      this.appBodyHeight = appbody.offsetHeight*0.975 + 'px';
+      this.rowHeight = appbody.offsetHeight/3 + 'px';
+    }
   }
 
   onFilterSelection(list: MatSelectionList): void {
