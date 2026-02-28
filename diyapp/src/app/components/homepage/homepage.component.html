@@ -1,9 +1,9 @@
 @if(combined$ | async; as data)
 {
-<mat-grid-list cols="5" rowHeight="1:1" class="homepage">
+<mat-grid-list cols="5" rowHeight="800px" class="homepage">
     <mat-grid-tile colspan="1">
         <div>
-            <mat-card appearance="outlined" class="list">
+            <mat-card appearance="outlined">
                 <mat-selection-list #categorySelectionList (selectionChange)="onFilterSelection(categorySelectionList)">
                     <mat-form-field>
                         <mat-label>Search by name</mat-label>
@@ -19,11 +19,11 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4" class="skrol">
         <div class="maxWidthHeight">
-            <mat-grid-list cols="4" rowHeight="2:1">
+            <mat-grid-list cols="4" rowHeight="300px">
                 @for(i of data.items; track i.id)
                 {
                 <mat-grid-tile>
-                    <mat-card appearance="outlined" class="margine">
+                    <mat-card appearance="outlined" class="list">
                         <h2>{{i.name}}</h2>
                         <button matButton="filled">View item</button>
                     </mat-card>
