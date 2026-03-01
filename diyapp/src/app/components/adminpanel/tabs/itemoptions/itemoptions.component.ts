@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input } from '@angular/core';
 import { ItemComponent } from '../../../item/item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
@@ -37,7 +37,7 @@ import { addItem, loadItemsFromCategories } from '../../../../store/item/item.ac
   templateUrl: './itemoptions.component.html',
   styleUrl: './itemoptions.component.scss',
 })
-export class ItemOptionsComponent {
+export class ItemOptionsComponent implements AfterViewInit {
 
   categoryId: number = 0;
   itemName: string = '';
@@ -46,7 +46,27 @@ export class ItemOptionsComponent {
   @Input() categories: Category[] = [];
   @Input() items: Item[] = [];
 
+  appBodyHeight = '300px';
+  rowHeight = '150px';
+
   constructor(private store: Store<AppState>) { }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateAppBodyHeight();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => this.updateAppBodyHeight());
+  }
+
+  private updateAppBodyHeight(): void {
+    const appbody = document.querySelector('.app-body') as HTMLElement;
+    if (appbody) {
+      this.appBodyHeight = appbody.offsetHeight * 0.5 + 'px';
+      this.rowHeight = appbody.offsetHeight / 4 + 'px';
+    }
+  }
 
   onSelectionChange(event: any): void {
     this.categoryId = event.value;

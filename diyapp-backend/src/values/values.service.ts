@@ -29,7 +29,8 @@ export class ValuesService {
 
     async getValuesOfItem(itemId: number) {
         return await this.valuesRepo.find({
-            where: { item: { id: itemId } }
+            where: { item: { id: itemId } },
+            relations: ['item', 'property'],
         });
     }
 
@@ -53,7 +54,7 @@ export class ValuesService {
 
     async deleteValue(id: number) {
         const value = await this.getValueById(id);
-        return this.valuesRepo.remove(value);
+        return this.valuesRepo.delete(value);
     }
 
     private async findItemAndProperty(itemId: number, propertyId: number) {

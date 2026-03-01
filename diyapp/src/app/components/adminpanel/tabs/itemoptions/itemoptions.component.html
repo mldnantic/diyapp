@@ -19,7 +19,7 @@
         <button matButton="filled" class="margine" (click)="addItem()">Add item</button>
     </div>
 </mat-card>
-<mat-grid-list cols="5" rowHeight="1:1">
+<mat-grid-list cols="5" [rowHeight]="appBodyHeight">
     <mat-grid-tile colspan="1">
         <div>
             <mat-card appearance="outlined">
@@ -37,11 +37,11 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4" class="skrol">
         <div class="maxWidthHeight">
-            <mat-grid-list cols="4" rowHeight="2:1">
+            <mat-grid-list cols="4" [rowHeight]="rowHeight">
                 @for(i of items; track i.id)
                 {
                 <mat-grid-tile>
-                    <mat-card appearance="outlined" class="margine">
+                    <mat-card appearance="outlined" class="list">
                         <item [item]=i></item>
                     </mat-card>
                 </mat-grid-tile>
