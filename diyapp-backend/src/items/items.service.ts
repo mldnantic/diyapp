@@ -17,10 +17,11 @@ export class ItemsService {
         const catIds = categoryIds.split(',').map(Number);
         return await this.itemsRepository
             .createQueryBuilder('item')
-            .leftJoinAndSelect('item.category', 'category')
-            .where('category.id IN (:...catIds)', { catIds })
+            .select(['item.id', 'item.name', 'item.price', 'item.categoryId'])
+            .where('item.categoryId IN (:...catIds)', { catIds })
             .getMany();
     }
+
 
     public async getById(id: number) {
         return await this.itemsRepository.findOneBy({ id });

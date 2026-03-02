@@ -18,3 +18,10 @@ export const selectItemList = createSelector(selectItemsFeature, (items) =>
         .filter((item) => item != null)
         .map((item) => <Item>item)
 );
+
+export const selectItemById = (id: number) => createSelector(selectItemsFeature, (items) =>
+    items.ids
+        .map((id) => items.entities[id])
+        .filter((item) => item != null)
+        .find(item => item.id == id)
+);

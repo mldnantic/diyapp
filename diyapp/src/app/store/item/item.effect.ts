@@ -25,7 +25,7 @@ export class ItemsEffects {
         )
     );
 
-    addItem$ = createEffect(() =>
+    addCategory$ = createEffect(() =>
         this.action$.pipe(
             ofType(addItem),
             mergeMap(action => {

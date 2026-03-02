@@ -1,6 +1,6 @@
 import { Category } from "src/categories/models/category.entity";
 import { Value } from "src/values/models/value.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Item {
@@ -13,7 +13,11 @@ export class Item {
     @Column()
     price: number;
 
+    @Column()
+    categoryId: number;
+
     @ManyToOne(() => Category, (category) => category.items, { onDelete: "CASCADE" })
+    @JoinColumn({name: "categoryId"})
     category: Category;
 
     @OneToMany(() => Value, value => value.item)

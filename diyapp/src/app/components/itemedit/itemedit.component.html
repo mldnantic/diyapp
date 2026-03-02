@@ -1,1 +1,10 @@
-<p>itemedit.component works!</p>
+@if(item$ | async; as item)
+{
+<mat-card appearance="outlined" class="margine">
+    <mat-card-header>
+        <h1>{{item.name}}</h1>
+    </mat-card-header>
+    <p>{{item.categoryId}}</p>
+    <p>{{item.price}}</p>
+</mat-card>
+}
