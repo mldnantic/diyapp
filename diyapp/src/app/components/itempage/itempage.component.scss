@@ -1,10 +1,12 @@
 .margine {
     margin: 10px;
     padding: 10px;
+    align-self: start;
 }
 
 .rowButtons {
     display: flex;
     flex-direction: row;
     justify-content: start;
+    align-items: center;
 }

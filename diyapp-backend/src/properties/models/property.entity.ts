@@ -13,6 +13,6 @@ export class Property {
     @ManyToOne(() => Category, (category) => category.properties, { onDelete: "CASCADE" })
     category: Category;
 
-    @OneToMany(() => Value, value => value.property)
+    @OneToMany(() => Value, value => value.property, { onDelete: "CASCADE" })
     values: Value[];
 }

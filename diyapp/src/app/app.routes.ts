@@ -10,6 +10,11 @@ export const routes: Routes = [
             import('./components/homepage/homepage.component').then((c) => c.HomePageComponent)
     },
     {
+        path: 'item/:id',
+        loadComponent: () =>
+            import('./components/itempage/itempage.component').then((c)=> c.ItemPageComponent)
+    },
+    {
         path: 'signup',
         component: SignUpComponent
     },

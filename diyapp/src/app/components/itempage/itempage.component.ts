@@ -1,30 +1,29 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Item } from '../../models/item';
+import { combineLatest, map, Observable, of } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { PropVal } from '../../models/propval';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { combineLatest, map, Observable, of } from 'rxjs';
-import { Property } from '../../models/property';
-import { Value } from '../../models/value';
-import { ActivatedRoute } from '@angular/router';
-import { Item } from '../../models/item';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { selectItemById } from '../../store/item/item.selector';
-import { AsyncPipe } from '@angular/common';
 import { loadProperties } from '../../store/property/property.action';
 import { loadValues } from '../../store/value/value.action';
 import { selectPropertyList } from '../../store/property/property.selector';
 import { selectValueList } from '../../store/value/value.selector';
-import { MatCardModule } from "@angular/material/card";
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { PropVal } from '../../models/propval';
+import { Property } from '../../models/property';
+import { Value } from '../../models/value';
 
 @Component({
-  selector: 'itemedit',
-  imports: [AsyncPipe, MatCardModule, MatTableModule, MatButtonModule],
-  providers: [Store],
-  templateUrl: './itemedit.component.html',
-  styleUrl: './itemedit.component.scss',
+  selector: 'app-itempage.component',
+  imports: [AsyncPipe, MatCardModule, MatTableModule, MatButtonModule, RouterLink],
+  templateUrl: './itempage.component.html',
+  styleUrl: './itempage.component.scss',
 })
-export class ItemEditComponent implements OnInit {
+export class ItemPageComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'value', 'options'];
 

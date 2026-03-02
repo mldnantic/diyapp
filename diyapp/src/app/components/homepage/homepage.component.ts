@@ -20,6 +20,7 @@ import { loadCategories } from '../../store/category/category.action';
 import { selectCategoryList } from '../../store/category/category.selector';
 import { selectItemList } from '../../store/item/item.selector';
 import { loadItemsFromCategories } from '../../store/item/item.action';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'homepage',
@@ -36,7 +37,8 @@ import { loadItemsFromCategories } from '../../store/item/item.action';
     MatTableModule,
     MatSelectModule,
     MatGridListModule,
-    MatListModule
+    MatListModule,
+    RouterLink
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',

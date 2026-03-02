@@ -25,7 +25,8 @@
                 <mat-grid-tile>
                     <mat-card appearance="outlined" class="list">
                         <h2>{{i.name}}</h2>
-                        <button matButton="filled">View item</button>
+                        <h2>{{i.price}} RSD</h2>
+                        <button matButton="filled" routerLink="item/{{i.id}}">View item</button>
                     </mat-card>
                 </mat-grid-tile>
                 }
