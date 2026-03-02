@@ -13,7 +13,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
-import { PropertiesService } from '../../../../services/properties.service';
 import { addCategory, deleteCategory, updateCategory } from '../../../../store/category/category.action';
 import { Observable, of } from 'rxjs';
 import { Category } from '../../../../models/category';

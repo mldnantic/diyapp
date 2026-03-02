@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ItemDialogComponent } from './itemdialog.component';
+import { ItemEditComponent } from './itemedit.component';
 
-describe('ItemdialogComponent', () => {
-  let component: ItemDialogComponent;
-  let fixture: ComponentFixture<ItemDialogComponent>;
+describe('ItemEditComponent', () => {
+  let component: ItemEditComponent;
+  let fixture: ComponentFixture<ItemEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ItemDialogComponent]
+      imports: [ItemEditComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ItemDialogComponent);
+    fixture = TestBed.createComponent(ItemEditComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

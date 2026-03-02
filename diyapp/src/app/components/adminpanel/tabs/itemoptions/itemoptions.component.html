@@ -42,7 +42,17 @@
                 {
                 <mat-grid-tile>
                     <mat-card appearance="outlined" class="list">
-                        <item [item]=i></item>
+                        <div class="part">
+                            <mat-card-title>
+                                {{i.name}}
+                            </mat-card-title>
+                            <h3>
+                                {{i.price}} RSD
+                            </h3>
+                            <div class="rowButtons">
+                                <button matButton="filled" [routerLink]="['/itemedit', i.id]">Edit item</button>
+                            </div>
+                        </div>
                     </mat-card>
                 </mat-grid-tile>
                 }

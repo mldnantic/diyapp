@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, HostListener, Input } from '@angular/core';
-import { ItemComponent } from '../../../item/item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,11 +15,11 @@ import { Item } from '../../../../models/item';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
 import { addItem, loadItemsFromCategories } from '../../../../store/item/item.action';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'itemoptions',
   imports: [
-    ItemComponent,
     MatButtonModule,
     MatTabsModule,
     MatButtonModule,
@@ -33,7 +32,8 @@ import { addItem, loadItemsFromCategories } from '../../../../store/item/item.ac
     MatSelectModule,
     MatGridListModule,
     MatListModule,
-  ],
+    RouterLink
+],
   templateUrl: './itemoptions.component.html',
   styleUrl: './itemoptions.component.scss',
 })

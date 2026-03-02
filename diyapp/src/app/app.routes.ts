@@ -35,6 +35,13 @@ export const routes: Routes = [
         data: { roles: ['admin'] }
     },
     {
+        path: 'itemedit/:id',
+        loadComponent: () =>
+            import('./components/itemedit/itemedit.component').then((c) => c.ItemEditComponent),
+        canActivate: [AuthGuard],
+        data: { roles: ['admin'] }
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }
