@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { combineLatest, map, Observable, of, take } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { Property } from '../../models/property';
 import { Value } from '../../models/value';
 import { ActivatedRoute } from '@angular/router';
@@ -32,11 +32,11 @@ interface PropVal {
 export class ItemEditComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'value', 'options'];
-  tableData = new MatTableDataSource<PropVal>();
 
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);
   values$: Observable<Value[]> = of([]);
+  tableData = new MatTableDataSource<PropVal>();
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
 
@@ -49,6 +49,14 @@ export class ItemEditComponent implements OnInit {
         this.store.dispatch(loadValues({ itemId: i.id }))
         this.properties$ = this.store.select(selectPropertyList);
         this.values$ = this.store.select(selectValueList);
+
+        this.properties$.subscribe(properties => {
+          console.log('Properties:', properties);
+        });
+
+        this.values$.subscribe(values => {
+          console.log('Values:', values);
+        });
 
         combineLatest([this.properties$, this.values$]).pipe(
           map(([props, vals]) =>
@@ -64,6 +72,7 @@ export class ItemEditComponent implements OnInit {
         ).subscribe(data => {
           this.tableData.data = data;
         })
+
       }
     })
   }

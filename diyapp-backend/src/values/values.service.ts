@@ -28,10 +28,18 @@ export class ValuesService {
     }
 
     async getValuesOfItem(itemId: number) {
-        return await this.valuesRepo.find({
-            where: { item: { id: itemId } },
-            relations: ['item', 'property'],
-        });
+        return await this.valuesRepo
+            .createQueryBuilder('value')
+            .leftJoin('value.item', 'item')
+            .leftJoin('value.property', 'property')
+            .where('item.id = :itemId', { itemId })
+            .select([
+                'value.id AS "id"',
+                'value.value AS "value"',
+                'item.id AS "itemId"',
+                'property.id AS "propertyId"',
+            ])
+            .getRawMany();
     }
 
     async getValueById(id: number) {
