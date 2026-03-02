@@ -4,13 +4,17 @@ import { Item } from './models/item.entity';
 import { Category } from 'src/categories/models/category.entity';
 import { In, Repository } from 'typeorm';
 import { ItemDto } from './models/item.dto';
+import { Property } from 'src/properties/models/property.entity';
+import { Value } from 'src/values/models/value.entity';
 
 @Injectable()
 export class ItemsService {
 
     constructor(
         @InjectRepository(Item) private itemsRepository: Repository<Item>,
-        @InjectRepository(Category) private categoryRepository: Repository<Category>
+        @InjectRepository(Category) private categoryRepository: Repository<Category>,
+        @InjectRepository(Property) private propertyRepository: Repository<Property>,
+        @InjectRepository(Value) private valueRepository: Repository<Value>,
     ) { }
 
     public async getFromCategories(categoryIds: string) {
@@ -32,14 +36,30 @@ export class ItemsService {
             id: itemDto.categoryId
         });
         if (!category) {
-            throw new Error('Item doesnt exist!');
+            throw new Error('Category doesnt exist!');
         }
-        const part = this.itemsRepository.create({
+        const item = this.itemsRepository.create({
             name: itemDto.name,
             price: itemDto.price,
             category
         });
-        return await this.itemsRepository.save(part);
+        const newItem = await this.itemsRepository.save(item);
+
+        const props = await this.propertyRepository.find({
+             where: { category: { id: category.id } }
+        })
+
+        const vals = props.map((property) => 
+            this.valueRepository.create({
+                value: "N/A",
+                item: newItem,
+                property: property
+            })
+        )
+
+        await this.valueRepository.save(vals);
+
+        return newItem;
     }
 
     public async delete(id: number) {

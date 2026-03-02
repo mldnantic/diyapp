@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { Observable, of, take } from 'rxjs';
+import { combineLatest, map, Observable, of, take } from 'rxjs';
 import { Property } from '../../models/property';
 import { Value } from '../../models/value';
 import { ActivatedRoute } from '@angular/router';
@@ -13,20 +13,30 @@ import { loadValues } from '../../store/value/value.action';
 import { selectPropertyList } from '../../store/property/property.selector';
 import { selectValueList } from '../../store/value/value.selector';
 import { MatCardModule } from "@angular/material/card";
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+
+interface PropVal {
+  propertyName: string;
+  value: string;
+  valueId: number;
+}
 
 @Component({
   selector: 'itemedit',
-  imports: [AsyncPipe, MatCardModule],
+  imports: [AsyncPipe, MatCardModule, MatTableModule, MatButtonModule],
   providers: [Store],
   templateUrl: './itemedit.component.html',
   styleUrl: './itemedit.component.scss',
 })
 export class ItemEditComponent implements OnInit {
 
+  displayedColumns: string[] = ['name', 'value', 'options'];
+  tableData = new MatTableDataSource<PropVal>();
+
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);
   values$: Observable<Value[]> = of([]);
-  combined$: Observable<{ properties: Property[]; values: Value[]; }> = of();
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
 
@@ -39,6 +49,21 @@ export class ItemEditComponent implements OnInit {
         this.store.dispatch(loadValues({ itemId: i.id }))
         this.properties$ = this.store.select(selectPropertyList);
         this.values$ = this.store.select(selectValueList);
+
+        combineLatest([this.properties$, this.values$]).pipe(
+          map(([props, vals]) =>
+            vals.map(val => {
+              const p = props.find(x => x.id == val.propertyId);
+              return {
+                propertyName: p?.name ?? '',
+                value: val.value,
+                valueId: val.id
+              };
+            })
+          )
+        ).subscribe(data => {
+          this.tableData.data = data;
+        })
       }
     })
   }
