@@ -19,4 +19,13 @@ export const itemsReducer = createReducer(
     on(Actions.addItemSuccess, (state, {item})=>
         adapter.addOne(item, state)
     ),
+    on(Actions.deleteItemSuccess, (state, {itemId})=>
+        adapter.removeOne(itemId, state)    
+    ),
+    on(Actions.updateItemSuccess, (state, {itemId, changes})=>
+        adapter.updateOne({
+            id: itemId,
+            changes: changes
+        }, state)
+    )
 )

@@ -28,12 +28,8 @@ export class ItemsService {
     return this.httpClient.delete<void>(environment.APIURL + "/items/" + itemId);
   }
 
-  updateItem(itemId: number, itemName: string, itemPrice: string, categoryId: number): Observable<void> {
-    return this.httpClient.put<void>(environment.APIURL + "/items/" + itemId, {
-      name: itemName,
-      price: itemPrice,
-      categoryId: categoryId
-    });
+  updateItem(itemId: number, changes: Partial<Item>): Observable<void> {
+    return this.httpClient.put<void>(environment.APIURL + "/items/" + itemId, changes);
   }
 
 }
