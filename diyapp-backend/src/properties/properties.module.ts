@@ -5,9 +5,10 @@ import { Property } from './models/property.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Category } from 'src/categories/models/category.entity';
 import { Value } from 'src/values/models/value.entity';
+import { Item } from 'src/items/models/item.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Property, Category, Value])],
+  imports:[TypeOrmModule.forFeature([Property, Category, Item, Value])],
   providers: [PropertiesService],
   controllers: [PropertiesController]
 })
