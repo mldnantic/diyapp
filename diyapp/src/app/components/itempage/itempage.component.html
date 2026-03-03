@@ -5,21 +5,19 @@
         <h1>{{item.name}}</h1>
     </mat-card-header>
     <div class="rowButtons">
-        <h2>{{item.price}} RSD</h2>
-        <button matButton="filled" class="margine" routerLink="">Add to project</button>
-    </div>
-    <div class="rowButtons">
         <mat-card appearance="outlined" class="margine">
 
             <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef>Property name</th>
+                    <th mat-header-cell *matHeaderCellDef>
+                        <h2>Properties</h2>
+                    </th>
                     <td mat-cell *matCellDef="let element">{{element.propertyName}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="value">
-                    <th mat-header-cell *matHeaderCellDef>Value</th>
+                    <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">{{element.value}}</td>
                 </ng-container>
 
@@ -32,6 +30,12 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+
+            <div class="rowCards">
+                <h2>{{item.price}} RSD</h2>
+                <button matButton="filled" class="margine" routerLink="">Add to project</button>
+            </div>
+
         </mat-card>
     </div>
 </mat-card>
