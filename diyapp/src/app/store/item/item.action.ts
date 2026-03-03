@@ -29,3 +29,29 @@ export const addItemSuccess = createAction(
     'Add Item Success',
     props<{ item: Item }>()
 );
+
+export const deleteItem = createAction(
+    'Delete Item',
+    props<{ itemId: number }>()
+);
+
+export const deleteItemSuccess = createAction(
+    'Delete Item Success',
+    props<{ itemId: number }>()
+);
+
+export const updateItem = createAction(
+    'Update Item',
+    props<{
+        itemId: number,
+        changes: Partial<Item>
+    }>()
+);
+
+export const updateItemSuccess = createAction(
+    'Update Item Success',
+    props<{
+        itemId: number,
+        changes: Partial<Item>
+    }>()
+);

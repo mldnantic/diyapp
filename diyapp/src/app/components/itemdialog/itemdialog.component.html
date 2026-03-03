@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Update {{data.fieldName}} of {{data.name}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>New {{data.fieldName}}</mat-label>
+    <input matInput [(ngModel)]="newValue">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Discard</button>
+  <button mat-button [mat-dialog-close]="newValue">Apply</button>
+</div>
