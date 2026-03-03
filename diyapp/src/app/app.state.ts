@@ -4,19 +4,22 @@ import { categoriesReducer, CategoriesState } from "./store/category/category.re
 import { itemsReducer, ItemsState } from "./store/item/item.reducer";
 import { propertiesReducer, PropertiesState } from "./store/property/property.reducer";
 import { valuesReducer, ValuesState } from "./store/value/value.reducer";
+import { userReducer, UserState } from "./store/user/user.reducer";
 
 export interface AppState {
     categories: CategoriesState;
     properties: PropertiesState;
     items: ItemsState;
     values: ValuesState;
+    user: UserState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
     categories: categoriesReducer,
     properties: propertiesReducer,
     items: itemsReducer,
-    values: valuesReducer
+    values: valuesReducer,
+    user: userReducer
 }
 
 export const metaReducers: MetaReducer<AppState>[] = isDevMode() ? [] : [];
