@@ -1,9 +1,12 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { ItemDto } from './models/item.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('items')
 export class ItemsController {
@@ -25,6 +28,24 @@ export class ItemsController {
     @Post()
     public addItem(@Body() dto: ItemDto) {
         return this.itemsService.create(dto);
+    }
+
+    @Post('upload/:id')
+    @UseInterceptors(FileInterceptor('image', {
+        storage: diskStorage({
+            destination: './uploads/items',
+            filename: (req, file, callback) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+                const ext = extname(file.originalname);
+                callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+            },
+        }),
+    }))
+    public async uploadImage(
+        @UploadedFile() file: Express.Multer.File,
+        @Param('id', ParseIntPipe) itemId: number
+    ) {
+        return this.itemsService.uploadImage(itemId, file.path);
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)

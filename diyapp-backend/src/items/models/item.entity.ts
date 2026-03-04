@@ -16,6 +16,9 @@ export class Item {
     @Column()
     categoryId: number;
 
+    @Column({nullable: true})
+    image: string;
+
     @ManyToOne(() => Category, (category) => category.items, { onDelete: "CASCADE" })
     @JoinColumn({name: "categoryId"})
     category: Category;

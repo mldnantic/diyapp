@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Item } from './models/item.entity';
 import { Category } from 'src/categories/models/category.entity';
@@ -26,7 +26,6 @@ export class ItemsService {
             .getMany();
     }
 
-
     public async getById(id: number) {
         return await this.itemsRepository.findOneBy({ id });
     }
@@ -46,10 +45,10 @@ export class ItemsService {
         const newItem = await this.itemsRepository.save(item);
 
         const props = await this.propertyRepository.find({
-             where: { category: { id: category.id } }
+            where: { category: { id: category.id } }
         })
 
-        const vals = props.map((property) => 
+        const vals = props.map((property) =>
             this.valueRepository.create({
                 value: "N/A",
                 item: newItem,
@@ -60,6 +59,18 @@ export class ItemsService {
         await this.valueRepository.save(vals);
 
         return newItem;
+    }
+
+    public async uploadImage(id: number, filePath: string) {
+        const item = await this.itemsRepository.findOneBy({
+            id: id
+        });
+        if (!item) {
+            throw new NotFoundException("Item not found!");
+        }
+
+        item.image = filePath;
+        return this.itemsRepository.save(item);
     }
 
     public async delete(id: number) {

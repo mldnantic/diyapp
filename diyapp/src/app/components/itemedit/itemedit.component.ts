@@ -19,6 +19,7 @@ import { PropVal } from '../../models/propval';
 import { MatDialog } from '@angular/material/dialog';
 import { updateItem } from '../../store/item/item.action';
 import { ItemDialogComponent } from '../itemdialog/itemdialog.component';
+import { ItemsService } from '../../services/items.service';
 
 @Component({
   selector: 'itemedit',
@@ -32,12 +33,14 @@ export class ItemEditComponent implements OnInit {
   displayedColumns: string[] = ['name', 'value', 'options'];
   readonly dialogDependency = inject(MatDialog);
 
+  selectedFile: File | null = null;
+
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);
   values$: Observable<Value[]> = of([]);
   tableData = new MatTableDataSource<PropVal>();
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private itemsService: ItemsService) { }
 
   ngOnInit(): void {
     const itemId = Number(this.route.snapshot.paramMap.get('id'));
@@ -65,6 +68,20 @@ export class ItemEditComponent implements OnInit {
 
       }
     })
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload() {
+    if (this.selectedFile) {
+      const itemId = Number(this.route.snapshot.paramMap.get('id'));
+      this.itemsService.uploadImage(this.selectedFile, itemId).subscribe({
+        next: (res) => console.log("Upload success: ", res),
+        error: (err) => console.error("Upload error: ", err)
+      });
+    }
   }
 
   openItemDialog(data: ItemDialogData): void {

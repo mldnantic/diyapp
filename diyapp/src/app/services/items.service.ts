@@ -24,6 +24,13 @@ export class ItemsService {
     });
   }
 
+  uploadImage(file: File, itemId: number) {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    return this.httpClient.post(environment.APIURL + "/items/upload/" + itemId, formData);
+  }
+
   deleteItem(itemId: number): Observable<void> {
     return this.httpClient.delete<void>(environment.APIURL + "/items/" + itemId);
   }
