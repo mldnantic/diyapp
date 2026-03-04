@@ -17,9 +17,16 @@
     border-radius: 5px;
 }
 
-.homepage{
+.homepage {
     width: 75%;
     justify-self: center;
+}
+
+@media (max-width: 1600px) {
+    .homepage {
+        width: 100%;
+        justify-self: center;
+    }
 }
 
 .skrol {
