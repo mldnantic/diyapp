@@ -13,19 +13,21 @@
             <table mat-table [dataSource]="categories" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Category name </th>
+                    <th mat-header-cell *matHeaderCellDef>Category name</th>
                     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="delete">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
-                        <button matButton="filled" class="margine"
-                            (click)="openDialog('rename', {entity: 'category', name: element.name, id: element.id})">Rename
-                            category</button>
-                        <button matButton="filled" class="margine"
-                            (click)="openDialog('delete', {entity: 'category', name: element.name, id: element.id})">Delete
-                            category</button>
+                        <div class="rowCards">
+                            <button matButton="filled" class="margine"
+                                (click)="openDialog('rename', {entity: 'category', name: element.name, id: element.id})">Rename
+                                category</button>
+                            <button matButton="filled" class="margine"
+                                (click)="openDialog('delete', {entity: 'category', name: element.name, id: element.id})">Delete
+                                category</button>
+                        </div>
                     </td>
                 </ng-container>
 
@@ -56,17 +58,19 @@
             <table mat-table [dataSource]="properties" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Category properties </th>
+                    <th mat-header-cell *matHeaderCellDef>Properties</th>
                     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="delete">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
-                        <button matButton="filled" class="margine"
-                            (click)="openDialog('rename', {entity: 'property', name: element.name, id: element.id})">Rename</button>
-                        <button matButton="filled" class="margine"
-                            (click)="openDialog('delete', {entity: 'property', name: element.name, id: element.id})">Delete</button>
+                        <div class="rowCards">
+                            <button matButton="filled" class="margine"
+                                (click)="openDialog('rename', {entity: 'property', name: element.name, id: element.id})">Rename</button>
+                            <button matButton="filled" class="margine"
+                                (click)="openDialog('delete', {entity: 'property', name: element.name, id: element.id})">Delete</button>
+                        </div>
                     </td>
                 </ng-container>
 
@@ -83,7 +87,7 @@
         </mat-card>
         }
         @else {
-        <h1 class="title">Select a category</h1>
+        <h1 class="centerText">Select category to edit properties</h1>
         }
         }
     </div>

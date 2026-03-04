@@ -2,7 +2,7 @@ import { ApplicationConfig, isDevMode, provideBrowserGlobalErrorListeners } from
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { metaReducers, reducers } from './app.state';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
