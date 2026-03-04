@@ -33,7 +33,7 @@ import { RouterLink } from "@angular/router";
     MatGridListModule,
     MatListModule,
     RouterLink
-],
+  ],
   templateUrl: './itemoptions.component.html',
   styleUrl: './itemoptions.component.scss',
 })
@@ -42,6 +42,8 @@ export class ItemOptionsComponent implements AfterViewInit {
   categoryId: number = 0;
   itemName: string = '';
   itemPrice: number = 0;
+
+  searchQuery: string = '';
 
   @Input() categories: Category[] = [];
   @Input() items: Item[] = [];
@@ -72,9 +74,17 @@ export class ItemOptionsComponent implements AfterViewInit {
     this.categoryId = event.value;
   }
 
+  onSearch() {
+    console.log("Searching for: ", this.searchQuery);
+  }
+
   onFilterSelection(list: MatSelectionList): void {
     const selectedValues = list.selectedOptions.selected.map(o => o.value);
     this.store.dispatch(loadItemsFromCategories({ categoryIds: selectedValues }));
+  }
+
+  onResetFilter() {
+    
   }
 
   addItem(): void {

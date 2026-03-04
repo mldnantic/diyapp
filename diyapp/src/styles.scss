@@ -58,3 +58,10 @@ body {
 .centerText {
   text-align: center;
 }
+
+.itemSearch {
+    width: 90%;
+    display: flex;
+    flex-flow: column;
+    align-self: start;
+}

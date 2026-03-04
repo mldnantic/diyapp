@@ -20,7 +20,7 @@ import { loadCategories } from '../../store/category/category.action';
 import { selectCategoryList } from '../../store/category/category.selector';
 import { selectItemList } from '../../store/item/item.selector';
 import { loadItemsFromCategories } from '../../store/item/item.action';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'homepage',
@@ -44,6 +44,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './homepage.component.scss',
 })
 export class HomePageComponent implements OnInit, AfterViewInit {
+
+  searchQuery: string = '';
 
   categories$: Observable<Category[]> = of([]);
   items$: Observable<Item[]> = of([]);
@@ -71,7 +73,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(()=>this.updateAppBodyHeight());
+    setTimeout(() => this.updateAppBodyHeight());
   }
 
   @HostListener('window:resize')
@@ -82,16 +84,24 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   private updateAppBodyHeight(): void {
     const appbody = document.querySelector('.app-body') as HTMLElement;
     if (appbody) {
-      this.appBodyHeight = appbody.offsetHeight*0.975 + 'px';
-      this.rowHeight = appbody.offsetHeight/3 + 'px';
+      this.appBodyHeight = appbody.offsetHeight * 0.975 + 'px';
+      this.rowHeight = appbody.offsetHeight / 3 + 'px';
     }
+  }
+
+  onSearch() {
+    console.log("Searching for: ", this.searchQuery);
   }
 
   onFilterSelection(list: MatSelectionList): void {
     this.selectedValues = list.selectedOptions.selected.map(o => o.value);
   }
 
-  onApplyFilter(): void {
+  onResetFilter(): void {
+
+  }
+
+  onApplyFilter() {
     this.store.dispatch(loadItemsFromCategories({ categoryIds: this.selectedValues }));
   }
 
