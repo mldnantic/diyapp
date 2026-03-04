@@ -1,7 +1,9 @@
 .userpanel{
+    width: 75%;
     padding: 10px;
     font-weight: 500;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-evenly;
+    justify-self: center;
 }

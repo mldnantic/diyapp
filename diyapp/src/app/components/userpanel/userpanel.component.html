@@ -1,12 +1,14 @@
 <div class="userpanel">
-    <h2>
-        {{username}}
-    </h2>
-    <p>
-        {{email}}
-    </p>
-    <div class="rowCards">
-        <button matButton="filled">Edit profile</button>
-        <button matButton="filled" (click)="logout()">Log out</button>
-    </div>
+    <mat-card appearance="outlined">
+        <h1>
+            {{username}}
+        </h1>
+        <p>
+            {{email}}
+        </p>
+        <div class="rowCards">
+            <button matButton="filled">Edit profile</button>
+            <button matButton="filled" (click)="logout()">Log out</button>
+        </div>
+    </mat-card>
 </div>

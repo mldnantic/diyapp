@@ -1,14 +1,16 @@
 @if(combined$ | async; as data) {
-<div >
-    <h1 class="title">Admin panel</h1>
-    <mat-tab-group animationDuration="0ms">
-        <mat-tab label="Category options">
-            <categoryoptions [categories]="data.categories"></categoryoptions>
-        </mat-tab>
-        <mat-tab label="Item options">
-            <itemoptions [categories]="data.categories" [items]="data.items"></itemoptions>
-        </mat-tab>
-        <!-- <mat-tab label="Item compatibility rules">
+<div class="adminpanel">
+    <mat-card appearance="outlined" class="margine">
+
+        <h1 class="title">Admin panel</h1>
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="Category options">
+                <categoryoptions [categories]="data.categories"></categoryoptions>
+            </mat-tab>
+            <mat-tab label="Item options">
+                <itemoptions [categories]="data.categories" [items]="data.items"></itemoptions>
+            </mat-tab>
+            <!-- <mat-tab label="Item compatibility rules">
             <mat-card appearance="outlined" class="margine">
                 <div class="opcija">
                     <mat-form-field class="margine">
@@ -35,6 +37,7 @@
                 </div>
             </mat-card>
         </mat-tab> -->
-    </mat-tab-group>
+        </mat-tab-group>
+    </mat-card>
 </div>
 }
