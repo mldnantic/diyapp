@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { RegisterUser, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,10 @@ import { environment } from '../../environments/environment';
 export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
+
+  registerUser(user: RegisterUser) {
+    return this.httpClient.post<User>(environment.APIURL + "/users", user);
+  }
 
   login(credentials: any) {
     return this.httpClient.post(environment.APIURL + "/auth/login", credentials);
@@ -19,7 +24,7 @@ export class AuthService {
 
   validateToken() {
     const token = this.getToken();
-    return this.httpClient.post<{valid: boolean, payload?: any}>(environment.APIURL + "/auth/validate", { token });
+    return this.httpClient.post<{ valid: boolean, payload?: any }>(environment.APIURL + "/auth/validate", { token });
   }
 
 }

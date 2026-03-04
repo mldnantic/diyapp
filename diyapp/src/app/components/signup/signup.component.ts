@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-signup.component',
@@ -37,10 +38,25 @@ export class SignUpComponent {
   }
 
   register() {
+    if (this.email == '' || this.username == '' || this.password == '')
+      return;
+    this.authService.registerUser({
+      email: this.email,
+      username: this.username,
+      password: this.password
+    }).subscribe({
+      next: (res: User) => {
+        console.log(res);
+        console.log('Registration successful, you can proceed to login');
+      },
+      error: (err) => {
+        console.error('REGISTRATION FAILED', err);
+      }
+    })
   }
 
   login() {
-    if(this.username == '' || this.password == '')
+    if (this.username == '' || this.password == '')
       return;
     this.authService.login({ username: this.username, password: this.password }).subscribe({
       next: (res: any) => {
