@@ -11,14 +11,7 @@
     align-items: center;
 }
 
-.itempage {
-    width: 75%;
-    justify-self: center;
-}
-
-@media (max-width: 1600px) {
-    .itempage {
-        width: 100%;
-        justify-self: center;
-    }
+.limitWidth {
+    width: 150px;
+    text-align: justify;
 }

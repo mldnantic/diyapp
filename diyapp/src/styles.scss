@@ -65,3 +65,15 @@ body {
     flex-flow: column;
     align-self: start;
 }
+
+.itempage {
+    width: 75%;
+    justify-self: center;
+}
+
+@media (max-width: 1600px) {
+    .itempage {
+        width: 100%;
+        justify-self: center;
+    }
+}
