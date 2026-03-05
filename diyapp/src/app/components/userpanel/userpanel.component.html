@@ -1,14 +1,31 @@
 <div class="userpanel">
     <mat-card appearance="outlined">
-        <h1>
-            {{username}}
-        </h1>
-        <p>
-            {{email}}
-        </p>
+
         <div class="rowCards">
-            <button matButton="filled">Edit profile</button>
-            <button matButton="filled" (click)="logout()">Log out</button>
+            <mat-card appearance="outlined" class="userCard">
+                <img mat-card-image
+                    src="https://static.vecteezy.com/system/resources/thumbnails/021/353/308/small_2x/user-icon-for-website-and-mobile-apps-png.png"
+                    class="limitWidth">
+                <h1>
+                    {{username}}
+                </h1>
+                <p>
+                    {{email}}
+                </p>
+                <div class="columnButtons">
+                    <button matButton="filled">Edit profile</button>
+                    <button matButton="filled">Create project</button>
+                </div>
+            </mat-card>
+            <mat-card appearance="outlined" class="userDashboard">
+                <div class="logOutHeader">
+                    <button matButton="filled" (click)="logout()">Log out</button>
+                    <h1>My projects</h1>
+                </div>
+                <div>TODO: Prikaz liste projekata</div>
+                <h1>My receipts</h1>
+                <div>TODO: Prikaz liste racuna</div>
+            </mat-card>
         </div>
     </mat-card>
 </div>

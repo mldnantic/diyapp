@@ -4,14 +4,9 @@
     align-self: start;
 }
 
-.rowButtons {
+.itemPrice {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: end;
     align-items: center;
-}
-
-.limitWidth {
-    width: 150px;
-    text-align: justify;
 }

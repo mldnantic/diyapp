@@ -1,9 +1,39 @@
-.userpanel{
+.userpanel {
     width: 75%;
     padding: 10px;
     font-weight: 500;
     display: flex;
     flex-flow: column wrap;
-    justify-content: space-evenly;
     justify-self: center;
+}
+
+.logOutHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userCard {
+    width: 20%;
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
+.userDashboard {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+}
+
+.columnButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+button {
+    margin: 5px;
 }
