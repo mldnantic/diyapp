@@ -49,11 +49,12 @@ export class ItemPageComponent implements OnInit {
             vals.map(val => {
               const p = props.find(x => x.id == val.propertyId);
               return {
+                propertyId: val.propertyId,
                 propertyName: p?.name ?? '',
                 value: val.value,
                 valueId: val.id
               };
-            })
+            }).sort((a, b) => a.propertyId - b.propertyId)
           )).subscribe(data => {
             this.tableData.data = data;
           })
