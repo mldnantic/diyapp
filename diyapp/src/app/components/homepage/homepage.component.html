@@ -35,16 +35,13 @@
                     @for(i of data.items; track i.id)
                     {
                     <mat-grid-tile>
-
-                        <mat-card appearance="outlined">
+                        <mat-card appearance="outlined" class="itemCard">
                             <mat-card-header>
                                 <mat-card-subtitle>{{i.name}}</mat-card-subtitle>
                             </mat-card-header>
                             <img mat-card-image [src]="api+'/'+i.image" class="limitWidth">
-                            <mat-card-content>
-                                <p>{{i.price}} RSD</p>
-                            </mat-card-content>
-                            <mat-card-actions>
+                            <mat-card-actions class="rowCards">
+                                <h2>{{i.price}} RSD</h2>
                                 <button matButton="filled" routerLink="item/{{i.id}}">View item</button>
                             </mat-card-actions>
                         </mat-card>

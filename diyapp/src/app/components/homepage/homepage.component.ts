@@ -87,7 +87,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     const appbody = document.querySelector('.app-body') as HTMLElement;
     if (appbody) {
       this.appBodyHeight = appbody.offsetHeight * 0.975 + 'px';
-      this.rowHeight = appbody.offsetHeight / 2 + 'px';
+      this.rowHeight = appbody.offsetHeight / 3 + 'px';
     }
   }
 
