@@ -5,6 +5,7 @@
         <mat-card-header>
             <h1>{{item.name}}</h1>
         </mat-card-header>
+        <img mat-card-image [src]="api+'/'+item.image" class="limitWidth">
         <div class="rowButtons">
             <mat-card appearance="outlined" class="margine">
 

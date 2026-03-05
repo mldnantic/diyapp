@@ -16,6 +16,7 @@ import { selectPropertyList } from '../../store/property/property.selector';
 import { selectValueList } from '../../store/value/value.selector';
 import { Property } from '../../models/property';
 import { Value } from '../../models/value';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-itempage.component',
@@ -26,6 +27,7 @@ import { Value } from '../../models/value';
 export class ItemPageComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'value', 'options'];
+  api: string = environment.APIURL;
 
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);

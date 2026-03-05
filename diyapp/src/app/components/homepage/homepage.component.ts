@@ -21,6 +21,7 @@ import { selectCategoryList } from '../../store/category/category.selector';
 import { selectItemList } from '../../store/item/item.selector';
 import { loadItemsFromCategories } from '../../store/item/item.action';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'homepage',
@@ -46,6 +47,7 @@ import { RouterLink } from '@angular/router';
 export class HomePageComponent implements OnInit, AfterViewInit {
 
   searchQuery: string = '';
+  api: string = environment.APIURL;
 
   categories$: Observable<Category[]> = of([]);
   items$: Observable<Item[]> = of([]);
