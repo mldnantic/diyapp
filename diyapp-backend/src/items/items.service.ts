@@ -21,7 +21,7 @@ export class ItemsService {
         const catIds = categoryIds.split(',').map(Number);
         return await this.itemsRepository
             .createQueryBuilder('item')
-            .select(['item.id', 'item.name', 'item.price', 'item.categoryId'])
+            .select(['item.id', 'item.name', 'item.price', 'item.categoryId', 'item.image'])
             .where('item.categoryId IN (:...catIds)', { catIds })
             .getMany();
     }
