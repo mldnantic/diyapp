@@ -9,6 +9,8 @@ import { ItemsModule } from './items/items.module';
 import { CategoriesModule } from './categories/categories.module';
 import { PropertiesModule } from './properties/properties.module';
 import { ValuesModule } from './values/values.module';
+import { ProjectsModule } from './projects/projects.module';
+import { ReceiptsModule } from './receipts/receipts.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { ValuesModule } from './values/values.module';
     PropertiesModule,
     ValuesModule,
     ItemsModule,
+    ProjectsModule,
+    ReceiptsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

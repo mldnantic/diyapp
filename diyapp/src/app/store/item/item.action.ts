@@ -35,6 +35,16 @@ export const addItemSuccess = createAction(
     props<{ item: Item }>()
 );
 
+export const uploadItemImage = createAction(
+    'Upload Item Image',
+    props<{ itemId: number, image: File }>()
+)
+
+export const uploadItemImageSuccess = createAction(
+    'Upload Item Image Success',
+    props<{ itemId: number, image: string }>()
+)
+
 export const deleteItem = createAction(
     'Delete Item',
     props<{ itemId: number }>()

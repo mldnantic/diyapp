@@ -28,7 +28,7 @@ export class ItemsService {
     });
   }
 
-  uploadImage(file: File, itemId: number) {
+  uploadImage(itemId: number, file: File) {
     const formData = new FormData();
     formData.append('image', file);
 

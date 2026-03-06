@@ -44,11 +44,11 @@ export class ItemsController {
             fileSize: 2 * 1024 * 1024
         }
     }))
-    public async uploadImage(
+    public async uploadItemImage(
         @UploadedFile() file: Express.Multer.File,
         @Param('id', ParseIntPipe) itemId: number
     ) {
-        return this.itemsService.uploadImage(itemId, file.path);
+        return this.itemsService.uploadItemImage(itemId, file.path);
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)

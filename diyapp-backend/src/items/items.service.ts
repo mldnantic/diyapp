@@ -63,7 +63,7 @@ export class ItemsService {
         return newItem;
     }
 
-    public async uploadImage(id: number, filePath: string) {
+    public async uploadItemImage(id: number, filePath: string) {
         const item = await this.itemsRepository.findOneBy({
             id: id
         });

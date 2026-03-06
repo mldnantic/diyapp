@@ -13,19 +13,27 @@ export const initialState: ItemsState = adapter.getInitialState({
 
 export const itemsReducer = createReducer(
     initialState,
-    on(Actions.loadItemsFromCategoriesSuccess, (state, {items})=> 
+    on(Actions.loadItemsFromCategoriesSuccess, (state, { items }) =>
         adapter.setAll(items, state)
     ),
-    on(Actions.loadItemSuccess, (state, {item}) =>
+    on(Actions.loadItemSuccess, (state, { item }) =>
         adapter.addOne(item, state)
     ),
-    on(Actions.addItemSuccess, (state, {item})=>
+    on(Actions.addItemSuccess, (state, { item }) =>
         adapter.addOne(item, state)
     ),
-    on(Actions.deleteItemSuccess, (state, {itemId})=>
-        adapter.removeOne(itemId, state)    
+    on(Actions.uploadItemImageSuccess, (state, { itemId, image }) =>
+        adapter.updateOne({
+            id: itemId,
+            changes: {
+                image: image
+            }
+        }, state)
     ),
-    on(Actions.updateItemSuccess, (state, {itemId, changes})=>
+    on(Actions.deleteItemSuccess, (state, { itemId }) =>
+        adapter.removeOne(itemId, state)
+    ),
+    on(Actions.updateItemSuccess, (state, { itemId, changes }) =>
         adapter.updateOne({
             id: itemId,
             changes: changes
