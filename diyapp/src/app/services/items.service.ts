@@ -32,7 +32,7 @@ export class ItemsService {
     const formData = new FormData();
     formData.append('image', file);
 
-    return this.httpClient.post(environment.APIURL + "/items/upload/" + itemId, formData);
+    return this.httpClient.post<Item>(environment.APIURL + "/items/upload/" + itemId, formData);
   }
 
   deleteItem(itemId: number): Observable<void> {

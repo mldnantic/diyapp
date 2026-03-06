@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { combineLatest, map, Observable, of } from 'rxjs';
+import { combineLatest, map, Observable, of, tap } from 'rxjs';
 import { Property } from '../../models/property';
 import { Value } from '../../models/value';
 import { ActivatedRoute } from '@angular/router';
@@ -17,9 +17,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { PropVal } from '../../models/propval';
 import { MatDialog } from '@angular/material/dialog';
-import { updateItem } from '../../store/item/item.action';
+import { loadItem, updateItem } from '../../store/item/item.action';
 import { ItemDialogComponent } from '../itemdialog/itemdialog.component';
 import { ItemsService } from '../../services/items.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'itemedit',
@@ -31,6 +32,7 @@ import { ItemsService } from '../../services/items.service';
 export class ItemEditComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'value', 'options'];
+  api: string = environment.APIURL;
   readonly dialogDependency = inject(MatDialog);
 
   selectedFile: File | null = null;
@@ -38,36 +40,39 @@ export class ItemEditComponent implements OnInit {
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);
   values$: Observable<Value[]> = of([]);
-  tableData = new MatTableDataSource<PropVal>();
+  tableData$: Observable<PropVal[]> = of([]);
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private itemsService: ItemsService) { }
 
   ngOnInit(): void {
     const itemId = Number(this.route.snapshot.paramMap.get('id'));
-    this.item$ = this.store.select(selectItemById(itemId));
-    this.item$.subscribe(i => {
-      if (i) {
-        this.store.dispatch(loadProperties({ categoryId: i.categoryId }));
-        this.store.dispatch(loadValues({ itemId: i.id }))
-        this.properties$ = this.store.select(selectPropertyList);
-        this.values$ = this.store.select(selectValueList);
+    this.item$ = this.store.select(selectItemById(itemId)).pipe(
+      tap(item => {
+        if (!item) {
+          this.store.dispatch(loadItem({ itemId }));
+        } else {
+          this.store.dispatch(loadProperties({ categoryId: item.categoryId }));
+          this.store.dispatch(loadValues({ itemId: item.id }));
+        }
+      })
+    );
 
-        combineLatest([this.properties$, this.values$]).pipe(
-          map(([props, vals]) =>
-            vals.map(val => {
-              const p = props.find(x => x.id == val.propertyId);
-              return {
-                propertyId: val.propertyId,
-                propertyName: p?.name ?? '',
-                value: val.value,
-                valueId: val.id
-              };
-            }).sort((a, b) => a.propertyId - b.propertyId)
-          )).subscribe(data => {
-            this.tableData.data = data;
-          });
-      }
-    })
+    this.tableData$ = combineLatest([
+      this.store.select(selectPropertyList),
+      this.store.select(selectValueList)
+    ]).pipe(
+      map(([props, vals]) =>
+        vals.map(val => {
+          const p = props.find(x => x.id === val.propertyId);
+          return {
+            propertyId: val.propertyId,
+            propertyName: p?.name ?? '',
+            value: val.value,
+            valueId: val.id
+          };
+        }).sort((a, b) => a.propertyId - b.propertyId)
+      )
+    );
   }
 
   onFileSelected(event: any) {
@@ -78,7 +83,9 @@ export class ItemEditComponent implements OnInit {
     if (this.selectedFile) {
       const itemId = Number(this.route.snapshot.paramMap.get('id'));
       this.itemsService.uploadImage(this.selectedFile, itemId).subscribe({
-        next: (res) => console.log("Upload success: ", res),
+        next: (res) => {
+          console.log("Upload success: ", res)
+        },
         error: (err) => console.error("Upload error: ", err)
       });
     }

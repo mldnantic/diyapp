@@ -3,7 +3,7 @@ import { Item } from '../../models/item';
 import { combineLatest, map, Observable, of, take, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { PropVal } from '../../models/propval';
 import { Store } from '@ngrx/store';
