@@ -53,21 +53,25 @@ export class ItemPageComponent implements OnInit {
         this.properties$ = this.store.select(selectPropertyList);
         this.values$ = this.store.select(selectValueList);
 
-        combineLatest([this.properties$, this.values$]).pipe(
-          map(([props, vals]) =>
-            vals.map(val => {
-              const p = props.find(x => x.id == val.propertyId);
-              return {
-                propertyId: val.propertyId,
-                propertyName: p?.name ?? '',
-                value: val.value,
-                valueId: val.id
-              };
-            }).sort((a, b) => a.propertyId - b.propertyId)
-          )).subscribe(data => {
-            this.tableData.data = data;
-          })
+        this.fillTable();
       }
     });
+  }
+
+  fillTable(): void {
+    combineLatest([this.properties$, this.values$]).pipe(
+      map(([props, vals]) =>
+        vals.map(val => {
+          const p = props.find(x => x.id == val.propertyId);
+          return {
+            propertyId: val.propertyId,
+            propertyName: p?.name ?? '',
+            value: val.value,
+            valueId: val.id
+          };
+        }).sort((a, b) => a.propertyId - b.propertyId)
+      )).subscribe(data => {
+        this.tableData.data = data;
+      });
   }
 }
