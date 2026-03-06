@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
-import { combineLatest, map, Observable, of, take } from 'rxjs';
+import { combineLatest, map, Observable, of, take, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -33,36 +33,31 @@ export class ItemPageComponent implements OnInit {
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);
   values$: Observable<Value[]> = of([]);
-  tableData = new MatTableDataSource<PropVal>();
+  tableData$: Observable<PropVal[]> = of([]);
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const itemId = Number(this.route.snapshot.paramMap.get('id'));
-    this.item$ = this.store.select(selectItemById(itemId));
-    this.item$.pipe(take(1)).subscribe(i => {
-      if (!i) {
-        this.store.dispatch(loadItem({ itemId: itemId }));
-      }
-    });
-    this.item$ = this.store.select(selectItemById(itemId));
-    this.item$.subscribe(i => {
-      if (i) {
-        this.store.dispatch(loadProperties({ categoryId: i.categoryId }));
-        this.store.dispatch(loadValues({ itemId: i.id }));
-        this.properties$ = this.store.select(selectPropertyList);
-        this.values$ = this.store.select(selectValueList);
 
-        this.fillTable();
-      }
-    });
-  }
+    this.item$ = this.store.select(selectItemById(itemId)).pipe(
+      tap(item => {
+        if (!item) {
+          this.store.dispatch(loadItem({ itemId }));
+        } else {
+          this.store.dispatch(loadProperties({ categoryId: item.categoryId }));
+          this.store.dispatch(loadValues({ itemId: item.id }));
+        }
+      })
+    );
 
-  fillTable(): void {
-    combineLatest([this.properties$, this.values$]).pipe(
+    this.tableData$ = combineLatest([
+      this.store.select(selectPropertyList),
+      this.store.select(selectValueList)
+    ]).pipe(
       map(([props, vals]) =>
         vals.map(val => {
-          const p = props.find(x => x.id == val.propertyId);
+          const p = props.find(x => x.id === val.propertyId);
           return {
             propertyId: val.propertyId,
             propertyName: p?.name ?? '',
@@ -70,8 +65,7 @@ export class ItemPageComponent implements OnInit {
             valueId: val.id
           };
         }).sort((a, b) => a.propertyId - b.propertyId)
-      )).subscribe(data => {
-        this.tableData.data = data;
-      });
+      )
+    );
   }
 }
