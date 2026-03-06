@@ -15,5 +15,8 @@ export class User {
     email: string;
 
     @Column()
+    profilePicture: string;
+
+    @Column()
     role: string;
 }
