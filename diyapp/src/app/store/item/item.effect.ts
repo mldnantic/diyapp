@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of } from "rxjs";
 import { ItemsService } from "../../services/items.service";
-import { addItem, addItemSuccess, deleteItem, deleteItemSuccess, loadItemsFromCategories, loadItemsFromCategoriesSuccess, updateItem, updateItemSuccess } from "./item.action";
+import { addItem, addItemSuccess, deleteItem, deleteItemSuccess, loadItem, loadItemsFromCategories, loadItemsFromCategoriesSuccess, loadItemSuccess, updateItem, updateItemSuccess } from "./item.action";
 
 
 @Injectable({
@@ -20,6 +20,18 @@ export class ItemsEffects {
                 this.itemsService.getItemsFromCategories(action.categoryIds).pipe(
                     map((items) => loadItemsFromCategoriesSuccess({ items })),
                     catchError(() => of({ type: 'load items from categories error' }))
+                )
+            )
+        )
+    );
+
+    loadItem$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(loadItem),
+            mergeMap(action =>
+                this.itemsService.getItem(action.itemId).pipe(
+                    map((item) => loadItemSuccess({ item })),
+                    catchError(() => of({ type: 'load item error' }))
                 )
             )
         )

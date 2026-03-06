@@ -16,6 +16,10 @@ export class ItemsService {
     return this.httpClient.get<Item[]>(environment.APIURL + "/items", { params });
   }
 
+  getItem(itemId: number) {
+    return this.httpClient.get<Item>(environment.APIURL + "/items/" + itemId);
+  }
+
   addItem(itemName: string, itemPrice: number, categoryId: number): Observable<Item> {
     return this.httpClient.post<Item>(environment.APIURL + "/items", {
       name: itemName,

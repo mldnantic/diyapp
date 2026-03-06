@@ -8,7 +8,12 @@ export const loadItemsFromCategories = createAction(
 
 export const loadItem = createAction(
     'Load Item',
-    props<{ itemId: string }>()
+    props<{ itemId: number }>()
+);
+
+export const loadItemSuccess = createAction(
+    'Load Item Success',
+    props<{ item: Item }>()
 );
 
 export const loadItemsFromCategoriesSuccess = createAction(

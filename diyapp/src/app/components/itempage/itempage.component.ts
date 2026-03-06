@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
-import { combineLatest, map, Observable, of } from 'rxjs';
+import { combineLatest, map, Observable, of, take } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -17,6 +17,7 @@ import { selectValueList } from '../../store/value/value.selector';
 import { Property } from '../../models/property';
 import { Value } from '../../models/value';
 import { environment } from '../../../environments/environment';
+import { loadItem } from '../../store/item/item.action';
 
 @Component({
   selector: 'app-itempage.component',
@@ -39,10 +40,16 @@ export class ItemPageComponent implements OnInit {
   ngOnInit(): void {
     const itemId = Number(this.route.snapshot.paramMap.get('id'));
     this.item$ = this.store.select(selectItemById(itemId));
+    this.item$.pipe(take(1)).subscribe(i => {
+      if (!i) {
+        this.store.dispatch(loadItem({ itemId: itemId }));
+      }
+    });
+    this.item$ = this.store.select(selectItemById(itemId));
     this.item$.subscribe(i => {
       if (i) {
         this.store.dispatch(loadProperties({ categoryId: i.categoryId }));
-        this.store.dispatch(loadValues({ itemId: i.id }))
+        this.store.dispatch(loadValues({ itemId: i.id }));
         this.properties$ = this.store.select(selectPropertyList);
         this.values$ = this.store.select(selectValueList);
 
@@ -60,9 +67,7 @@ export class ItemPageComponent implements OnInit {
           )).subscribe(data => {
             this.tableData.data = data;
           })
-
       }
-    })
+    });
   }
-
 }

@@ -16,6 +16,9 @@ export const itemsReducer = createReducer(
     on(Actions.loadItemsFromCategoriesSuccess, (state, {items})=> 
         adapter.setAll(items, state)
     ),
+    on(Actions.loadItemSuccess, (state, {item}) =>
+        adapter.addOne(item, state)
+    ),
     on(Actions.addItemSuccess, (state, {item})=>
         adapter.addOne(item, state)
     ),
