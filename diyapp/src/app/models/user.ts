@@ -7,5 +7,6 @@ export interface RegisterUser {
 export interface User {
     email: string;
     username: string;
+    profilePicture: string;
     role: string;
 }

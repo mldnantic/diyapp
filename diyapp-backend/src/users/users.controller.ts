@@ -18,7 +18,7 @@ export class UsersController {
     }
 
     @UseGuards(LocalAuthGuard)
-    @Post('uploadProfilePicture/:id')
+    @Post('uploadProfilePicture/:username')
     @UseInterceptors(FileInterceptor('image', {
         storage: diskStorage({
             destination: './uploads/users',
@@ -34,7 +34,7 @@ export class UsersController {
     }))
     public async uploadProfilePicture(
         @UploadedFile() file: Express.Multer.File,
-        @Param('id') username: string
+        @Param('username') username: string
     ) {
         return this.usersService.uploadProfilePicture(username, file.path);
     }
