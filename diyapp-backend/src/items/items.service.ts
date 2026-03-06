@@ -6,6 +6,8 @@ import { In, Repository } from 'typeorm';
 import { ItemDto } from './models/item.dto';
 import { Property } from 'src/properties/models/property.entity';
 import { Value } from 'src/values/models/value.entity';
+import * as fs from 'fs';
+import path from 'path';
 
 @Injectable()
 export class ItemsService {
@@ -65,8 +67,18 @@ export class ItemsService {
         const item = await this.itemsRepository.findOneBy({
             id: id
         });
+
         if (!item) {
             throw new NotFoundException("Item not found!");
+        }
+
+        if (item.image) {
+            try {
+                await fs.promises.unlink(path.resolve(item.image));
+            }
+            catch (err) {
+                throw new Error("Failed to delete image!", err);
+            }
         }
 
         item.image = filePath;

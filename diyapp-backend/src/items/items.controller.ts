@@ -40,6 +40,9 @@ export class ItemsController {
                 callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
             },
         }),
+        limits: {
+            fileSize: 2 * 1024 * 1024
+        }
     }))
     public async uploadImage(
         @UploadedFile() file: Express.Multer.File,
