@@ -10,7 +10,4 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class App {
-  protected readonly title = signal('diyapp');
-
-  links = ['adminpanel', 'moderatorpanel', 'profile', 'signup'];
 }

@@ -18,12 +18,27 @@ export class UserPanelComponent implements OnInit {
 
   username: string = '';
   email: string = '';
+  role: string = '';
 
   ngOnInit(): void {
     const jwt = localStorage.getItem('jwt');
     const decodedJwt = this.decodeJWT(jwt);
     this.username = decodedJwt?.username;
     this.email = decodedJwt?.email;
+    this.role = decodedJwt?.role;
+  }
+  
+  logout() {
+    localStorage.removeItem('jwt');
+    this.router.navigate(['']);
+  }
+
+  navToAdminPanel() {
+    this.router.navigate(['adminpanel']);
+  }
+
+  navToModeratorPanel() {
+    this.router.navigate(['moderatorpanel']);
   }
 
   private decodeJWT(token: string | null) {
@@ -33,13 +48,9 @@ export class UserPanelComponent implements OnInit {
     const decoded = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
     return {
       username: decoded.username,
-      email: decoded.email
+      email: decoded.email,
+      role: decoded.role
     };
-  }
-
-  logout() {
-    localStorage.removeItem('jwt');
-    this.router.navigate(['']);
   }
 
 }

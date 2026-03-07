@@ -13,6 +13,12 @@
                     {{email}}
                 </p>
                 <div class="columnButtons">
+                    @if(role == 'admin') {
+                    <button matButton="outlined" (click)="navToAdminPanel()">Admin panel</button>
+                    }
+                    @if(role == 'admin' || role == 'moderator') {
+                    <button matButton="outlined" (click)="navToModeratorPanel()">Moderator panel</button>
+                    }
                     <button matButton="filled">Edit profile</button>
                     <button matButton="filled">Create project</button>
                 </div>
