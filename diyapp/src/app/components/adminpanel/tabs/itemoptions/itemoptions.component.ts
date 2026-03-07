@@ -14,7 +14,7 @@ import { Category } from '../../../../models/category';
 import { Item } from '../../../../models/item';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
-import { addItem, loadItemsFromCategories } from '../../../../store/item/item.action';
+import { addItem, deleteItem, loadItemsFromCategories } from '../../../../store/item/item.action';
 import { RouterLink } from "@angular/router";
 
 @Component({
@@ -84,7 +84,7 @@ export class ItemOptionsComponent implements AfterViewInit {
   }
 
   onResetFilter() {
-    
+
   }
 
   addItem(): void {
@@ -98,6 +98,10 @@ export class ItemOptionsComponent implements AfterViewInit {
     }));
     this.itemName = '';
     this.itemPrice = 0;
+  }
+
+  onDeleteItem(itemId: number) {
+    this.store.dispatch(deleteItem({ itemId }));
   }
 
 }

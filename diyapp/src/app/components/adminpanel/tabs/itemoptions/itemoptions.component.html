@@ -59,6 +59,7 @@
                             </h3>
                             <div class="rowButtons">
                                 <button matButton="filled" [routerLink]="['/itemedit', i.id]">Edit item</button>
+                                <button matButton="filled" (click)="onDeleteItem(i.id)">Delete item</button>
                             </div>
                         </div>
                     </mat-card>
