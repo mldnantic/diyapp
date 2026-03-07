@@ -8,17 +8,18 @@ export const registerUser = createAction(
 
 export const registerUserSuccess = createAction(
     'Register User Success',
-    props<{ user: User }>()
 );
 
 export const loginUser = createAction(
     'Login User',
-    props<{ user: User }>()
+    props<{
+        username: string,
+        password: string
+    }>()
 );
 
 export const loginUserSuccess = createAction(
     'Login User Success',
-    props<{ access_token: string }>()
 );
 
 export const uploadProfilePicture = createAction(
@@ -28,5 +29,4 @@ export const uploadProfilePicture = createAction(
 
 export const uploadProfilePictureSuccess = createAction(
     'Upload Profile Picture Success',
-    props<{ user: User }>()
 );

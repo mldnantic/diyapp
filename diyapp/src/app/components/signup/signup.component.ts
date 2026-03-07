@@ -5,12 +5,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { registerUser } from '../../store/auth/auth.action';
+import { loginUser, registerUser } from '../../store/auth/auth.action';
 
 @Component({
   selector: 'app-signup.component',
@@ -33,7 +30,7 @@ export class SignUpComponent {
 
   hide = signal(true);
 
-  constructor(private router: Router, private store: Store<AppState>, private authService: AuthService) { }
+  constructor(private store: Store<AppState>) { }
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -50,36 +47,16 @@ export class SignUpComponent {
         password: this.password
       }
     }));
-    // this.authService.registerUser({
-    //   email: this.email,
-    //   username: this.username,
-    //   password: this.password
-    // }).subscribe({
-    //   next: (res: User) => {
-    //     console.log(res);
-    //     console.log('Registration successful, you can proceed to login');
-    //   },
-    //   error: (err) => {
-    //     console.error('REGISTRATION FAILED', err);
-    //   }
-    // })
   }
 
   login() {
     if (this.username == '' || this.password == '')
       return;
-    this.authService.login({ username: this.username, password: this.password }).subscribe({
-      next: (res: any) => {
-        localStorage.setItem('jwt', res.access_token);
-        console.log(res.access_token);
-        this.router.navigate(['profile']);
-      },
-      error: (err) => {
-        console.error('LOGIN FAILED', err);
-      }
-    });
-
+    this.store.dispatch(loginUser({
+      username: this.username,
+      password: this.password
+    }
+    ));
   }
-
 
 }

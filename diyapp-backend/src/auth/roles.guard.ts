@@ -12,7 +12,6 @@ export class RolesGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    // If no roles are required, allow access
     if (!requiredRoles) {
       return true;
     }
@@ -20,12 +19,10 @@ export class RolesGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const user = request.user;
 
-    // If user is missing (not logged in), deny
     if (!user) {
       throw new ForbiddenException('You must be logged in');
     }
 
-    // Check if user role matches required roles
     if (!requiredRoles.includes(user.role)) {
       throw new ForbiddenException('You do not have permission');
     }

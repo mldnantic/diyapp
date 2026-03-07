@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { RegisterUser, User } from '../models/user';
+import { Credentials, LoginUser, RegisterUser, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +14,8 @@ export class AuthService {
     return this.httpClient.post<User>(environment.APIURL + "/users", user);
   }
 
-  login(credentials: any) {
-    return this.httpClient.post(environment.APIURL + "/auth/login", credentials);
+  login(credentials: Credentials) {
+    return this.httpClient.post<LoginUser>(environment.APIURL + "/auth/login", credentials);
   }
 
   uploadProfilePicture(username: string, profilePicture: File) {

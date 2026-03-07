@@ -11,7 +11,7 @@ export interface AppState {
     properties: PropertiesState;
     items: ItemsState;
     values: ValuesState;
-    user: AuthState;
+    auth: AuthState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -19,7 +19,7 @@ export const reducers: ActionReducerMap<AppState> = {
     properties: propertiesReducer,
     items: itemsReducer,
     values: valuesReducer,
-    user: authReducer
+    auth: authReducer
 }
 
 export const metaReducers: MetaReducer<AppState>[] = isDevMode() ? [] : [];
