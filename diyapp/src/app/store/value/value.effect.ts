@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of } from "rxjs";
-import { addValue, addValueSuccess, deleteValue, deleteValueSuccess, loadValues, loadValuesSuccess, updateValue, updateValueSuccess } from "./value.action";
+import * as ValueActions from "./value.action";
 import { ValuesService } from "../../services/values.service";
 
 @Injectable({
@@ -14,10 +14,10 @@ export class ValuesEffects {
 
     loadValues$ = createEffect(() =>
         this.action$.pipe(
-            ofType(loadValues),
+            ofType(ValueActions.loadValues),
             mergeMap(action =>
                 this.categoriesService.getValuesOfItem(action.itemId).pipe(
-                    map((values) => loadValuesSuccess({ values })),
+                    map((values) => ValueActions.loadValuesSuccess({ values })),
                     catchError(() => of({ type: 'load error' }))
                 )
             )
@@ -26,10 +26,10 @@ export class ValuesEffects {
 
     addValue$ = createEffect(() =>
         this.action$.pipe(
-            ofType(addValue),
+            ofType(ValueActions.addValue),
             mergeMap(action => {
                 return this.categoriesService.addValue(action.value, action.itemId, action.propertyId).pipe(
-                    map((value) => addValueSuccess({ value })),
+                    map((value) => ValueActions.addValueSuccess({ value })),
                     catchError(() => of({ type: 'add value error' }))
                 )
             })
@@ -38,10 +38,10 @@ export class ValuesEffects {
 
     deleteValue$ = createEffect(() =>
         this.action$.pipe(
-            ofType(deleteValue),
+            ofType(ValueActions.deleteValue),
             mergeMap(action => {
                 return this.categoriesService.deleteValue(action.valueId).pipe(
-                    map(() => deleteValueSuccess({ valueId: action.valueId })),
+                    map(() => ValueActions.deleteValueSuccess({ valueId: action.valueId })),
                     catchError(() => of({ type: 'delete value error' }))
                 )
             })
@@ -50,10 +50,10 @@ export class ValuesEffects {
 
     updateValue$ = createEffect(() =>
         this.action$.pipe(
-            ofType(updateValue),
+            ofType(ValueActions.updateValue),
             mergeMap(action => {
                 return this.categoriesService.updateValue(action.valueId, action.value).pipe(
-                    map(() => updateValueSuccess({ valueId: action.valueId, value: action.value })),
+                    map(() => ValueActions.updateValueSuccess({ valueId: action.valueId, value: action.value })),
                     catchError(() => of({ type: 'update value error' }))
                 )
             })

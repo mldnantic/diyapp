@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { CategoriesService } from "../../services/categories.service";
-import { addCategory, addCategorySuccess, deleteCategory, deleteCategorySuccess, loadCategories, loadCategoriesSuccess, updateCategory, updateCategorySuccess } from "./category.action";
+import * as CategoryActions from "./category.action";
 import { catchError, map, mergeMap, of } from "rxjs";
 
 
@@ -15,10 +15,10 @@ export class CategoriesEffects {
 
     loadCategories$ = createEffect(() =>
         this.action$.pipe(
-            ofType(loadCategories),
+            ofType(CategoryActions.loadCategories),
             mergeMap(() =>
                 this.categoriesService.getCategories().pipe(
-                    map((categories) => loadCategoriesSuccess({ categories })),
+                    map((categories) => CategoryActions.loadCategoriesSuccess({ categories })),
                     catchError(() => of({ type: 'load error' }))
                 )
             )
@@ -27,10 +27,10 @@ export class CategoriesEffects {
 
     addCategory$ = createEffect(() =>
         this.action$.pipe(
-            ofType(addCategory),
+            ofType(CategoryActions.addCategory),
             mergeMap(action => {
                 return this.categoriesService.addCategory(action.categoryName).pipe(
-                    map((category) => addCategorySuccess({ category })),
+                    map((category) => CategoryActions.addCategorySuccess({ category })),
                     catchError(() => of({ type: 'add category error' }))
                 )
             })
@@ -39,10 +39,10 @@ export class CategoriesEffects {
 
     deleteCategory$ = createEffect(() =>
         this.action$.pipe(
-            ofType(deleteCategory),
+            ofType(CategoryActions.deleteCategory),
             mergeMap(action => {
                 return this.categoriesService.deleteCategory(action.categoryId).pipe(
-                    map(() => deleteCategorySuccess({ categoryId: action.categoryId })),
+                    map(() => CategoryActions.deleteCategorySuccess({ categoryId: action.categoryId })),
                     catchError(() => of({ type: 'delete category error' }))
                 )
             })
@@ -51,10 +51,10 @@ export class CategoriesEffects {
 
     updateCategory$ = createEffect(() =>
         this.action$.pipe(
-            ofType(updateCategory),
+            ofType(CategoryActions.updateCategory),
             mergeMap(action => {
                 return this.categoriesService.updateCategory(action.categoryId, action.categoryName).pipe(
-                    map(() => updateCategorySuccess({ categoryId: action.categoryId, categoryName: action.categoryName })),
+                    map(() => CategoryActions.updateCategorySuccess({ categoryId: action.categoryId, categoryName: action.categoryName })),
                     catchError(() => of({ type: 'update category error' }))
                 )
             })

@@ -64,8 +64,10 @@ export class UsersService {
     const savedUser = await this.usersRepository.save(user);
 
     return {
+      id: savedUser.id,
       email: savedUser.email,
       username: savedUser.username,
+      profilePicture: savedUser.profilePicture,
       role: savedUser.role,
     };
   }

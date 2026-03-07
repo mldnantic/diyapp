@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { PropertiesService } from "../../services/properties.service";
-import { addProperty, addPropertySuccess, deleteProperty, deletePropertySuccess, loadProperties, loadPropertiesSuccess, updateProperty, updatePropertySuccess } from "./property.action";
+import * as PropertyActions from "./property.action";
 import { catchError, map, mergeMap, of } from "rxjs";
 
 @Injectable({
@@ -14,10 +14,10 @@ export class PropertiesEffects {
 
     loadProperties$ = createEffect(() =>
         this.action$.pipe(
-            ofType(loadProperties),
+            ofType(PropertyActions.loadProperties),
             mergeMap( action =>
                 this.propertiesService.getProperties(action.categoryId).pipe(
-                    map((properties) => loadPropertiesSuccess({ properties })),
+                    map((properties) => PropertyActions.loadPropertiesSuccess({ properties })),
                     catchError(() => of({ type: 'load error' }))
                 )
             )
@@ -26,10 +26,10 @@ export class PropertiesEffects {
 
     addProperty$ = createEffect(() =>
         this.action$.pipe(
-            ofType(addProperty),
+            ofType(PropertyActions.addProperty),
             mergeMap(action => {
                 return this.propertiesService.addProperty(action.categoryId, action.propertyName).pipe(
-                    map((property) => addPropertySuccess({ property })),
+                    map((property) => PropertyActions.addPropertySuccess({ property })),
                     catchError(() => of({ type: 'add property error' }))
                 )
             })
@@ -38,10 +38,10 @@ export class PropertiesEffects {
 
     deleteProperty$ = createEffect(() =>
         this.action$.pipe(
-            ofType(deleteProperty),
+            ofType(PropertyActions.deleteProperty),
             mergeMap(action => {
                 return this.propertiesService.deleteProperty(action.propertyId).pipe(
-                    map(() => deletePropertySuccess({ propertyId: action.propertyId })),
+                    map(() => PropertyActions.deletePropertySuccess({ propertyId: action.propertyId })),
                     catchError(() => of({ type: 'delete property error' }))
                 )
             })
@@ -50,10 +50,10 @@ export class PropertiesEffects {
 
     updateProperty$ = createEffect(() =>
         this.action$.pipe(
-            ofType(updateProperty),
+            ofType(PropertyActions.updateProperty),
             mergeMap(action => {
                 return this.propertiesService.updateProperty(action.propertyId, action.propertyName).pipe(
-                    map(() => updatePropertySuccess({ propertyId: action.propertyId, propertyName: action.propertyName })),
+                    map(() => PropertyActions.updatePropertySuccess({ propertyId: action.propertyId, propertyName: action.propertyName })),
                     catchError(() => of({ type: 'update property error' }))
                 )
             })

@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import { registerUser } from '../../store/auth/auth.action';
 
 @Component({
   selector: 'app-signup.component',
@@ -30,7 +33,7 @@ export class SignUpComponent {
 
   hide = signal(true);
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private store: Store<AppState>, private authService: AuthService) { }
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -40,19 +43,26 @@ export class SignUpComponent {
   register() {
     if (this.email == '' || this.username == '' || this.password == '')
       return;
-    this.authService.registerUser({
-      email: this.email,
-      username: this.username,
-      password: this.password
-    }).subscribe({
-      next: (res: User) => {
-        console.log(res);
-        console.log('Registration successful, you can proceed to login');
-      },
-      error: (err) => {
-        console.error('REGISTRATION FAILED', err);
+    this.store.dispatch(registerUser({
+      newUser: {
+        email: this.email,
+        username: this.username,
+        password: this.password
       }
-    })
+    }));
+    // this.authService.registerUser({
+    //   email: this.email,
+    //   username: this.username,
+    //   password: this.password
+    // }).subscribe({
+    //   next: (res: User) => {
+    //     console.log(res);
+    //     console.log('Registration successful, you can proceed to login');
+    //   },
+    //   error: (err) => {
+    //     console.error('REGISTRATION FAILED', err);
+    //   }
+    // })
   }
 
   login() {
