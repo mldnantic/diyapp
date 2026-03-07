@@ -11,6 +11,7 @@ import { PropertiesModule } from './properties/properties.module';
 import { ValuesModule } from './values/values.module';
 import { ProjectsModule } from './projects/projects.module';
 import { ReceiptsModule } from './receipts/receipts.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ReceiptsModule } from './receipts/receipts.module';
     PropertiesModule,
     ValuesModule,
     ItemsModule,
+    CommentsModule,
     ProjectsModule,
     ReceiptsModule,
   ],
