@@ -7,6 +7,7 @@ import { Comment } from "src/comments/models/comment.entity";
 import { DataSourceOptions } from "typeorm";
 import { Project } from "src/projects/models/project.entity";
 import { ProjectItem } from "src/projects/models/project-item.entity";
+import { Receipt } from "src/receipts/models/receipt.entity";
 
 export const typeOrmConfig: DataSourceOptions = {
   type: "postgres",
@@ -15,6 +16,6 @@ export const typeOrmConfig: DataSourceOptions = {
   username: "postgres",
   password: "mysecretpassword",
   database: "postgres",
-  entities: [User, Category, Property, Item, Value, Comment, Project, ProjectItem],
+  entities: [User, Category, Property, Item, Value, Comment, Project, ProjectItem, Receipt],
   synchronize: true,
 };

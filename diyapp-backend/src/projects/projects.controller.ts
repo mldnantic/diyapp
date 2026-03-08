@@ -32,12 +32,12 @@ export class ProjectsController {
   }
 
   @Post(':id/items')
-  addItem(@Param('id', ParseIntPipe) id: number, @Body() dto: ProjectItemDto) {
+  addItemToProject(@Param('id', ParseIntPipe) id: number, @Body() dto: ProjectItemDto) {
     return this.projectService.addItemToProject(id, dto);
   }
 
   @Delete(':id/items/:itemId')
-  removeItem(@Param('id', ParseIntPipe) id: number, @Param('itemId', ParseIntPipe) itemId: number) {
+  removeItemFromProject(@Param('id', ParseIntPipe) id: number, @Param('itemId', ParseIntPipe) itemId: number) {
     return this.projectService.removeItemFromProject(id, itemId);
   }
 }
