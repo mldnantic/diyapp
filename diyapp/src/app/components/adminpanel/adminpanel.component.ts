@@ -67,9 +67,3 @@ export class AdminPanelComponent implements OnInit {
     )
   }
 }
-
-export interface DialogData {
-  entity: string;
-  name: string;
-  id: number;
-}

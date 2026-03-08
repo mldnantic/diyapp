@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, Ma
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RenameDialogComponent } from '../renamedialog/renamedialog.component';
-import { ItemDialogData } from '../itemedit/itemedit.component';
+import { ItemDialogData } from '../../models/itemdialogdata';
 
 @Component({
   selector: 'itemdialog',

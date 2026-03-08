@@ -13,13 +13,14 @@ import { loadValues, updateValue } from '../../store/value/value.action';
 import { selectPropertyList } from '../../store/property/property.selector';
 import { selectValueList } from '../../store/value/value.selector';
 import { MatCardModule } from "@angular/material/card";
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { PropVal } from '../../models/propval';
 import { MatDialog } from '@angular/material/dialog';
 import { loadItem, updateItem, uploadItemImage } from '../../store/item/item.action';
 import { ItemDialogComponent } from '../itemdialog/itemdialog.component';
 import { environment } from '../../../environments/environment';
+import { ItemDialogData } from '../../models/itemdialogdata';
 
 @Component({
   selector: 'itemedit',
@@ -110,10 +111,4 @@ export class ItemEditComponent implements OnInit {
       }
     });
   }
-}
-
-export interface ItemDialogData {
-  fieldName: string;
-  id: number;
-  name: string;
 }

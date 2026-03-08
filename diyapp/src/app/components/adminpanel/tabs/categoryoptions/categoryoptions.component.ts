@@ -17,7 +17,7 @@ import { addCategory, deleteCategory, updateCategory } from '../../../../store/c
 import { Observable, of } from 'rxjs';
 import { Category } from '../../../../models/category';
 import { Property } from '../../../../models/property';
-import { DialogData } from '../../adminpanel.component';
+import { DialogData } from '../../../../models/dialogdata';
 import { RenameDialogComponent } from '../../../renamedialog/renamedialog.component';
 import { DeleteDialogComponent } from '../../../deletedialog/deletedialog.component';
 import { MatDialog } from '@angular/material/dialog';
