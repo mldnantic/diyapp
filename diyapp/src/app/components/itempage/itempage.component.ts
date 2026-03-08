@@ -21,10 +21,13 @@ import { loadItem } from '../../store/item/item.action';
 import { Comment } from '../../models/comment';
 import { loadCommentsFromItem } from '../../store/comments/comment.action';
 import { selectCommentList } from '../../store/comments/comment.selector';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-itempage.component',
-  imports: [AsyncPipe, MatCardModule, MatTableModule, MatButtonModule, RouterLink],
+  imports: [AsyncPipe, MatCardModule, MatTableModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule, RouterLink],
   templateUrl: './itempage.component.html',
   styleUrl: './itempage.component.scss',
 })
@@ -32,6 +35,8 @@ export class ItemPageComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'value', 'options'];
   api: string = environment.APIURL;
+
+  comment: string = '';
 
   item$: Observable<Item | undefined> = of();
   properties$: Observable<Property[]> = of([]);
@@ -51,7 +56,7 @@ export class ItemPageComponent implements OnInit {
         } else {
           this.store.dispatch(loadProperties({ categoryId: item.categoryId }));
           this.store.dispatch(loadValues({ itemId: item.id }));
-          this.store.dispatch(loadCommentsFromItem({itemId: itemId}));
+          this.store.dispatch(loadCommentsFromItem({ itemId: itemId }));
         }
       })
     );

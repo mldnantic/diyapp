@@ -47,10 +47,17 @@
         </div>
         <div>
             <h1>Comments</h1>
+            <div class="komentar">
+                <mat-form-field>
+                    <mat-label>Your comment</mat-label>
+                    <input matInput [(ngModel)]="comment">
+                </mat-form-field>
+                <button matButton="filled" class="margine">Add comment</button>
+            </div>
             @if(comments$ | async; as comments) {
             @for(c of comments; track c.id) {
             <div class="komentar">
-                <h2>{{c.userId}}</h2>
+                <h2>{{c.username}}</h2>
                 <p>{{c.content}}</p>
                 <p>{{c.createdAt}}</p>
             </div>

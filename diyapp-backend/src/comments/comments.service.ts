@@ -22,8 +22,8 @@ export class CommentsService {
     if (!item) {
       throw new NotFoundException(`Item with id ${dto.itemId} not found`);
     }
-    const user = await this.usersRepository.findOne({where: {id: dto.userId}});
-    if(!user) {
+    const user = await this.usersRepository.findOne({ where: { id: dto.userId } });
+    if (!user) {
       throw new NotFoundException(`User with id ${dto.userId} not found`);
     }
     const comment = this.commentsRepository.create({
@@ -46,10 +46,20 @@ export class CommentsService {
   }
 
   async getCommentsForItem(itemId: number) {
-    return await this.commentsRepository.find({
-      where: { item: { id: itemId } }
-    });
+    return await this.commentsRepository
+      .createQueryBuilder('comment')
+      .leftJoin('comment.user', 'user')
+      .select([
+        'comment.id AS "id"',
+        'user.username AS "username"',
+        'comment.content AS "content"',
+        'comment.createdAt AS "createdAt"',
+        'comment.itemId AS "itemId"',
+      ])
+      .where('comment.itemId = :itemId', { itemId })
+      .getRawMany();
   }
+
 
   async findOne(id: number) {
     const comment = await this.commentsRepository.findOne({ where: { id }, relations: ['item'] });

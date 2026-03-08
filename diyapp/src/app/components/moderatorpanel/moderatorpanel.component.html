@@ -3,9 +3,9 @@
         @if(comments$ | async; as comments) {
         @for(c of comments; track c.id) {
         <div class="komentar">
-            <h2>{{c.userId}}</h2>
             <h2>{{c.content}}</h2>
             <h2>{{c.createdAt}}</h2>
+            <button matButton="filled" class="margine">Allow comment</button>
             <button matButton="filled" class="margine">Delete comment</button>
         </div>
         }
