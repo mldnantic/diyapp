@@ -47,6 +47,15 @@
         </div>
         <div>
             <h1>Comments</h1>
+            @if(comments$ | async; as comments) {
+            @for(c of comments; track c.id) {
+            <div class="komentar">
+                <h2>{{c.userId}}</h2>
+                <p>{{c.content}}</p>
+                <p>{{c.createdAt}}</p>
+            </div>
+            }
+            }
         </div>
     </mat-card>
 </div>

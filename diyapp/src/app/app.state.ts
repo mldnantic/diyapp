@@ -5,6 +5,7 @@ import { itemsReducer, ItemsState } from "./store/item/item.reducer";
 import { propertiesReducer, PropertiesState } from "./store/property/property.reducer";
 import { valuesReducer, ValuesState } from "./store/value/value.reducer";
 import { authReducer, AuthState } from "./store/auth/auth.reducer";
+import { commentsReducer, CommentsState } from "./store/comments/comment.reducer";
 
 export interface AppState {
     categories: CategoriesState;
@@ -12,6 +13,7 @@ export interface AppState {
     items: ItemsState;
     values: ValuesState;
     auth: AuthState;
+    comments: CommentsState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -19,7 +21,8 @@ export const reducers: ActionReducerMap<AppState> = {
     properties: propertiesReducer,
     items: itemsReducer,
     values: valuesReducer,
-    auth: authReducer
+    auth: authReducer,
+    comments: commentsReducer
 }
 
 export const metaReducers: MetaReducer<AppState>[] = isDevMode() ? [] : [];

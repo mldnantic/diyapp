@@ -17,9 +17,9 @@ export class CommentsService {
     return this.httpClient.get<Comment[]>(environment.APIURL + "/comments/" + itemId);
   }
 
-  addComment(username: string, content: string, itemId: number) {
+  addComment(userId: number, content: string, itemId: number) {
     return this.httpClient.post<Comment>(environment.APIURL + "/comments", {
-      username: username,
+      userId: userId,
       content: content,
       itemId: itemId
     });

@@ -18,6 +18,9 @@ import { Property } from '../../models/property';
 import { Value } from '../../models/value';
 import { environment } from '../../../environments/environment';
 import { loadItem } from '../../store/item/item.action';
+import { Comment } from '../../models/comment';
+import { loadCommentsFromItem } from '../../store/comments/comment.action';
+import { selectCommentList } from '../../store/comments/comment.selector';
 
 @Component({
   selector: 'app-itempage.component',
@@ -34,6 +37,7 @@ export class ItemPageComponent implements OnInit {
   properties$: Observable<Property[]> = of([]);
   values$: Observable<Value[]> = of([]);
   tableData$: Observable<PropVal[]> = of([]);
+  comments$: Observable<Comment[]> = of([]);
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) { }
 
@@ -47,6 +51,7 @@ export class ItemPageComponent implements OnInit {
         } else {
           this.store.dispatch(loadProperties({ categoryId: item.categoryId }));
           this.store.dispatch(loadValues({ itemId: item.id }));
+          this.store.dispatch(loadCommentsFromItem({itemId: itemId}));
         }
       })
     );
@@ -67,5 +72,7 @@ export class ItemPageComponent implements OnInit {
         }).sort((a, b) => a.propertyId - b.propertyId)
       )
     );
+
+    this.comments$ = this.store.select(selectCommentList);
   }
 }
