@@ -27,6 +27,10 @@ export class CommentsService {
     return await this.commentRepository.save(comment);
   }
 
+  async getComments() {
+    return await this.commentRepository.find();
+  }
+
   async getCommentsForItem(itemId: number) {
     return await this.commentRepository.find({
       where: { item: { id: itemId } }

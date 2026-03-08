@@ -1,0 +1,25 @@
+.moderatorPanel {
+    width: 75%;
+    justify-self: center;
+}
+
+@media (max-width: 1600px) {
+    .moderatorPanel {
+        width: 90%;
+        justify-self: center;
+    }
+}
+
+.komentar {
+    padding: 10px;
+    font-weight: 500;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+h2 {
+    flex: 1;
+}

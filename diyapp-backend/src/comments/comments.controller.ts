@@ -11,6 +11,11 @@ export class CommentsController {
     return this.commentsService.create(dto);
   }
 
+  @Get()
+  async getComments() {
+    return this.commentsService.getComments();
+  }
+
   @Get(':itemid')
   async getCommentsForItem(@Param('itemid', ParseIntPipe) itemId: number) {
     return this.commentsService.getCommentsForItem(itemId);

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatListModule, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { Category } from '../../../../models/category';
 import { Item } from '../../../../models/item';
 import { Store } from '@ngrx/store';
