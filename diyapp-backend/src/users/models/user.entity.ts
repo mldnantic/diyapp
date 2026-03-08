@@ -17,6 +17,9 @@ export class User {
     email: string;
 
     @OneToMany(() => Project, project => project.user)
+    comments: Comment[];
+
+    @OneToMany(() => Project, project => project.user)
     projects: Project[];
 
     @OneToMany(()=> Receipt, receipt => receipt.user)

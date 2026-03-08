@@ -21,11 +21,6 @@ export class CommentsController {
     return this.commentsService.getCommentsForItem(itemId);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body('content') content: string) {
-    return this.commentsService.update(id, content);
-  }
-
   @Delete(':id')
   async remove(@Param('id') id: number) {
     return this.commentsService.remove(id);

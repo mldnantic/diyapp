@@ -1,13 +1,11 @@
 import { Item } from "src/items/models/item.entity";
+import { User } from "src/users/models/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('comments')
 export class Comment {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    username: string;
 
     @Column({ length: 200 })
     content: string;
@@ -17,4 +15,7 @@ export class Comment {
 
     @ManyToOne(() => Item, (item) => item.comments, { onDelete: 'CASCADE' })
     item: Item;
+
+    @ManyToOne(() => User, (user) => user.comments, {onDelete: 'CASCADE'})
+    user: User;
 }

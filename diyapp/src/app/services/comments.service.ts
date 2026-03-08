@@ -6,7 +6,7 @@ import { Comment } from '../models/comment';
   providedIn: 'root',
 })
 export class CommentsService {
-  
+
   constructor(private httpClient: HttpClient) { }
 
   getComments() {
@@ -15,6 +15,18 @@ export class CommentsService {
 
   getCommentsForItem(itemId: number) {
     return this.httpClient.get<Comment[]>(environment.APIURL + "/comments/" + itemId);
+  }
+
+  addComment(username: string, content: string, itemId: number) {
+    return this.httpClient.post<Comment>(environment.APIURL + "/comments", {
+      username: username,
+      content: content,
+      itemId: itemId
+    });
+  }
+
+  deleteComment(commentId: string) {
+    return this.httpClient.delete(environment.APIURL + "/comments/" + commentId);
   }
 
 }

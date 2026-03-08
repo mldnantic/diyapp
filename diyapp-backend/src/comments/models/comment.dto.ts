@@ -1,5 +1,5 @@
 export class CommentDto {
-    username: string;
+    userId: number;
     content: string;
     itemId: number;
 }
