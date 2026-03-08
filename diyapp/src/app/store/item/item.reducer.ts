@@ -13,6 +13,9 @@ export const initialState: ItemsState = adapter.getInitialState({
 
 export const itemsReducer = createReducer(
     initialState,
+    on(Actions.loadMostPopularItemsSuccess, (state, { items }) =>
+        adapter.setAll(items, state)
+    ),
     on(Actions.loadItemsFromCategoriesSuccess, (state, { items }) =>
         adapter.setAll(items, state)
     ),

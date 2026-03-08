@@ -11,6 +11,10 @@ export class ItemsService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getMostPopularItems() {
+    return this.httpClient.get<Item[]>(environment.APIURL + "/items/mostpopular");
+  }
+
   getItemsFromCategories(categoryIds: number[]) {
     const params = new HttpParams().set('categoryIds', categoryIds.join(","));
     return this.httpClient.get<Item[]>(environment.APIURL + "/items", { params });

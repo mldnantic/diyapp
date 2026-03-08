@@ -1,9 +1,23 @@
 import { createAction, props } from "@ngrx/store";
 import { Item } from "../../models/item";
 
+export const loadMostPopularItems = createAction(
+    'Load Most Popular Items'
+);
+
+export const loadMostPopularItemsSuccess = createAction(
+    'Load Most Popular Items Success',
+    props<{ items: Item[] }>()
+);
+
 export const loadItemsFromCategories = createAction(
     'Load Items From Categories',
     props<{ categoryIds: number[] }>()
+);
+
+export const loadItemsFromCategoriesSuccess = createAction(
+    'Load Items From Categories Success',
+    props<{ items: Item[] }>()
 );
 
 export const loadItem = createAction(
@@ -14,11 +28,6 @@ export const loadItem = createAction(
 export const loadItemSuccess = createAction(
     'Load Item Success',
     props<{ item: Item }>()
-);
-
-export const loadItemsFromCategoriesSuccess = createAction(
-    'Load Items From Categories Success',
-    props<{ items: Item[] }>()
 );
 
 export const addItem = createAction(

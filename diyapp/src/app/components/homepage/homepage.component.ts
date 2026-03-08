@@ -19,7 +19,7 @@ import { AppState } from '../../app.state';
 import { loadCategories } from '../../store/category/category.action';
 import { selectCategoryList } from '../../store/category/category.selector';
 import { selectItemList } from '../../store/item/item.selector';
-import { loadItemsFromCategories } from '../../store/item/item.action';
+import { loadItemsFromCategories, loadMostPopularItems } from '../../store/item/item.action';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
@@ -64,6 +64,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     this.store.dispatch(loadCategories());
     this.categories$ = this.store.select(selectCategoryList);
 
+    this.store.dispatch(loadMostPopularItems());
     this.items$ = this.store.select(selectItemList);
 
     this.combined$ = combineLatest([
@@ -99,8 +100,10 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     this.selectedValues = list.selectedOptions.selected.map(o => o.value);
   }
 
-  onResetFilter(): void {
-
+  onResetFilter(categorySelectionList: MatSelectionList): void {
+    this.store.dispatch(loadMostPopularItems());
+    categorySelectionList.deselectAll();
+    this.searchQuery = '';
   }
 
   onApplyFilter() {

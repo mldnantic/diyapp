@@ -14,7 +14,7 @@ import { Category } from '../../../../models/category';
 import { Item } from '../../../../models/item';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../app.state';
-import { addItem, deleteItem, loadItemsFromCategories } from '../../../../store/item/item.action';
+import { addItem, deleteItem, loadItemsFromCategories, loadMostPopularItems } from '../../../../store/item/item.action';
 import { RouterLink } from "@angular/router";
 
 @Component({
@@ -83,8 +83,10 @@ export class ItemOptionsComponent implements AfterViewInit {
     this.store.dispatch(loadItemsFromCategories({ categoryIds: selectedValues }));
   }
 
-  onResetFilter() {
-
+  onResetFilter(categorySelectionList: MatSelectionList) {
+    this.store.dispatch(loadMostPopularItems());
+    categorySelectionList.deselectAll();
+    this.searchQuery = '';
   }
 
   addItem(): void {

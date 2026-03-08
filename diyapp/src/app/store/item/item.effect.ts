@@ -12,6 +12,18 @@ export class ItemsEffects {
     private action$ = inject(Actions);
     private itemsService = inject(ItemsService);
 
+    loadMostPopularItems$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(ItemActions.loadMostPopularItems),
+            mergeMap( () =>
+                this.itemsService.getMostPopularItems().pipe(
+                    map((items) => ItemActions.loadMostPopularItemsSuccess({ items })),
+                    catchError(() => of({ type: 'load most popular items error' }))
+                )
+            )
+        )
+    );
+
     loadItemsFromCategories$ = createEffect(() =>
         this.action$.pipe(
             ofType(ItemActions.loadItemsFromCategories),
@@ -58,8 +70,8 @@ export class ItemsEffects {
             ofType(ItemActions.uploadItemImage),
             mergeMap(action => {
                 return this.itemsService.uploadImage(action.itemId, action.image).pipe(
-                    map((item)=> ItemActions.uploadItemImageSuccess({itemId: item.id, image: item.image})),
-                    catchError(() => of({type: 'upload item image error'}))
+                    map((item) => ItemActions.uploadItemImageSuccess({ itemId: item.id, image: item.image })),
+                    catchError(() => of({ type: 'upload item image error' }))
                 )
             })
         )
