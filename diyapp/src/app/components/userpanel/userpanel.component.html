@@ -1,17 +1,13 @@
 <div class="userpanel">
-    <mat-card appearance="outlined">
-
+    <mat-card appearance="outlined" class="panelCard">
         <div class="rowCards">
             <mat-card appearance="outlined" class="userCard">
-                <div class="username">
-                    <h1>
-                        {{username}}
-                    </h1>
-                    <p>Edit username</p>
-                </div>
+                <h1>
+                    {{username}}
+                </h1>
 
                 <p>E-mail: {{email}}</p>
-                
+
                 <div class="columnButtons">
                     @if(role == 'admin') {
                     <button matButton="outlined" (click)="navToAdminPanel()">Admin panel</button>
@@ -19,7 +15,7 @@
                     @if(role == 'admin' || role == 'moderator') {
                     <button matButton="outlined" (click)="navToModeratorPanel()">Moderator panel</button>
                     }
-                    <button matButton="filled">Create project</button>
+                    <button matButton="filled" (click)="createProject()">Create project</button>
                 </div>
             </mat-card>
             <div class="userDashboard">

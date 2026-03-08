@@ -48,7 +48,6 @@ import { selectPropertyList } from '../../../../store/property/property.selector
 export class CategoryOptionsComponent {
 
   displayedColumns: string[] = ['name', 'delete'];
-  readonly dialogDependency = inject(MatDialog);
 
   name: string = '';
   propertyName: string = '';
@@ -58,7 +57,7 @@ export class CategoryOptionsComponent {
   @Input() categories: Category[] = [];
   properties$: Observable<Property[]> = of([]);
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private dialogDependency: MatDialog) { }
 
   addCategory(): void {
     if (this.name == '')

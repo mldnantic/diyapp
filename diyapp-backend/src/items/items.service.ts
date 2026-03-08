@@ -20,7 +20,12 @@ export class ItemsService {
     ) { }
 
     public async getMostPopular() {
-        return await this.itemsRepository.find();
+        return await this.itemsRepository.find({
+            order: {
+                viewCount: "DESC"
+            },
+            take: 4
+        });
     }
 
     public async getFromCategories(categoryIds: string) {

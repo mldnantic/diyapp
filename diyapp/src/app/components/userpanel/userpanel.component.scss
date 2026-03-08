@@ -1,5 +1,6 @@
 .userpanel {
     width: 75%;
+    height: 90%;
     padding: 10px;
     font-weight: 500;
     display: flex;
@@ -7,6 +8,16 @@
     justify-self: center;
 }
 
+@media (max-width: 1600px) {
+    .userpanel {
+        width: 90%;
+        justify-self: center;
+    }
+}
+
+.panelCard {
+    height: 100%;
+}
 .logOutHeader {
     width: 100%;
     display: flex;

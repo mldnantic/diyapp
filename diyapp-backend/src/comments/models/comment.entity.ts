@@ -13,6 +13,12 @@ export class Comment {
     @CreateDateColumn({ type: 'timestamp', precision: 0 })
     createdAt: Date;
 
+    @Column()
+    userId: number;
+    
+    @Column()
+    itemId: number;
+
     @ManyToOne(() => Item, (item) => item.comments, { onDelete: 'CASCADE' })
     item: Item;
 

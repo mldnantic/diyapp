@@ -33,7 +33,7 @@ export class UserPanelComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  editUsername() {
+  createProject() {
     
   }
 
