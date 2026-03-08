@@ -15,6 +15,9 @@ export class Item {
     @Column()
     price: number;
 
+    @Column({default: 0})
+    viewCount: number;
+
     @Column()
     categoryId: number;
 

@@ -13,6 +13,11 @@ export class ItemsController {
 
     constructor(private itemsService: ItemsService) { }
 
+    @Get('mostpopular')
+    public getMostPopularItems() {
+        return this.itemsService.getMostPopular();
+    }
+
     @Get()
     public getItemsFromCategories(@Query('categoryIds') categoryIds: string) {
         return this.itemsService.getFromCategories(categoryIds);

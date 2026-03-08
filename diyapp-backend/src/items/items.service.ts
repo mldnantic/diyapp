@@ -19,6 +19,10 @@ export class ItemsService {
         @InjectRepository(Value) private valueRepository: Repository<Value>,
     ) { }
 
+    public async getMostPopular() {
+        return await this.itemsRepository.find();
+    }
+
     public async getFromCategories(categoryIds: string) {
         const catIds = categoryIds.split(',').map(Number);
         return await this.itemsRepository

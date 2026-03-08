@@ -33,6 +33,10 @@ export class UserPanelComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  editUsername() {
+    
+  }
+
   navToAdminPanel() {
     this.router.navigate(['adminpanel']);
   }
