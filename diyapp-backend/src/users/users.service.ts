@@ -4,8 +4,6 @@ import { Repository } from 'typeorm';
 import { User } from './models/user.entity';
 import { UserDto } from './models/user.dto';
 import * as bcrypt from 'bcrypt';
-import * as fs from 'fs';
-import path from 'path';
 
 @Injectable()
 export class UsersService {
@@ -14,27 +12,6 @@ export class UsersService {
 
   public async getByUsername(username: string) {
     return await this.usersRepository.findOneBy({ username });
-  }
-
-  public async uploadProfilePicture(username: string, profilePicture: string) {
-    const user = await this.usersRepository.findOneBy({
-      username: username
-    });
-    if (!user) {
-      throw new NotFoundException("User not found!");
-    }
-
-    if (user.profilePicture) {
-      try {
-        await fs.promises.unlink(path.resolve(user.profilePicture));
-      }
-      catch (err) {
-        throw new Error("Failed to delete profile picture!", err);
-      }
-    }
-
-    user.profilePicture = profilePicture;
-    return this.usersRepository.save(user);
   }
 
   public async register(userDto: UserDto) {
@@ -67,7 +44,6 @@ export class UsersService {
       id: savedUser.id,
       email: savedUser.email,
       username: savedUser.username,
-      profilePicture: savedUser.profilePicture,
       role: savedUser.role,
     };
   }

@@ -18,13 +18,6 @@ export class AuthService {
     return this.httpClient.post<LoginUser>(environment.APIURL + "/auth/login", credentials);
   }
 
-  uploadProfilePicture(username: string, profilePicture: File) {
-    const formData = new FormData();
-    formData.append('image', profilePicture);
-
-    return this.httpClient.post<User>(environment.APIURL + "/users/uploadProfilePicture/" + username, formData);
-  }
-
   private getToken(): string | null {
     return localStorage.getItem('jwt');
   }

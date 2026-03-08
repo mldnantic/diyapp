@@ -16,9 +16,6 @@ export class User {
     @Column()
     email: string;
 
-    @Column({ nullable: true })
-    profilePicture: string;
-
     @OneToMany(() => Project, project => project.user)
     projects: Project[];
 

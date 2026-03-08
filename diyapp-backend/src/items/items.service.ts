@@ -86,6 +86,23 @@ export class ItemsService {
     }
 
     public async delete(id: number) {
+        const item = await this.itemsRepository.findOneBy({
+            id: id
+        });
+
+        if (!item) {
+            throw new NotFoundException("Item not found!");
+        }
+
+        if (item.image) {
+            try {
+                await fs.promises.unlink(path.resolve(item.image));
+            }
+            catch (err) {
+                throw new Error("Failed to delete image!", err);
+            }
+        }
+
         return await this.itemsRepository.delete(id);
     }
 

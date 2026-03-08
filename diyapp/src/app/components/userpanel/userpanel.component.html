@@ -3,15 +3,15 @@
 
         <div class="rowCards">
             <mat-card appearance="outlined" class="userCard">
-                <img mat-card-image
-                    src="https://static.vecteezy.com/system/resources/thumbnails/021/353/308/small_2x/user-icon-for-website-and-mobile-apps-png.png"
-                    class="limitWidth">
-                <h1>
-                    {{username}}
-                </h1>
-                <p>
-                    {{email}}
-                </p>
+                <div class="username">
+                    <h1>
+                        {{username}}
+                    </h1>
+                    <p>Edit username</p>
+                </div>
+
+                <p>E-mail: {{email}}</p>
+                
                 <div class="columnButtons">
                     @if(role == 'admin') {
                     <button matButton="outlined" (click)="navToAdminPanel()">Admin panel</button>
@@ -19,7 +19,6 @@
                     @if(role == 'admin' || role == 'moderator') {
                     <button matButton="outlined" (click)="navToModeratorPanel()">Moderator panel</button>
                     }
-                    <button matButton="filled">Edit profile</button>
                     <button matButton="filled">Create project</button>
                 </div>
             </mat-card>

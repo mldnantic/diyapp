@@ -21,12 +21,3 @@ export const loginUser = createAction(
 export const loginUserSuccess = createAction(
     'Login User Success',
 );
-
-export const uploadProfilePicture = createAction(
-    'Upload Profile Picture',
-    props<{ username: string, profilePicture: File }>()
-);
-
-export const uploadProfilePictureSuccess = createAction(
-    'Upload Profile Picture Success',
-);

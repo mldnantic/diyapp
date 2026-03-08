@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class UserPanelComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router) { }
 
   username: string = '';
   email: string = '';

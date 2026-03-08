@@ -64,16 +64,4 @@ export class AuthEffects {
             )
         )
     );
-
-    uploadProfilePicture$ = createEffect(() =>
-        this.action$.pipe(
-            ofType(AuthActions.uploadProfilePicture),
-            mergeMap(action =>
-                this.authService.uploadProfilePicture(action.username, action.profilePicture).pipe(
-                    map(() => AuthActions.uploadProfilePictureSuccess()),
-                    catchError(() => of({ type: 'upload profile picture error' }))
-                )
-            )
-        )
-    );
 }
