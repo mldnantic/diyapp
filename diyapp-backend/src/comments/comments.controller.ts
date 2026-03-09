@@ -26,6 +26,11 @@ export class CommentsController {
     return this.commentsService.reportComment(id);
   }
 
+  @Put('/unreport/:id')
+  async unreportComment(@Param('id', ParseIntPipe) id: number) {
+    return this.commentsService.unreportComment(id);
+  }
+
   @Delete(':id')
   async delete(@Param('id') id: number) {
     return this.commentsService.delete(id);

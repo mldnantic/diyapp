@@ -11,7 +11,7 @@
                 <h2>{{c.username}}</h2>
                 <h2>{{c.content}}</h2>
                 <h2>{{c.createdAt | date:'dd.MM.yyyy HH:mm'}}</h2>
-                <button matButton="filled" class="margine">Allow comment</button>
+                <button matButton="filled" class="margine" (click)="unreportComment(c.id)">Allow comment</button>
                 <button matButton="filled" class="margine" (click)="deleteComment(c.id)">Delete comment</button>
             </div>
         </mat-card>

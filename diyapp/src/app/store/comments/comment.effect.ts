@@ -62,6 +62,18 @@ export class CommentsEffects {
         }
     );
 
+    unreportComment$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(CommentActions.unreportComment),
+            mergeMap(action =>
+                this.commentsService.unreportComment(action.commentId).pipe(
+                    map(() => CommentActions.unreportCommentSuccess({ commentId: action.commentId })),
+                    catchError(() => of({ type: 'report comment error' }))
+                )
+            )
+        )
+    );
+
     deleteComment$ = createEffect(() =>
         this.action$.pipe(
             ofType(CommentActions.deleteComment),

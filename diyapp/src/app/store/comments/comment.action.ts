@@ -39,6 +39,16 @@ export const reportComment = createAction(
     props<{ commentId: number }>()
 );
 
+export const unreportComment = createAction(
+    'Unreport Comment',
+    props<{ commentId: number }>()
+);
+
+export const unreportCommentSuccess = createAction(
+    'Unreport Comment Success',
+    props<{ commentId: number }>()
+);
+
 export const deleteComment = createAction(
     'Delete Comment',
     props<{ commentId: number }>()

@@ -79,21 +79,26 @@ export class CommentsService {
       throw new NotFoundException(`Comment with id ${id} not found`);
     }
     comment.reported = true;
-    await this.commentsRepository.save(comment);
+    const rComment = await this.commentsRepository.save(comment);
 
-    return await this.commentsRepository
-      .createQueryBuilder('comment')
-      .leftJoin('comment.user', 'user')
-      .select([
-        'comment.id AS "id"',
-        'user.username AS "username"',
-        'comment.content AS "content"',
-        'comment.createdAt AS "createdAt"',
-        'comment.itemId AS "itemId"',
-        'comment.reported AS "reported"'
-      ])
-      .where('comment.id = :id', { id })
-      .getRawOne();
+    return {
+      id: rComment.id,
+      reported: rComment.reported
+    }
+  }
+  
+  async unreportComment(id: number) {
+    const comment = await this.commentsRepository.findOne({ where: { id } });
+    if (!comment) {
+      throw new NotFoundException(`Comment with id ${id} not found`);
+    }
+    comment.reported = false;
+    const uComment = await this.commentsRepository.save(comment);
+
+    return {
+      id: uComment.id,
+      reported: uComment.reported
+    }
   }
 
   async delete(id: number) {
