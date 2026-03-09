@@ -41,21 +41,11 @@ export class ReceiptsService {
         return this.receiptRepo.save(receipt);
     }
 
-    findAll() {
-        return this.receiptRepo.find({ relations: ['user'] });
-    }
-
-    async findOne(id: number) {
-        const receipt = await this.receiptRepo.findOne({
-            where: { id },
+    getReceiptsOfUser(userId: number) {
+        return this.receiptRepo.find({
+            where: { user: { id: userId } },
             relations: ['user'],
         });
-        if (!receipt) throw new NotFoundException('Receipt not found');
-        return receipt;
     }
 
-    async remove(id: number) {
-        const receipt = await this.findOne(id);
-        return this.receiptRepo.remove(receipt);
-    }
 }
