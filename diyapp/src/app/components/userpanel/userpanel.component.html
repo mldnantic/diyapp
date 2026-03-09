@@ -23,7 +23,15 @@
                     <button matButton="filled" (click)="logout()">Log out</button>
                     <h1>My projects</h1>
                 </div>
-                <div>TODO: Prikaz liste projekata</div>
+                <div>
+                    @if(projects$ | async; as projects ) {
+                    <mat-card appearance="outlined" class="projekti">
+                        @for(p of projects; track p.id) {
+                        <h2>{{p.name}}</h2>
+                        }
+                    </mat-card>
+                    }
+                </div>
                 <h1>My receipts</h1>
                 <div>TODO: Prikaz liste racuna</div>
             </div>

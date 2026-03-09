@@ -1,7 +1,6 @@
 export class ProjectDto {
-    name: string;
     userId: number;
-    items: ProjectItemDto[];
+    name: string;
 }
 
 export class ProjectItemDto {

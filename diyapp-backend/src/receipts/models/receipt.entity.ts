@@ -12,6 +12,6 @@ export class Receipt {
   @Column()
   total: number;
 
-  @ManyToOne(() => User, user => user.receipts, { eager: true })
+  @ManyToOne(() => User, user => user.receipts)
   user: User;
 }

@@ -10,7 +10,7 @@ export class ProjectItem {
   @ManyToOne(() => Project, project => project.items)
   project: Project;
 
-  @ManyToOne(() => Item, item => item.projectItems, { eager: true })
+  @ManyToOne(() => Item, item => item.projectItems)
   item: Item;
 
   @Column()

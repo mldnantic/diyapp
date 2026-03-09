@@ -15,16 +15,16 @@ export class Comment {
 
     @Column()
     userId: number;
-    
+
     @Column()
     itemId: number;
 
-    @Column({default: false})
+    @Column({ default: false })
     reported: boolean;
 
     @ManyToOne(() => Item, (item) => item.comments, { onDelete: 'CASCADE' })
     item: Item;
 
-    @ManyToOne(() => User, (user) => user.comments, {onDelete: 'CASCADE'})
+    @ManyToOne(() => User, (user) => user.comments, { onDelete: 'CASCADE' })
     user: User;
 }

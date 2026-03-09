@@ -7,7 +7,7 @@ export const selectCommentsFeature = createSelector(
     (comments) => comments
 );
 
-export const selectedItemIds = createSelector(
+export const selectedCommentIds = createSelector(
     selectCommentsFeature,
     (comments) => comments.ids
 );

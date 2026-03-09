@@ -14,6 +14,7 @@ import { loggingInterceptor } from '../interceptors/jwtinterceptor';
 import { ValuesEffects } from './store/value/value.effect';
 import { AuthEffects } from './store/auth/auth.effect';
 import { CommentsEffects } from './store/comments/comment.effect';
+import { ProjectsEffects } from './store/project/project.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,7 +29,8 @@ export const appConfig: ApplicationConfig = {
       ItemsEffects,
       ValuesEffects,
       AuthEffects,
-      CommentsEffects
+      CommentsEffects,
+      ProjectsEffects
     ),
   ]
 };

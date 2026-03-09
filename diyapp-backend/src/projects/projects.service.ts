@@ -14,22 +14,36 @@ export class ProjectsService {
     @InjectRepository(ProjectItem) private projectItemRepo: Repository<ProjectItem>,
     @InjectRepository(Item) private itemRepo: Repository<Item>,
     @InjectRepository(User) private userRepo: Repository<User>,
-  ) {}
+  ) { }
 
-  async createProject(dto: ProjectDto): Promise<Project> {
+  async createProject(dto: ProjectDto) {
     const user = await this.userRepo.findOneBy({ id: dto.userId });
     if (!user) throw new NotFoundException('User not found');
 
     const project = this.projectRepo.create({
       name: dto.name,
       user: user,
-      items: dto.items,
+      items: [],
     });
-    return this.projectRepo.save(project);
+    const newProject = await this.projectRepo.save(project);
+    return {
+      id: newProject.id,
+      name: newProject.name,
+      userId: newProject.user.id
+    }
   }
 
-  findAll() {
-    return this.projectRepo.find({ relations: ['user', 'items', 'items.item'] });
+  async findProjectsOfUser(userId: number) {
+    const projects = await this.projectRepo.find({
+      where: { user: { id: userId } },
+      relations: ['user'],
+    });
+
+    return projects.map(project => ({
+      id: project.id,
+      name: project.name,
+      userId: project.user.id,
+    }));
   }
 
   async getProject(id: number) {

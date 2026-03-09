@@ -10,7 +10,7 @@ export class Project {
   @Column({ length: 50 })
   name: string;
 
-  @ManyToOne(() => User, user => user.projects, { eager: true })
+  @ManyToOne(() => User, user => user.projects)
   user: User;
 
   @OneToMany(() => ProjectItem, projectItem => projectItem.project, { cascade: true })

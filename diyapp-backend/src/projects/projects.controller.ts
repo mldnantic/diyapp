@@ -11,9 +11,9 @@ export class ProjectsController {
     return this.projectService.createProject(dto);
   }
 
-  @Get()
-  findAll() {
-    return this.projectService.findAll();
+  @Get('/user/:id')
+  findProjectsOfUser(@Param('id', ParseIntPipe) userId: number) {
+    return this.projectService.findProjectsOfUser(userId);
   }
 
   @Get(':id')
