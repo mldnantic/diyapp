@@ -54,6 +54,17 @@ export class ProjectsService {
     return project;
   }
 
+  async getItemsOfProject(id: number) {
+    const project = await this.projectRepo.findOne({
+      where: { id: id },
+      relations: ["items", "items.item"]
+    });
+
+    if (!project) throw new NotFoundException('Project not found');
+
+    return project.items;
+  }
+
   async deleteProject(id: number) {
     const project = await this.getProject(id);
     if (!project) throw new NotFoundException('Project not found');

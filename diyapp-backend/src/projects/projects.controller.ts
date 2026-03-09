@@ -21,6 +21,11 @@ export class ProjectsController {
     return this.projectService.getProject(id);
   }
 
+  @Get('/items/:id')
+  getItemsOfProject(@Param('id', ParseIntPipe) id: number) {
+    return this.projectService.getItemsOfProject(id);
+  }
+
   @Delete(':id')
   deleteProject(@Param('id', ParseIntPipe) id: number) {
     return this.projectService.deleteProject(id);
