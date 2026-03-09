@@ -13,6 +13,6 @@ export class ProjectItem {
   @ManyToOne(() => Item, item => item.projectItems, { eager: true })
   item: Item;
 
-  @Column('int')
+  @Column()
   quantity: number;
 }

@@ -9,7 +9,7 @@ export class Item {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ length: 50 })
     name: string;
 
     @Column()

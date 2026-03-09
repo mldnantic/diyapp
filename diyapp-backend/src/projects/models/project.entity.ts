@@ -7,7 +7,7 @@ export class Project {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ length: 50 })
   name: string;
 
   @ManyToOne(() => User, user => user.projects, { eager: true })

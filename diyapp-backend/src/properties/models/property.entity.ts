@@ -7,7 +7,7 @@ export class Property {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ length: 50 })
     name: string;
 
     @ManyToOne(() => Category, (category) => category.properties, { onDelete: "CASCADE" })

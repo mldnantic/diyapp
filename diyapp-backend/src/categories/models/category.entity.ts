@@ -7,7 +7,7 @@ export class Category {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ length: 50 })
     name: string;
 
     @OneToMany(() => Property, (property) => property.category)
