@@ -7,7 +7,7 @@ export class ProjectsController {
   constructor(private readonly projectService: ProjectsService) {}
 
   @Post()
-  create(@Body() dto: ProjectDto) {
+  createProject(@Body() dto: ProjectDto) {
     return this.projectService.createProject(dto);
   }
 
@@ -21,14 +21,9 @@ export class ProjectsController {
     return this.projectService.getProject(id);
   }
 
-  @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() dto: ProjectDto) {
-    return this.projectService.updateProject(id, dto);
-  }
-
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.projectService.removeProject(id);
+  deleteProject(@Param('id', ParseIntPipe) id: number) {
+    return this.projectService.deleteProject(id);
   }
 
   @Post(':id/items')

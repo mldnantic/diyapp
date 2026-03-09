@@ -26,6 +26,13 @@ export const routes: Routes = [
         data: { roles: ['user', 'moderator', 'admin'] }
     },
     {
+        path: 'project/:id',
+        loadComponent: () =>
+            import('./components/projectpage/projectpage.component').then((c)=> c.ProjectPageComponent),
+        canActivate: [AuthGuard],
+        data: {roles: ['user', 'moderator', 'admin']}
+    },
+    {
         path: 'moderatorpanel',
         loadComponent: () =>
             import('./components/moderatorpanel/moderatorpanel.component').then((c) => c.ModeratorPanelComponent),

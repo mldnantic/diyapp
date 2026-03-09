@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, of } from 'rxjs';
 import { Project } from '../../models/project';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { createProject, loadProjectsFromUser } from '../../store/project/project.action';
+import { createProject, deleteProject, loadProjectsFromUser } from '../../store/project/project.action';
 import { AsyncPipe } from '@angular/common';
 import { selectProjectList } from '../../store/project/project.selector';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,7 +16,7 @@ import { CreateDialogComponent } from '../createdialog/createdialog.component';
 
 @Component({
   selector: 'userpanel',
-  imports: [AsyncPipe, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [AsyncPipe, MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, RouterLink],
   templateUrl: './userpanel.component.html',
   styleUrl: './userpanel.component.scss',
 })
@@ -57,7 +57,6 @@ export class UserPanelComponent implements OnInit {
   }
 
   createProject(): void {
-
     const dialog = this.createProjectDialog.open(CreateDialogComponent, {
       width: '300px',
       enterAnimationDuration: '0ms',
@@ -65,12 +64,16 @@ export class UserPanelComponent implements OnInit {
     });
 
     dialog.afterClosed().subscribe(result => {
-      if(result) {
-        this.store.dispatch(createProject({userId: this.userId, projectName: result}));
+      if (result) {
+        this.store.dispatch(createProject({ userId: this.userId, projectName: result }));
       }
     });
   }
-
+  
+  deleteProject(id: number) {
+    this.store.dispatch(deleteProject({ projectId: id }));
+  }
+  
   private decodeJWT(token: string | null) {
     if (token == null)
       return;
@@ -83,5 +86,4 @@ export class UserPanelComponent implements OnInit {
       role: decoded.role
     };
   }
-
 }

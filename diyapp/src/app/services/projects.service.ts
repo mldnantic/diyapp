@@ -21,8 +21,12 @@ export class ProjectsService {
     return this.httpClient.get<Project[]>(environment.APIURL + "/projects/user/" + userId);
   }
 
+  getProject(id: number) {
+    return this.httpClient.get<Project>(environment.APIURL + "/projects/" + id);
+  }
+
   deleteProject(id: number) {
-    return this.httpClient.delete(environment.APIURL + "projects/" + id);
+    return this.httpClient.delete(environment.APIURL + "/projects/" + id);
   }
 
 }

@@ -27,7 +27,13 @@
                     @if(projects$ | async; as projects ) {
                     <mat-card appearance="outlined" class="projekti">
                         @for(p of projects; track p.id) {
-                        <h2>{{p.name}}</h2>
+                        <mat-card appearance="outlined">
+                            <div class="rowCards">
+                                <h2 class="projectButton">{{p.name}}</h2>
+                                <button matButton="filled" class="projectButton" [routerLink]="['/project', p.id]">View project</button>
+                                <button matButton="filled" class="projectButton" (click)="deleteProject(p.id)">Delete project</button>
+                            </div>
+                        </mat-card>
                         }
                     </mat-card>
                     }

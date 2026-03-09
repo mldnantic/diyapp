@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-createdialog.component',
+  selector: 'createdialog',
   imports: [MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule],
   templateUrl: './createdialog.component.html',
   styleUrl: './createdialog.component.scss',

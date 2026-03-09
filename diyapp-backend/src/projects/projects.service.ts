@@ -54,15 +54,10 @@ export class ProjectsService {
     return project;
   }
 
-  async updateProject(id: number, dto: ProjectDto) {
+  async deleteProject(id: number) {
     const project = await this.getProject(id);
-    project.name = dto.name ?? project.name;
-    return this.projectRepo.save(project);
-  }
-
-  async removeProject(id: number) {
-    const project = await this.getProject(id);
-    return this.projectRepo.remove(project);
+    if (!project) throw new NotFoundException('Project not found');
+    return this.projectRepo.delete(project.id);
   }
 
   async addItemToProject(projectId: number, dto: ProjectItemDto) {
