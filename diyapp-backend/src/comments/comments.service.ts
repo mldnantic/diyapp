@@ -67,8 +67,7 @@ export class CommentsService {
         'user.username AS "username"',
         'comment.content AS "content"',
         'comment.createdAt AS "createdAt"',
-        'comment.itemId AS "itemId"',
-        'comment.reported AS "reported"'
+        'comment.itemId AS "itemId"'
       ])
       .where('comment.itemId = :itemId', { itemId })
       .getRawMany();
@@ -80,7 +79,21 @@ export class CommentsService {
       throw new NotFoundException(`Comment with id ${id} not found`);
     }
     comment.reported = true;
-    return await this.commentsRepository.save(comment);
+    await this.commentsRepository.save(comment);
+
+    return await this.commentsRepository
+      .createQueryBuilder('comment')
+      .leftJoin('comment.user', 'user')
+      .select([
+        'comment.id AS "id"',
+        'user.username AS "username"',
+        'comment.content AS "content"',
+        'comment.createdAt AS "createdAt"',
+        'comment.itemId AS "itemId"',
+        'comment.reported AS "reported"'
+      ])
+      .where('comment.id = :id', { id })
+      .getRawOne();
   }
 
   async delete(id: number) {

@@ -19,7 +19,7 @@ import { Value } from '../../models/value';
 import { environment } from '../../../environments/environment';
 import { loadItem } from '../../store/item/item.action';
 import { Comment } from '../../models/comment';
-import { addComment, loadCommentsFromItem } from '../../store/comments/comment.action';
+import { addComment, loadCommentsFromItem, reportComment } from '../../store/comments/comment.action';
 import { selectCommentList } from '../../store/comments/comment.selector';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -100,7 +100,11 @@ export class ItemPageComponent implements OnInit {
   }
 
   addComment() {
-    this.store.dispatch(addComment({userId: this.userId, content: this.comment, itemId: this.itemId}));
+    this.store.dispatch(addComment({ userId: this.userId, content: this.comment, itemId: this.itemId }));
     this.comment = '';
+  }
+
+  reportComment(id: number) {
+    this.store.dispatch(reportComment({ commentId: id }));
   }
 }

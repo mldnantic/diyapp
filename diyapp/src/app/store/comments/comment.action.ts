@@ -33,3 +33,18 @@ export const addCommentSuccess = createAction(
     'Add Comment Success',
     props<{ comment: Comment }>()
 );
+
+export const reportComment = createAction(
+    'Report Comment',
+    props<{ commentId: number }>()
+);
+
+export const deleteComment = createAction(
+    'Delete Comment',
+    props<{ commentId: number }>()
+);
+
+export const deleteCommentSuccess = createAction(
+    'Delete Comment Success',
+    props<{ commentId: number }>()
+);

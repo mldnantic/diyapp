@@ -30,7 +30,7 @@ export class CommentsEffects {
             mergeMap(() =>
                 this.commentsService.getReportedComments().pipe(
                     map((comments) => CommentActions.loadReportedCommentsSuccess({ comments })),
-                    catchError(() => of({ type: 'load  reported comments error' }))
+                    catchError(() => of({ type: 'load reported comments error' }))
                 )
             )
         )
@@ -48,4 +48,29 @@ export class CommentsEffects {
         )
     );
 
+    reportComment$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(CommentActions.reportComment),
+            mergeMap(action =>
+                this.commentsService.reportComment(action.commentId).pipe(
+                    catchError(() => of({ type: 'report comment error' }))
+                )
+            )
+        ),
+        {
+            dispatch: false
+        }
+    );
+
+    deleteComment$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(CommentActions.deleteComment),
+            mergeMap(action =>
+                this.commentsService.deleteComment(action.commentId).pipe(
+                    map(() => CommentActions.deleteCommentSuccess({ commentId: action.commentId })),
+                    catchError(() => of({ type: 'delete comment error' }))
+                )
+            )
+        )
+    );
 }

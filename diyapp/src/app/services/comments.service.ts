@@ -25,7 +25,11 @@ export class CommentsService {
     });
   }
 
-  deleteComment(commentId: string) {
+  reportComment(id: number) {
+    return this.httpClient.put<Comment>(environment.APIURL + "/comments/" + id, {});
+  }
+
+  deleteComment(commentId: number) {
     return this.httpClient.delete(environment.APIURL + "/comments/" + commentId);
   }
 

@@ -65,7 +65,9 @@
                     <p class="margine">@{{c.username}}</p>
                     <p>{{c.content}}</p>
                     <p class="date">{{c.createdAt | date:'dd.MM.yyyy HH:mm'}}</p>
-                    <button matButton class="margine">Report comment</button>
+                    @if(loggedIn$ | async) {
+                    <button matButton class="margine" (click)="reportComment(c.id)">Report comment</button>
+                    }
                 </div>
             </mat-card>
             }

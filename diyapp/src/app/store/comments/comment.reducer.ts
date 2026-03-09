@@ -22,4 +22,7 @@ export const commentsReducer = createReducer(
     on(Actions.addCommentSuccess, (state, { comment }) =>
         adapter.addOne(comment, state)
     ),
+    on(Actions.deleteCommentSuccess,(state,{commentId})=>
+        adapter.removeOne(commentId, state)
+    ),
 )

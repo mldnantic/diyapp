@@ -6,7 +6,7 @@ import { Comment } from '../../models/comment';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { loadReportedComments } from '../../store/comments/comment.action';
+import { deleteComment, loadReportedComments } from '../../store/comments/comment.action';
 import { selectCommentList } from '../../store/comments/comment.selector';
 @Component({
   selector: 'app-moderatorpanel.component',
@@ -25,4 +25,7 @@ export class ModeratorPanelComponent implements OnInit {
     this.comments$ = this.store.select(selectCommentList);
   }
 
+  deleteComment(id: number) {
+    this.store.dispatch(deleteComment({commentId: id}));
+  }
 }
