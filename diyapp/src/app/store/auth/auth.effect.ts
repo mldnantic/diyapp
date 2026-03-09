@@ -52,7 +52,7 @@ export class AuthEffects {
                         this.snackBar.open('Login successful!', 'Close', {
                             duration: 3000,
                         });
-                        return AuthActions.loginUserSuccess({ user: res.user });
+                        return AuthActions.loginUserSuccess();
                     }),
                     catchError(() => {
                         this.snackBar.open('Login failed!', 'Close', {

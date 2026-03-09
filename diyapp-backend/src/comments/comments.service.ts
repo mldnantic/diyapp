@@ -34,7 +34,8 @@ export class CommentsService {
     const newComment = await this.commentsRepository.save(comment);
 
     return {
-      userId: newComment.user.id,
+      id: newComment.id,
+      username: user.username,
       content: newComment.content,
       createdAt: newComment.createdAt,
       itemId: newComment.item.id

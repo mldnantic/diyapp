@@ -18,13 +18,15 @@ export class AuthService {
     return this.httpClient.post<LoginUser>(environment.APIURL + "/auth/login", credentials);
   }
 
+  validateToken() {
+    const token = this.getToken();
+    return this.httpClient.post<{
+      valid: boolean,
+      payload?: any
+    }>(environment.APIURL + "/auth/validate", { token });
+  }
+  
   private getToken(): string | null {
     return localStorage.getItem('jwt');
   }
-
-  validateToken() {
-    const token = this.getToken();
-    return this.httpClient.post<{ valid: boolean, payload?: any }>(environment.APIURL + "/auth/validate", { token });
-  }
-
 }

@@ -10,7 +10,9 @@
                 <img mat-card-image [src]="api+'/'+item.image" class="itemImage">
                 <div class="itemPrice">
                     <h2>{{item.price}} RSD</h2>
-                    <button matButton="filled" class="margine" routerLink="">Add to project</button>
+                    @if(loggedIn$ | async) {
+                    <button matButton="filled" class="margine">Add to project</button>
+                    }
                 </div>
             </mat-card>
 
@@ -47,20 +49,24 @@
         </div>
         <div>
             <h1>Comments</h1>
-            <div>
-                <mat-form-field>
+            @if(loggedIn$ | async) {
+            <div class="rowCards">
+                <mat-form-field class="maxWidthHeight">
                     <mat-label>Your comment</mat-label>
                     <input matInput [(ngModel)]="comment">
                 </mat-form-field>
-                <button matButton="filled" class="margine">Add comment</button>
+                <button matButton="filled" class="margine" (click)="addComment()">Add comment</button>
             </div>
+            }
             @if(comments$ | async; as comments) {
             @for(c of comments; track c.id) {
-            <div class="komentar">
-                <h2>{{c.username}}</h2>
-                <p>{{c.content}}</p>
-                <p>{{c.createdAt}}</p>
-            </div>
+            <mat-card class="komentarCard">
+                <div class="komentar">
+                    <p class="margine">@{{c.username}}</p>
+                    <p>{{c.content}}</p>
+                    <p class="date">{{c.createdAt | date:'dd.MM.yyyy HH:mm'}}</p>
+                </div>
+            </mat-card>
             }
             }
         </div>
