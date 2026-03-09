@@ -16,6 +16,9 @@ export const commentsReducer = createReducer(
     on(Actions.loadCommentsFromItemSuccess, (state, { comments }) =>
         adapter.setAll(comments, state)
     ),
+    on(Actions.loadReportedCommentsSuccess, (state, { comments }) =>
+        adapter.setAll(comments, state)
+    ),
     on(Actions.addCommentSuccess, (state, { comment }) =>
         adapter.addOne(comment, state)
     ),

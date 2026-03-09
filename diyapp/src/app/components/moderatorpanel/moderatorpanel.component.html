@@ -1,13 +1,17 @@
 <div class="moderatorPanel">
     <mat-card appearance="outlined" class="margine">
+        <h1 class="title">Moderator panel</h1>
         @if(comments$ | async; as comments) {
         @for(c of comments; track c.id) {
-        <div class="komentar">
-            <h2>{{c.content}}</h2>
-            <h2>{{c.createdAt}}</h2>
-            <button matButton="filled" class="margine">Allow comment</button>
-            <button matButton="filled" class="margine">Delete comment</button>
-        </div>
+        <mat-card appearance="outlined" class="margine">
+            <div class="komentar">
+                <h2>{{c.username}}</h2>
+                <h2>{{c.content}}</h2>
+                <h2>{{c.createdAt | date:'dd.MM.yyyy HH:mm'}}</h2>
+                <button matButton="filled" class="margine">Allow comment</button>
+                <button matButton="filled" class="margine">Delete comment</button>
+            </div>
+        </mat-card>
         }
         }
     </mat-card>

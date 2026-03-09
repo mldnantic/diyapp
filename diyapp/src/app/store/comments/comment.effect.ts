@@ -24,6 +24,18 @@ export class CommentsEffects {
         )
     );
 
+    loadReportedComments$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(CommentActions.loadReportedComments),
+            mergeMap(() =>
+                this.commentsService.getReportedComments().pipe(
+                    map((comments) => CommentActions.loadReportedCommentsSuccess({ comments })),
+                    catchError(() => of({ type: 'load  reported comments error' }))
+                )
+            )
+        )
+    );
+
     addComment$ = createEffect(() =>
         this.action$.pipe(
             ofType(CommentActions.addComment),
@@ -35,5 +47,5 @@ export class CommentsEffects {
             )
         )
     );
-    
+
 }

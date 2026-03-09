@@ -43,7 +43,19 @@ export class CommentsService {
   }
 
   async getReportedComments() {
-    return await this.commentsRepository.find();
+    return await this.commentsRepository
+      .createQueryBuilder('comment')
+      .leftJoin('comment.user', 'user')
+      .select([
+        'comment.id AS "id"',
+        'user.username AS "username"',
+        'comment.content AS "content"',
+        'comment.createdAt AS "createdAt"',
+        'comment.itemId AS "itemId"',
+        'comment.reported AS "reported"'
+      ])
+      .where('comment.reported = :reported', { reported: true })
+      .getRawMany();
   }
 
   async getCommentsForItem(itemId: number) {
@@ -56,9 +68,19 @@ export class CommentsService {
         'comment.content AS "content"',
         'comment.createdAt AS "createdAt"',
         'comment.itemId AS "itemId"',
+        'comment.reported AS "reported"'
       ])
       .where('comment.itemId = :itemId', { itemId })
       .getRawMany();
+  }
+
+  async reportComment(id: number) {
+    const comment = await this.commentsRepository.findOne({ where: { id } });
+    if (!comment) {
+      throw new NotFoundException(`Comment with id ${id} not found`);
+    }
+    comment.reported = true;
+    return await this.commentsRepository.save(comment);
   }
 
   async delete(id: number) {
@@ -66,7 +88,7 @@ export class CommentsService {
     if (!comment) {
       throw new NotFoundException(`Comment with id ${id} not found`);
     }
-    await this.commentsRepository.delete(comment);
+    return await this.commentsRepository.delete(comment);
   }
-  
+
 }

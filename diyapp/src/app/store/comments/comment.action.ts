@@ -11,6 +11,15 @@ export const loadCommentsFromItemSuccess = createAction(
     props<{ comments: Comment[] }>()
 );
 
+export const loadReportedComments = createAction(
+    'Load Reported Comments'
+);
+
+export const loadReportedCommentsSuccess = createAction(
+    'Load Reported Comments Success',
+    props<{ comments: Comment[] }>()
+);
+
 export const addComment = createAction(
     'Add Comment',
     props<{

@@ -19,6 +19,9 @@ export class Comment {
     @Column()
     itemId: number;
 
+    @Column({default: false})
+    reported: boolean;
+
     @ManyToOne(() => Item, (item) => item.comments, { onDelete: 'CASCADE' })
     item: Item;
 

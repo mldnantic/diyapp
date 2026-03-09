@@ -34,11 +34,12 @@ export class AuthService {
   async validateToken(token: string) {
     try {
       const decoded: any = jwt.verify(token, jwtConstants.secret);
-      const { sub, iat, exp, ...payload} = decoded;
-      return payload;
-    }
-    catch (error) {
+      const { iat, exp, sub, ...payload } = decoded;
+
+      return { id: sub, ...payload };
+    } catch (error) {
       return null;
     }
   }
+
 }
