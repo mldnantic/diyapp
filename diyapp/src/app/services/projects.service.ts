@@ -11,11 +11,10 @@ export class ProjectsService {
   constructor(private httpClient: HttpClient) { }
 
   createProject(userId: number, projectName: string) {
-    return this.httpClient.post<Project>(environment.APIURL + "/projects",
-      {
-        userId: userId,
-        projectName: projectName
-      });
+    return this.httpClient.post<Project>(environment.APIURL + "/projects", {
+      userId: userId,
+      name: projectName
+    });
   }
 
   getProjectsFromUser(userId: number) {

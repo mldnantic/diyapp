@@ -11,7 +11,7 @@ export const loadProjectsFromUserSuccess = createAction(
     props<{ projects: Project[] }>()
 );
 
-export const addProject = createAction(
+export const createProject = createAction(
     'Add Project',
     props<{
         userId: number,
@@ -19,7 +19,7 @@ export const addProject = createAction(
     }>()
 );
 
-export const addProjectSuccess = createAction(
+export const createProjectSuccess = createAction(
     'Add Project Success',
     props<{ project: Project }>()
 );

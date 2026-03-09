@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, of } from 'rxjs';
 import { Project } from '../../models/project';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { loadProjectsFromUser } from '../../store/project/project.action';
+import { createProject, loadProjectsFromUser } from '../../store/project/project.action';
 import { AsyncPipe } from '@angular/common';
-import { selectProjectList, selectProjectsFeature } from '../../store/project/project.selector';
+import { selectProjectList } from '../../store/project/project.selector';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateDialogComponent } from '../createdialog/createdialog.component';
 
 @Component({
   selector: 'userpanel',
@@ -21,7 +22,7 @@ import { selectProjectList, selectProjectsFeature } from '../../store/project/pr
 })
 export class UserPanelComponent implements OnInit {
 
-  constructor(private router: Router, private store: Store<AppState>) { }
+  constructor(private router: Router, private store: Store<AppState>, private createProjectDialog: MatDialog) { }
 
   userId: number = 0;
   username: string = '';
@@ -38,17 +39,13 @@ export class UserPanelComponent implements OnInit {
     this.email = decodedJwt?.email;
     this.role = decodedJwt?.role;
 
-    this.store.dispatch(loadProjectsFromUser({userId: this.userId}));
+    this.store.dispatch(loadProjectsFromUser({ userId: this.userId }));
     this.projects$ = this.store.select(selectProjectList);
   }
-  
+
   logout() {
     localStorage.removeItem('jwt');
     this.router.navigate(['']);
-  }
-
-  createProject() {
-    
   }
 
   navToAdminPanel() {
@@ -57,6 +54,21 @@ export class UserPanelComponent implements OnInit {
 
   navToModeratorPanel() {
     this.router.navigate(['moderatorpanel']);
+  }
+
+  createProject(): void {
+
+    const dialog = this.createProjectDialog.open(CreateDialogComponent, {
+      width: '300px',
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if(result) {
+        this.store.dispatch(createProject({userId: this.userId, projectName: result}));
+      }
+    });
   }
 
   private decodeJWT(token: string | null) {

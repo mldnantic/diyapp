@@ -16,7 +16,7 @@ export const projectsReducer = createReducer(
     on(Actions.loadProjectsFromUserSuccess, (state, { projects }) =>
         adapter.setAll(projects, state)
     ),
-    on(Actions.addProjectSuccess, (state, { project }) =>
+    on(Actions.createProjectSuccess, (state, { project }) =>
         adapter.addOne(project, state)
     ),
     on(Actions.deleteProjectSuccess, (state, { projectId }) =>

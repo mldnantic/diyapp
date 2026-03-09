@@ -26,10 +26,10 @@ export class ProjectsEffects {
 
     createProject$ = createEffect(() =>
         this.action$.pipe(
-            ofType(ProjectActions.addProject),
+            ofType(ProjectActions.createProject),
             mergeMap(action =>
                 this.projectsService.createProject(action.userId, action.projectName).pipe(
-                    map((project) => ProjectActions.addProjectSuccess({ project })),
+                    map((project) => ProjectActions.createProjectSuccess({ project })),
                     catchError(() => of({ type: 'create project error' }))
                 )
             )
