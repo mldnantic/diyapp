@@ -9,12 +9,12 @@ export class CommentsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getComments() {
-    return this.httpClient.get<Comment[]>(environment.APIURL + "/comments");
+  getReportedComments() {
+    return this.httpClient.get<Comment[]>(environment.APIURL + "/comments/reported");
   }
 
   getCommentsForItem(itemId: number) {
-    return this.httpClient.get<Comment[]>(environment.APIURL + "/comments/" + itemId);
+    return this.httpClient.get<Comment[]>(environment.APIURL + "/comments/item/" + itemId);
   }
 
   addComment(userId: number, content: string, itemId: number) {

@@ -41,7 +41,7 @@ export class CommentsService {
     }
   }
 
-  async getComments() {
+  async getReportedComments() {
     return await this.commentsRepository.find();
   }
 
@@ -60,17 +60,12 @@ export class CommentsService {
       .getRawMany();
   }
 
-
-  async findOne(id: number) {
+  async delete(id: number) {
     const comment = await this.commentsRepository.findOne({ where: { id }, relations: ['item'] });
     if (!comment) {
       throw new NotFoundException(`Comment with id ${id} not found`);
     }
-    return comment;
+    await this.commentsRepository.delete(comment);
   }
-
-  async remove(id: number) {
-    const comment = await this.findOne(id);
-    await this.commentsRepository.remove(comment);
-  }
+  
 }

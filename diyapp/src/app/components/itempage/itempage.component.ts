@@ -61,6 +61,12 @@ export class ItemPageComponent implements OnInit {
       })
     );
 
+    this.mapTableData();
+
+    this.comments$ = this.store.select(selectCommentList);
+  }
+
+  mapTableData() {
     this.tableData$ = combineLatest([
       this.store.select(selectPropertyList),
       this.store.select(selectValueList)
@@ -77,7 +83,9 @@ export class ItemPageComponent implements OnInit {
         }).sort((a, b) => a.propertyId - b.propertyId)
       )
     );
+  }
 
-    this.comments$ = this.store.select(selectCommentList);
+  addComment() {
+
   }
 }

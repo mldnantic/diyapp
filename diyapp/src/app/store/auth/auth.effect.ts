@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as AuthActions from "./auth.action";
-import { catchError, map, merge, mergeMap, of, tap } from "rxjs";
+import { catchError, map, mergeMap, of } from "rxjs";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
@@ -52,7 +52,7 @@ export class AuthEffects {
                         this.snackBar.open('Login successful!', 'Close', {
                             duration: 3000,
                         });
-                        return AuthActions.loginUserSuccess();
+                        return AuthActions.loginUserSuccess({ user: res.user });
                     }),
                     catchError(() => {
                         this.snackBar.open('Login failed!', 'Close', {

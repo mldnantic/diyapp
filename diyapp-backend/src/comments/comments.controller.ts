@@ -11,18 +11,19 @@ export class CommentsController {
     return this.commentsService.create(dto);
   }
 
-  @Get()
-  async getComments() {
-    return this.commentsService.getComments();
+  @Get('reported')
+  async getReportedComments() {
+    return this.commentsService.getReportedComments();
   }
 
-  @Get(':itemid')
+  @Get('/item/:itemid')
   async getCommentsForItem(@Param('itemid', ParseIntPipe) itemId: number) {
     return this.commentsService.getCommentsForItem(itemId);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
-    return this.commentsService.remove(id);
+  async delete(@Param('id') id: number) {
+    return this.commentsService.delete(id);
   }
+
 }

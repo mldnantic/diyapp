@@ -2,7 +2,7 @@ import { createAction, props } from "@ngrx/store";
 import { Comment } from "../../models/comment";
 
 export const loadCommentsFromItem = createAction(
-    'Load Comments',
+    'Load Comments From Item',
     props<{ itemId: number }>()
 );
 
@@ -16,7 +16,6 @@ export const addComment = createAction(
     props<{
         userId: number,
         content: string,
-        createdAt: Date,
         itemId: number
     }>()
 );

@@ -18,7 +18,7 @@ export class ModeratorPanelComponent implements OnInit {
   constructor(private commentsService: CommentsService) { }
 
   ngOnInit(): void {
-    this.comments$ = this.commentsService.getComments();
+    this.comments$ = this.commentsService.getReportedComments();
   }
 
 }
