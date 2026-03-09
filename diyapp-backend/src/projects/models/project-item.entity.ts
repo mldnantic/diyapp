@@ -7,7 +7,7 @@ export class ProjectItem {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Project, project => project.items)
+  @ManyToOne(() => Project, project => project.items, {onDelete: 'CASCADE'})
   project: Project;
 
   @ManyToOne(() => Item, item => item.projectItems)

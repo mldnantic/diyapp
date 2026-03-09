@@ -70,7 +70,15 @@ export class ProjectsService {
       item,
       quantity: dto.quantity,
     });
-    return this.projectItemRepo.save(projectItem);
+
+    const addedItem = await this.projectItemRepo.save(projectItem);
+
+    return {
+      id: addedItem.id,
+      projectId: addedItem.project.id,
+      itemId: addedItem.item.id,
+      quantity: addedItem.quantity,
+    };
   }
 
   async removeItemFromProject(projectId: number, itemId: number) {
@@ -79,6 +87,6 @@ export class ProjectsService {
       relations: ['project', 'item'],
     });
     if (!projectItem) throw new NotFoundException('ProjectItem not found');
-    return this.projectItemRepo.remove(projectItem);
+    return this.projectItemRepo.delete(projectItem.id);
   }
 }

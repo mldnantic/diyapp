@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Project } from "../../models/project";
+import { Project, ProjectItem } from "../../models/project";
 
 export const loadProjectsFromUser = createAction(
     'Load Projects From User',
@@ -22,6 +22,20 @@ export const createProject = createAction(
 export const createProjectSuccess = createAction(
     'Add Project Success',
     props<{ project: Project }>()
+);
+
+export const addItemToProject = createAction(
+    'Add Item To Project',
+    props<{
+        itemId: number,
+        projectId: number,
+        quantity: number
+    }>()
+);
+
+export const addItemToProjectSuccess = createAction(
+    'Add Item To Project Success',
+    props<{ projectItem: ProjectItem }>()
 );
 
 export const deleteProject = createAction(
