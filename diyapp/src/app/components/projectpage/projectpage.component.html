@@ -1,6 +1,6 @@
+@if(project$ | async; as project) {
 <div class="moderatorPanel">
     <mat-card appearance="outlined" class="margine">
-        @if(project$ | async; as project) {
         <h1 class="title">{{project.name}}</h1>
         @if(itemProjects$ | async; as itemProjects) {
         @for(i of itemProjects; track i.id) {
@@ -14,6 +14,6 @@
         </mat-card>
         }
         }
-        }
     </mat-card>
 </div>
+}

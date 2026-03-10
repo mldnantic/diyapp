@@ -31,7 +31,7 @@ export class ProjectPageComponent implements OnInit {
     this.project$ = this.store.select(selectProjectById(this.projectId)).pipe(
       tap(project => {
         if (!project) {
-          console.error("Project doesn't exist!");
+          this.store.dispatch(loadProject({ projectId: this.projectId }));
         }
         else {
           this.store.dispatch(loadItemsOfProject({ projectId: this.projectId }));

@@ -27,9 +27,7 @@ export const projectsReducer = createReducer(
     })),
     on(Actions.removeItemFromProjectSuccess, (state, { itemId, projectId }) => ({
         ...state,
-        items: state.items.filter(item => {
-            item.id !== itemId && item.projectId !== projectId
-        })
+        items: state.items.filter(item => item.itemId !== itemId)
     })),
     on(Actions.createProjectSuccess, (state, { project }) =>
         adapter.addOne(project, state)
