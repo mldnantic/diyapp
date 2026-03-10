@@ -26,6 +26,9 @@
                 <div>
                     @if(projects$ | async; as projects ) {
                     <mat-card appearance="outlined" class="projekti">
+                        @if(projects.length == 0) {
+                            <h2>You don't have any projects</h2>
+                        }
                         @for(p of projects; track p.id) {
                         <mat-card appearance="outlined">
                             <div class="rowCards">
@@ -38,8 +41,6 @@
                     </mat-card>
                     }
                 </div>
-                <h1>My receipts</h1>
-                <div>TODO: Prikaz liste racuna</div>
             </div>
         </div>
     </mat-card>
