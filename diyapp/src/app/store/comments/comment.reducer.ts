@@ -2,7 +2,6 @@ import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { Comment } from "../../models/comment";
 import { createReducer, on } from "@ngrx/store";
 import * as Actions from "./comment.action";
-import { Action } from "rxjs/internal/scheduler/Action";
 
 export interface CommentsState extends EntityState<Comment> {
 }

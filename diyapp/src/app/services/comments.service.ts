@@ -30,7 +30,7 @@ export class CommentsService {
   }
 
   unreportComment(id: number) {
-    return this.httpClient.put<Comment>(environment.APIURL + "/comments/" + id, {});
+    return this.httpClient.put<Comment>(environment.APIURL + "/comments/unreport/" + id, {});
   }
 
   deleteComment(commentId: number) {

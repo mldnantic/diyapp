@@ -120,8 +120,7 @@ export class ItemPageComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
-        // this.store.dispatch(addItemToProject({ itemId: itemId, projectId: result.projectId, quantity: result.quantity }));
+        this.store.dispatch(addItemToProject({ itemId: itemId, projectId: result.projectId, quantity: result.quantity }));
       }
     });
   }
