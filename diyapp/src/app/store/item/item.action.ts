@@ -30,6 +30,11 @@ export const loadItemSuccess = createAction(
     props<{ item: Item }>()
 );
 
+export const viewItem = createAction(
+    'View Item',
+    props<{ itemId: number }>()
+)
+
 export const addItem = createAction(
     'Add Item',
     props<{

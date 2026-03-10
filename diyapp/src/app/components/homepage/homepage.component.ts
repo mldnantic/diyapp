@@ -64,6 +64,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     this.store.dispatch(loadCategories());
     this.categories$ = this.store.select(selectCategoryList);
 
+    this.store.dispatch(loadMostPopularItems());
     this.items$ = this.store.select(selectItemList);
 
     this.combined$ = combineLatest([

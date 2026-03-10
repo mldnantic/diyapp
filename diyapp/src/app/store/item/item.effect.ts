@@ -48,6 +48,20 @@ export class ItemsEffects {
         )
     );
 
+    viewItem$ = createEffect(() =>
+            this.action$.pipe(
+                ofType(ItemActions.viewItem),
+                mergeMap(action =>
+                    this.itemsService.viewItem(action.itemId).pipe(
+                        catchError(() => of({ type: 'report comment error' }))
+                    )
+                )
+            ),
+            {
+                dispatch: false
+            }
+        );
+
     addItem$ = createEffect(() =>
         this.action$.pipe(
             ofType(ItemActions.addItem),

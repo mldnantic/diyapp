@@ -17,7 +17,7 @@ import { selectValueList } from '../../store/value/value.selector';
 import { Property } from '../../models/property';
 import { Value } from '../../models/value';
 import { environment } from '../../../environments/environment';
-import { loadItem } from '../../store/item/item.action';
+import { loadItem, viewItem } from '../../store/item/item.action';
 import { Comment } from '../../models/comment';
 import { addComment, loadCommentsFromItem, reportComment } from '../../store/comments/comment.action';
 import { selectCommentList } from '../../store/comments/comment.selector';
@@ -60,6 +60,8 @@ export class ItemPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemId = Number(this.route.snapshot.paramMap.get('id'));
+
+    this.store.dispatch(viewItem({itemId: this.itemId}));
 
     this.item$ = this.store.select(selectItemById(this.itemId)).pipe(
       tap(item => {

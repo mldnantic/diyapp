@@ -41,6 +41,20 @@ export class ItemsService {
         return await this.itemsRepository.findOneBy({ id });
     }
 
+    public async viewItem(id: number) {
+        const item = await this.itemsRepository.findOneBy({
+            id: id
+        });
+
+        if (!item) {
+            throw new NotFoundException("Item not found!");
+        }
+
+        item.viewCount += 1;
+
+        return await this.itemsRepository.save(item);
+    }
+
     public async create(itemDto: ItemDto) {
         const category = await this.categoryRepository.findOneBy({
             id: itemDto.categoryId
@@ -91,7 +105,7 @@ export class ItemsService {
         }
 
         item.image = filePath;
-        return this.itemsRepository.save(item);
+        return await this.itemsRepository.save(item);
     }
 
     public async delete(id: number) {

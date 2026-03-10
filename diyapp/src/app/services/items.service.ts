@@ -32,6 +32,10 @@ export class ItemsService {
     });
   }
 
+  viewItem(itemId: number) {
+    return this.httpClient.put(environment.APIURL + "/items/" + itemId, {});
+  }
+
   uploadImage(itemId: number, file: File) {
     const formData = new FormData();
     formData.append('image', file);

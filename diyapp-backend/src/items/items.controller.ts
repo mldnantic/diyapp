@@ -28,6 +28,11 @@ export class ItemsController {
         return this.itemsService.getById(id);
     }
 
+    @Put(':id')
+    public viewItem(@Param('id', ParseIntPipe)id: number) {
+        return this.itemsService.viewItem(id);
+    }
+
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles('admin')
     @Post()
