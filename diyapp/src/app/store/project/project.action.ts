@@ -11,6 +11,28 @@ export const loadProjectsFromUserSuccess = createAction(
     props<{ projects: Project[] }>()
 );
 
+export const loadProject = createAction(
+    'Load Project',
+    props<{ projectId: number }>()
+);
+
+export const loadProjectSuccess = createAction(
+    'Load Project Success',
+    props<{ project: Project }>()
+);
+
+export const loadItemsOfProject = createAction(
+    'Load Items Of Project',
+    props<{
+        projectId: number
+    }>()
+);
+
+export const loadItemsOfProjectSuccess = createAction(
+    'Load Items Of Project Success',
+    props<{ items: ProjectItem[] }>()
+);
+
 export const createProject = createAction(
     'Add Project',
     props<{
@@ -33,9 +55,20 @@ export const addItemToProject = createAction(
     }>()
 );
 
-export const addItemToProjectSuccess = createAction(
-    'Add Item To Project Success',
-    props<{ projectItem: ProjectItem }>()
+export const removeItemFromProject = createAction(
+    'Remove Item From Project',
+    props<{
+        itemId: number,
+        projectId: number
+    }>()
+);
+
+export const removeItemFromProjectSuccess = createAction(
+    'Remove Item From Project Success',
+    props<{
+        itemId: number,
+        projectId: number
+    }>()
 );
 
 export const deleteProject = createAction(

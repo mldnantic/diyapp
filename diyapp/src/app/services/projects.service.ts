@@ -18,19 +18,23 @@ export class ProjectsService {
   }
 
   addItemToProject(itemId: number, projectId: number, quantity: number) {
-    return this.httpClient.post<ProjectItem>(environment.APIURL + "/projects/" + projectId + "/items/" + itemId, {
+    return this.httpClient.post(environment.APIURL + "/projects/" + projectId + "/items", {
       itemId: itemId,
       quantity: quantity
     }
     )
   };
 
-  removeItemToProject(projectId: number, itemId: number) {
+  removeItemFromProject(projectId: number, itemId: number) {
     return this.httpClient.delete(environment.APIURL + "/projects/" + projectId + "/items/" + itemId);
   };
 
   getProjectsFromUser(userId: number) {
     return this.httpClient.get<Project[]>(environment.APIURL + "/projects/user/" + userId);
+  }
+
+  getItemsOfProject(projectId: number) {
+    return this.httpClient.get<ProjectItem[]>(environment.APIURL + "/projects/items/" + projectId);
   }
 
   getProject(id: number) {

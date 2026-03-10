@@ -1,1 +1,19 @@
-<p>projectpage.component works!</p>
+<div class="moderatorPanel">
+    <mat-card appearance="outlined" class="margine">
+        @if(project$ | async; as project) {
+        <h1 class="title">{{project.name}}</h1>
+        @if(itemProjects$ | async; as itemProjects) {
+        @for(i of itemProjects; track i.id) {
+        <mat-card appearance="outlined" class="margine">
+            <div class="komentar">
+                <h2>{{i.itemName}}</h2>
+                <h2>{{i.itemPrice}}</h2>
+                <h2>{{i.quantity}}</h2>
+                <button matButton="filled" class="margine" (click)="removeItem(i.itemId)">Remove item</button>
+            </div>
+        </mat-card>
+        }
+        }
+        }
+    </mat-card>
+</div>

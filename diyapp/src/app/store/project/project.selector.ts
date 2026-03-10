@@ -18,3 +18,15 @@ export const selectProjectList = createSelector(selectProjectsFeature, (projects
         .filter((project) => project != null)
         .map((project) => <Project>project)
 );
+
+export const selectProjectById = (id: number) => createSelector(selectProjectsFeature, (projects) =>
+    projects.ids
+        .map((id) => projects.entities[id])
+        .filter((project) => project != null)
+        .find(project => project.id == id)
+);
+
+export const selectProjectItems = createSelector(
+  selectProjectsFeature,
+  (projects) => projects.items
+);

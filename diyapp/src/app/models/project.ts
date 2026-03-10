@@ -8,5 +8,7 @@ export interface ProjectItem {
     id: number,
     projectId: number,
     itemId: number,
+    itemName: string,
+    itemPrice: number,
     quantity: number
 }

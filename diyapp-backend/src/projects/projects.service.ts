@@ -62,7 +62,14 @@ export class ProjectsService {
 
     if (!project) throw new NotFoundException('Project not found');
 
-    return project.items;
+    return project.items.map(pi => ({
+      id: pi.id,
+      projectId: project.id,
+      itemId: pi.item.id,
+      itemName: pi.item.name,
+      itemPrice: pi.item.price,
+      quantity: pi.quantity
+    }));
   }
 
   async deleteProject(id: number) {
