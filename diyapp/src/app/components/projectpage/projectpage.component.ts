@@ -4,7 +4,7 @@ import { Project, ProjectItem } from '../../models/project';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { loadItemsOfProject, loadProject } from '../../store/project/project.action';
+import { loadItemsOfProject, loadProject, removeItemFromProject } from '../../store/project/project.action';
 import { MatCardModule } from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,7 +42,7 @@ export class ProjectPageComponent implements OnInit {
   }
 
   removeItem(itemId: number) {
-
+    this.store.dispatch(removeItemFromProject({ itemId: itemId, projectId: this.projectId }));
   }
 
 }

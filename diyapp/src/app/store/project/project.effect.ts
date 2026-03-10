@@ -66,7 +66,7 @@ export class ProjectsEffects {
         this.action$.pipe(
             ofType(ProjectActions.removeItemFromProject),
             mergeMap(action =>
-                this.projectsService.removeItemFromProject(action.itemId,action.projectId).pipe(
+                this.projectsService.removeItemFromProject(action.projectId, action.itemId).pipe(
                     map(() => ProjectActions.removeItemFromProjectSuccess({ itemId: action.itemId, projectId: action.projectId })),
                     catchError(() => of({ type: 'remove item from project error' }))
                 )

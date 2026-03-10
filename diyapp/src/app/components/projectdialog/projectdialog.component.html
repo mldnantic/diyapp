@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Select project and quantity</h1>
+@if(projects$ | async; as projects) {
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Project</mat-label>
+        <mat-select (selectionChange)="onSelectProject($event)">
+            @for (p of projects; track p.id) {
+            <mat-option [value]="p.id">{{p.name}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" min="1" [(ngModel)]="quantity">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="{projectId: projectId, quantity: quantity}">Confirm</button>
+</div>
+}

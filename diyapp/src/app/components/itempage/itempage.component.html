@@ -11,7 +11,7 @@
                 <div class="itemPrice">
                     <h2>{{item.price}} RSD</h2>
                     @if(loggedIn$ | async) {
-                    <button matButton="filled" class="margine">Add to project</button>
+                    <button matButton="filled" class="margine" (click)="addItemToProject(item.id)">Add to project</button>
                     }
                 </div>
             </mat-card>

@@ -25,6 +25,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { addItemToProject } from '../../store/project/project.action';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectDialogComponent } from '../projectdialog/projectdialog.component';
 
 @Component({
   selector: 'app-itempage.component',
@@ -48,7 +51,12 @@ export class ItemPageComponent implements OnInit {
   comments$: Observable<Comment[]> = of([]);
   loggedIn$: Observable<boolean> = of();
 
-  constructor(private authService: AuthService, private store: Store<AppState>, private route: ActivatedRoute) { }
+  constructor(
+    private authService: AuthService,
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.itemId = Number(this.route.snapshot.paramMap.get('id'));
@@ -97,6 +105,25 @@ export class ItemPageComponent implements OnInit {
         }).sort((a, b) => a.propertyId - b.propertyId)
       )
     );
+  }
+
+  addItemToProject(itemId: number) {
+
+    const dialog = this.dialog.open(ProjectDialogComponent, {
+      width: '300px',
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+      data: {
+        userId: this.userId
+      }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+        // this.store.dispatch(addItemToProject({ itemId: itemId, projectId: result.projectId, quantity: result.quantity }));
+      }
+    });
   }
 
   addComment() {

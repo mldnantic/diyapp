@@ -6,9 +6,9 @@
         @for(i of itemProjects; track i.id) {
         <mat-card appearance="outlined" class="margine">
             <div class="komentar">
-                <h2>{{i.itemName}}</h2>
-                <h2>{{i.itemPrice}}</h2>
-                <h2>{{i.quantity}}</h2>
+                <h2>Item: {{i.itemName}}</h2>
+                <h2>Price: {{i.itemPrice}} RSD</h2>
+                <h2>Quantity: {{i.quantity}}</h2>
                 <button matButton="filled" class="margine" (click)="removeItem(i.itemId)">Remove item</button>
             </div>
         </mat-card>
